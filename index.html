@@ -1,68 +1,150 @@
-```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
 <meta charset="UTF-8">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>4EV | Forever Victory — Roblox Rivals Clan</title>
 
-<meta name="description" content="4EV | Forever Victory is a competitive Roblox Rivals clan built for skilled, active and ambitious players. Join the 4EV Discord, compete, improve and represent Forever Victory.">
-
-<meta name="keywords" content="4EV, Forever Victory, Roblox Rivals clan, Roblox Rivals, Rivals clan, competitive Roblox clan">
+<meta name="description"
+content="4EV | Forever Victory — competitive Roblox Rivals clan. Join our community, compete, improve and represent 4EV.">
 
 <style>
 
 /* =========================================================
-   RESET
+   CORE
 ========================================================= */
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
 }
 
-html {
-    scroll-behavior: smooth;
+html{
+    scroll-behavior:smooth;
 }
 
-body {
-    font-family: Inter, Arial, Helvetica, sans-serif;
-    background: #050505;
-    color: #ffffff;
-    overflow-x: hidden;
+body{
+    background:#030303;
+    color:#fff;
+    font-family:Arial,Helvetica,sans-serif;
+    overflow-x:hidden;
 }
 
-a {
-    text-decoration: none;
-    color: inherit;
+a{
+    text-decoration:none;
+    color:inherit;
 }
 
-button {
-    font-family: inherit;
+::selection{
+    background:#ffd700;
+    color:#000;
 }
 
 
 /* =========================================================
-   CURSOR GLOW
+   SCROLL PROGRESS
 ========================================================= */
 
-.cursor-glow {
-    position: fixed;
-    width: 350px;
-    height: 350px;
-    border-radius: 50%;
-    pointer-events: none;
-    background: radial-gradient(
-        circle,
-        rgba(255, 215, 0, 0.10),
-        transparent 70%
-    );
-    transform: translate(-50%, -50%);
-    z-index: 1;
-    mix-blend-mode: screen;
+#progress{
+    position:fixed;
+    top:0;
+    left:0;
+    width:0%;
+    height:3px;
+    background:#ffd700;
+    box-shadow:0 0 20px #ffd700;
+    z-index:99999;
+}
+
+
+/* =========================================================
+   LOADING SCREEN
+========================================================= */
+
+#loader{
+    position:fixed;
+    inset:0;
+    background:#030303;
+    z-index:99998;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    transition:
+        opacity 1s ease,
+        visibility 1s ease;
+}
+
+#loader.hide{
+    opacity:0;
+    visibility:hidden;
+}
+
+.loader-inner{
+    text-align:center;
+}
+
+.loader-logo{
+    font-size:90px;
+    font-weight:1000;
+    color:#ffd700;
+    letter-spacing:-6px;
+
+    animation:
+        loaderPulse 1.2s infinite alternate;
+}
+
+.loader-text{
+    color:#666;
+    letter-spacing:5px;
+    font-size:11px;
+    margin-top:15px;
+}
+
+.loader-line{
+    width:180px;
+    height:2px;
+    background:#222;
+    margin:25px auto 0;
+    overflow:hidden;
+}
+
+.loader-line::after{
+    content:"";
+    display:block;
+    width:50%;
+    height:100%;
+    background:#ffd700;
+
+    animation:
+        loaderLine 1.2s infinite;
+}
+
+@keyframes loaderPulse{
+    from{
+        transform:scale(.95);
+        text-shadow:0 0 10px rgba(255,215,0,.2);
+    }
+
+    to{
+        transform:scale(1.05);
+        text-shadow:0 0 50px rgba(255,215,0,.7);
+    }
+}
+
+@keyframes loaderLine{
+    from{
+        transform:translateX(-150%);
+    }
+
+    to{
+        transform:translateX(300%);
+    }
 }
 
 
@@ -70,88 +152,180 @@ button {
    BACKGROUND
 ========================================================= */
 
-.background {
-    position: fixed;
-    inset: 0;
-    z-index: -5;
-    overflow: hidden;
+.background{
+    position:fixed;
+    inset:0;
+    z-index:-20;
+    overflow:hidden;
     background:
         radial-gradient(
-            circle at 50% 10%,
-            rgba(255, 215, 0, 0.10),
-            transparent 30%
+            circle at 50% 15%,
+            rgba(255,215,0,.12),
+            transparent 32%
         ),
-        #050505;
+        #030303;
 }
 
-.grid {
-    position: absolute;
-    inset: 0;
+.grid{
+    position:absolute;
+    inset:-100px;
 
     background-image:
         linear-gradient(
-            rgba(255,255,255,0.025) 1px,
+            rgba(255,255,255,.025) 1px,
             transparent 1px
         ),
         linear-gradient(
             90deg,
-            rgba(255,255,255,0.025) 1px,
+            rgba(255,255,255,.025) 1px,
             transparent 1px
         );
 
-    background-size: 50px 50px;
+    background-size:55px 55px;
 
-    mask-image: linear-gradient(
-        to bottom,
-        black,
-        transparent 90%
-    );
+    transform:
+        perspective(500px)
+        rotateX(55deg)
+        translateY(-100px)
+        scale(1.5);
+
+    animation:
+        gridMove 12s linear infinite;
+
+    mask-image:
+        linear-gradient(
+            to bottom,
+            transparent,
+            black 25%,
+            black 70%,
+            transparent
+        );
 }
 
-.orb {
-    position: absolute;
-    border-radius: 50%;
-    filter: blur(80px);
-    opacity: .15;
-    animation: floatOrb 10s ease-in-out infinite;
-}
+@keyframes gridMove{
 
-.orb.one {
-    width: 400px;
-    height: 400px;
-    background: #ffd700;
-    top: 5%;
-    left: -150px;
-}
-
-.orb.two {
-    width: 350px;
-    height: 350px;
-    background: #ffffff;
-    top: 40%;
-    right: -150px;
-    animation-delay: -4s;
-}
-
-.orb.three {
-    width: 300px;
-    height: 300px;
-    background: #ffd700;
-    top: 75%;
-    left: 30%;
-    animation-delay: -7s;
-}
-
-@keyframes floatOrb {
-
-    0%,100% {
-        transform: translateY(0) translateX(0);
+    from{
+        background-position:0 0;
     }
 
-    50% {
-        transform: translateY(-50px) translateX(30px);
+    to{
+        background-position:0 550px;
     }
 
+}
+
+
+/* =========================================================
+   GIANT BACKGROUND RINGS
+========================================================= */
+
+.ring{
+    position:absolute;
+
+    left:50%;
+    top:25%;
+
+    border:
+        1px solid rgba(255,215,0,.08);
+
+    border-radius:50%;
+
+    transform:
+        translate(-50%,-50%);
+
+    animation:
+        ringSpin 30s linear infinite;
+}
+
+.ring:nth-child(1){
+    width:350px;
+    height:350px;
+}
+
+.ring:nth-child(2){
+    width:650px;
+    height:650px;
+    animation-duration:45s;
+}
+
+.ring:nth-child(3){
+    width:950px;
+    height:950px;
+    animation-duration:65s;
+}
+
+.ring:nth-child(4){
+    width:1300px;
+    height:1300px;
+    animation-duration:90s;
+}
+
+@keyframes ringSpin{
+    from{
+        transform:
+            translate(-50%,-50%)
+            rotate(0deg);
+    }
+
+    to{
+        transform:
+            translate(-50%,-50%)
+            rotate(360deg);
+    }
+}
+
+
+/* =========================================================
+   ORBS
+========================================================= */
+
+.orb{
+    position:absolute;
+    border-radius:50%;
+    filter:blur(90px);
+    opacity:.14;
+
+    animation:
+        orbFloat 12s ease-in-out infinite;
+}
+
+.orb.one{
+    width:450px;
+    height:450px;
+    background:#ffd700;
+    left:-200px;
+    top:10%;
+}
+
+.orb.two{
+    width:350px;
+    height:350px;
+    background:#fff;
+    right:-180px;
+    top:45%;
+    animation-delay:-4s;
+}
+
+.orb.three{
+    width:300px;
+    height:300px;
+    background:#ffd700;
+    left:40%;
+    top:80%;
+    animation-delay:-7s;
+}
+
+@keyframes orbFloat{
+
+    0%,100%{
+        transform:translate(0,0) scale(1);
+    }
+
+    50%{
+        transform:
+            translate(50px,-60px)
+            scale(1.2);
+    }
 }
 
 
@@ -159,121 +333,203 @@ button {
    PARTICLES
 ========================================================= */
 
-.particles {
-    position: fixed;
-    inset: 0;
-    pointer-events: none;
-    z-index: -1;
+#particles{
+    position:fixed;
+    inset:0;
+    z-index:-5;
+    pointer-events:none;
 }
 
-.particle {
-    position: absolute;
-    width: 3px;
-    height: 3px;
-    border-radius: 50%;
-    background: #ffd700;
-    opacity: .5;
+.particle{
+    position:absolute;
+
+    width:2px;
+    height:2px;
+
+    background:#ffd700;
+
+    border-radius:50%;
+
+    box-shadow:
+        0 0 8px #ffd700;
 
     animation:
-        particleFloat linear infinite;
+        particleUp linear infinite;
 }
 
-@keyframes particleFloat {
+@keyframes particleUp{
 
-    from {
-        transform: translateY(110vh);
-        opacity: 0;
+    from{
+        transform:
+            translate3d(
+                0,
+                110vh,
+                0
+            )
+            scale(.3);
+
+        opacity:0;
     }
 
-    20% {
-        opacity: .5;
+    15%{
+        opacity:.8;
     }
 
-    80% {
-        opacity: .5;
+    80%{
+        opacity:.5;
     }
 
-    to {
-        transform: translateY(-10vh);
-        opacity: 0;
-    }
+    to{
+        transform:
+            translate3d(
+                100px,
+                -10vh,
+                0
+            )
+            scale(1.5);
 
+        opacity:0;
+    }
 }
 
 
 /* =========================================================
-   NAVIGATION
+   MOUSE SPOTLIGHT
 ========================================================= */
 
-.nav {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
+#spotlight{
+    position:fixed;
 
-    z-index: 1000;
+    width:500px;
+    height:500px;
 
-    background: rgba(5,5,5,.72);
+    border-radius:50%;
 
-    backdrop-filter: blur(20px);
+    pointer-events:none;
 
-    border-bottom: 1px solid rgba(255,255,255,.06);
+    background:
+        radial-gradient(
+            circle,
+            rgba(255,215,0,.09),
+            transparent 70%
+        );
+
+    transform:
+        translate(-50%,-50%);
+
+    z-index:-1;
 }
 
-.nav-inner {
-    max-width: 1250px;
-    margin: auto;
 
-    height: 75px;
+/* =========================================================
+   NAV
+========================================================= */
 
-    padding: 0 25px;
+nav{
+    position:fixed;
 
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+    top:0;
+    left:0;
+
+    width:100%;
+
+    z-index:5000;
+
+    background:
+        rgba(3,3,3,.55);
+
+    backdrop-filter:
+        blur(20px);
+
+    border-bottom:
+        1px solid rgba(255,255,255,.06);
+
+    transition:.4s;
 }
 
-.logo {
-    font-size: 27px;
-    font-weight: 1000;
-    letter-spacing: 4px;
-    color: #ffd700;
+nav.scrolled{
+    background:
+        rgba(3,3,3,.92);
+
+    box-shadow:
+        0 10px 50px rgba(0,0,0,.4);
+}
+
+.nav-inner{
+    max-width:1250px;
+    height:75px;
+
+    margin:auto;
+
+    padding:0 25px;
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+}
+
+.logo{
+    color:#ffd700;
+
+    font-size:28px;
+
+    font-weight:1000;
+
+    letter-spacing:4px;
 
     text-shadow:
-        0 0 20px rgba(255,215,0,.35);
+        0 0 20px rgba(255,215,0,.4);
 
-    animation: logoPulse 3s ease-in-out infinite;
+    transition:.3s;
 }
 
-@keyframes logoPulse {
-
-    0%,100% {
-        text-shadow:
-            0 0 15px rgba(255,215,0,.2);
-    }
-
-    50% {
-        text-shadow:
-            0 0 30px rgba(255,215,0,.6);
-    }
-
+.logo:hover{
+    transform:
+        scale(1.1)
+        rotate(-2deg);
 }
 
-.nav-links {
-    display: flex;
-    gap: 28px;
+.nav-links{
+    display:flex;
+    gap:30px;
 }
 
-.nav-links a {
-    color: #888;
-    font-size: 13px;
-    font-weight: 700;
+.nav-links a{
+    color:#777;
 
-    transition: .25s;
+    font-size:12px;
+
+    font-weight:900;
+
+    letter-spacing:1px;
+
+    position:relative;
 }
 
-.nav-links a:hover {
-    color: #ffd700;
+.nav-links a::after{
+    content:"";
+
+    position:absolute;
+
+    left:50%;
+    bottom:-8px;
+
+    width:0;
+    height:2px;
+
+    background:#ffd700;
+
+    transform:translateX(-50%);
+
+    transition:.3s;
+}
+
+.nav-links a:hover{
+    color:#fff;
+}
+
+.nav-links a:hover::after{
+    width:100%;
 }
 
 
@@ -281,257 +537,342 @@ button {
    HERO
 ========================================================= */
 
-.hero {
-    min-height: 100vh;
+.hero{
+    min-height:100vh;
 
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    display:flex;
+    align-items:center;
+    justify-content:center;
 
-    text-align: center;
+    text-align:center;
+
+    position:relative;
 
     padding:
-        140px 25px
+        130px 25px
         100px;
 
-    position: relative;
+    perspective:1200px;
 }
 
-.hero-content {
-    max-width: 1100px;
+.hero-content{
+    max-width:1100px;
+
+    transform-style:preserve-3d;
 
     animation:
-        heroEnter 1.2s cubic-bezier(.16,1,.3,1);
+        heroIn 1.5s
+        cubic-bezier(.16,1,.3,1);
 }
 
-@keyframes heroEnter {
+@keyframes heroIn{
 
-    from {
-        opacity: 0;
+    from{
+        opacity:0;
+
         transform:
-            translateY(50px)
-            scale(.95);
+            translateY(80px)
+            scale(.7)
+            rotateX(20deg);
+
+        filter:blur(15px);
     }
 
-    to {
-        opacity: 1;
+    to{
+        opacity:1;
+
         transform:
             translateY(0)
-            scale(1);
+            scale(1)
+            rotateX(0);
+
+        filter:blur(0);
+    }
+}
+
+.status{
+    display:inline-flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    padding:10px 18px;
+
+    border:
+        1px solid rgba(255,215,0,.25);
+
+    background:
+        rgba(255,215,0,.06);
+
+    border-radius:50px;
+
+    color:#ffd700;
+
+    font-size:11px;
+
+    font-weight:900;
+
+    letter-spacing:2px;
+
+    animation:
+        statusAppear 1s .3s both;
+}
+
+@keyframes statusAppear{
+
+    from{
+        opacity:0;
+        transform:translateY(20px) scale(.8);
     }
 
+    to{
+        opacity:1;
+        transform:none;
+    }
 }
 
-.status {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
+.status-dot{
+    width:8px;
+    height:8px;
 
-    padding: 9px 17px;
+    background:#00ff88;
 
-    border-radius: 50px;
-
-    background: rgba(255,215,0,.06);
-
-    border: 1px solid rgba(255,215,0,.25);
-
-    color: #ffd700;
-
-    font-size: 12px;
-    font-weight: 800;
-
-    margin-bottom: 28px;
-
-    box-shadow:
-        0 0 30px rgba(255,215,0,.06);
-}
-
-.status-dot {
-    width: 8px;
-    height: 8px;
-
-    border-radius: 50%;
-
-    background: #00ff88;
+    border-radius:50%;
 
     box-shadow:
         0 0 15px #00ff88;
 
-    animation: statusPulse 1.5s infinite;
+    animation:
+        statusBlink 1.2s infinite;
 }
 
-@keyframes statusPulse {
+@keyframes statusBlink{
 
-    0%,100% {
-        transform: scale(1);
-        opacity: 1;
+    0%,100%{
+        transform:scale(1);
     }
 
-    50% {
-        transform: scale(1.5);
-        opacity: .6;
+    50%{
+        transform:scale(1.6);
     }
-
 }
 
-.hero h1 {
-    font-size: clamp(
-        80px,
-        18vw,
-        190px
-    );
+.hero h1{
+    margin-top:30px;
 
-    line-height: .78;
+    font-size:
+        clamp(90px,19vw,210px);
 
-    font-weight: 1000;
+    line-height:.75;
 
-    letter-spacing: -10px;
+    font-weight:1000;
 
-    color: #ffd700;
+    letter-spacing:-12px;
+
+    color:#ffd700;
 
     text-shadow:
-        0 0 15px rgba(255,215,0,.15),
-        0 0 60px rgba(255,215,0,.10);
+        0 0 20px rgba(255,215,0,.15),
+        0 0 80px rgba(255,215,0,.12);
 
     animation:
-        titleGlow 4s ease-in-out infinite;
+        titleReveal 1.5s .15s both,
+        titlePulse 4s 2s infinite;
 }
 
-@keyframes titleGlow {
+@keyframes titleReveal{
 
-    0%,100% {
-        filter: brightness(1);
+    from{
+        opacity:0;
+
+        transform:
+            scale(1.5)
+            translateY(-30px);
+
+        filter:
+            blur(25px);
     }
 
-    50% {
-        filter: brightness(1.2);
+    to{
+        opacity:1;
+
+        transform:
+            scale(1)
+            translateY(0);
+
+        filter:blur(0);
+    }
+}
+
+@keyframes titlePulse{
+
+    0%,100%{
+        text-shadow:
+            0 0 20px rgba(255,215,0,.15),
+            0 0 80px rgba(255,215,0,.12);
     }
 
+    50%{
+        text-shadow:
+            0 0 40px rgba(255,215,0,.4),
+            0 0 120px rgba(255,215,0,.18);
+    }
 }
 
-.hero-subtitle {
-    font-size: clamp(
-        24px,
-        4vw,
-        44px
-    );
+.hero-subtitle{
+    margin-top:30px;
 
-    font-weight: 900;
+    font-size:
+        clamp(20px,4vw,42px);
 
-    margin-top: 30px;
+    font-weight:1000;
 
-    letter-spacing: 8px;
+    letter-spacing:
+        clamp(3px,1vw,9px);
 
-    text-transform: uppercase;
+    animation:
+        fadeUp 1s .5s both;
 }
 
-.hero-description {
-    max-width: 750px;
+.hero-description{
+    max-width:750px;
 
-    margin: 30px auto;
+    margin:30px auto;
 
-    color: #888;
+    color:#777;
 
-    font-size: 18px;
+    font-size:17px;
+
+    animation:
+        fadeUp 1s .7s both;
 }
 
-.buttons {
-    display: flex;
-
-    justify-content: center;
-
-    align-items: center;
-
-    gap: 15px;
-
-    flex-wrap: wrap;
-
-    margin-top: 35px;
+.hero-description strong{
+    color:#aaa;
 }
 
-.btn {
-    position: relative;
+.buttons{
+    display:flex;
 
-    display: inline-flex;
+    justify-content:center;
 
-    align-items: center;
-    justify-content: center;
+    gap:15px;
 
-    gap: 10px;
+    flex-wrap:wrap;
 
-    padding: 16px 27px;
+    margin-top:35px;
 
-    border-radius: 10px;
+    animation:
+        fadeUp 1s .9s both;
+}
 
-    font-size: 14px;
+@keyframes fadeUp{
 
-    font-weight: 900;
+    from{
+        opacity:0;
+        transform:
+            translateY(30px);
+    }
 
-    overflow: hidden;
+    to{
+        opacity:1;
+        transform:none;
+    }
+}
+
+
+/* =========================================================
+   BUTTONS
+========================================================= */
+
+.btn{
+    position:relative;
+
+    display:inline-flex;
+
+    align-items:center;
+    justify-content:center;
+
+    gap:10px;
+
+    padding:16px 28px;
+
+    border-radius:10px;
+
+    font-size:13px;
+
+    font-weight:1000;
+
+    overflow:hidden;
 
     transition:
         transform .25s,
         box-shadow .25s;
 }
 
-.btn::before {
-    content: "";
+.btn::before{
+    content:"";
 
-    position: absolute;
+    position:absolute;
 
-    top: 0;
-    left: -100%;
+    top:0;
+    left:-120%;
 
-    width: 60%;
-    height: 100%;
+    width:70%;
+    height:100%;
 
     background:
         linear-gradient(
             90deg,
             transparent,
-            rgba(255,255,255,.35),
+            rgba(255,255,255,.5),
             transparent
         );
 
-    transform: skewX(-20deg);
+    transform:skewX(-20deg);
 
-    transition: .6s;
+    transition:.6s;
 }
 
-.btn:hover::before {
-    left: 140%;
+.btn:hover::before{
+    left:150%;
 }
 
-.btn:hover {
+.btn:hover{
     transform:
-        translateY(-5px)
-        scale(1.02);
+        translateY(-6px)
+        scale(1.03);
 }
 
-.btn-gold {
-    background: #ffd700;
-    color: #080808;
+.gold{
+    background:#ffd700;
+
+    color:#050505;
 
     box-shadow:
-        0 10px 40px rgba(255,215,0,.12);
+        0 10px 40px rgba(255,215,0,.15);
 }
 
-.btn-gold:hover {
+.gold:hover{
     box-shadow:
-        0 15px 55px rgba(255,215,0,.28);
+        0 15px 70px rgba(255,215,0,.35);
 }
 
-.btn-dark {
-    background: rgba(255,255,255,.04);
+.dark{
+    color:#fff;
 
-    border: 1px solid rgba(255,255,255,.12);
+    background:
+        rgba(255,255,255,.04);
 
-    color: white;
+    border:
+        1px solid rgba(255,255,255,.12);
 }
 
-.btn-dark:hover {
-    border-color: #ffd700;
-    color: #ffd700;
+.dark:hover{
+    border-color:#ffd700;
+
+    color:#ffd700;
 }
 
 
@@ -539,117 +880,123 @@ button {
    SCROLL INDICATOR
 ========================================================= */
 
-.scroll {
-    position: absolute;
+.scroll{
+    position:absolute;
 
-    bottom: 35px;
-    left: 50%;
+    bottom:30px;
 
-    transform: translateX(-50%);
+    left:50%;
 
-    color: #555;
+    transform:translateX(-50%);
 
-    font-size: 11px;
+    color:#555;
 
-    letter-spacing: 3px;
+    font-size:10px;
 
-    text-transform: uppercase;
+    letter-spacing:4px;
 
-    animation: scrollBounce 2s infinite;
+    animation:
+        scrollFloat 2s infinite;
 }
 
-@keyframes scrollBounce {
+@keyframes scrollFloat{
 
-    0%,100% {
+    0%,100%{
         transform:
-            translateX(-50%)
-            translateY(0);
+            translate(-50%,0);
     }
 
-    50% {
+    50%{
         transform:
-            translateX(-50%)
-            translateY(10px);
+            translate(-50%,12px);
     }
-
 }
 
 
 /* =========================================================
-   GENERAL SECTIONS
+   SECTIONS
 ========================================================= */
 
-section {
-    max-width: 1250px;
+section{
+    max-width:1250px;
 
-    margin: auto;
+    margin:auto;
 
     padding:
-        120px 25px;
+        130px 25px;
 }
 
-.section-title {
-    text-align: center;
+.section-title{
+    max-width:800px;
 
-    max-width: 800px;
+    text-align:center;
 
     margin:
-        0 auto
-        65px;
+        0 auto 65px;
 }
 
-.section-label {
-    color: #ffd700;
+.label{
+    color:#ffd700;
 
-    font-size: 12px;
+    font-size:11px;
 
-    font-weight: 900;
+    font-weight:1000;
 
-    letter-spacing: 4px;
+    letter-spacing:5px;
 
-    margin-bottom: 15px;
+    margin-bottom:15px;
 }
 
-.section-title h2 {
+.section-title h2{
     font-size:
-        clamp(38px,6vw,65px);
+        clamp(40px,7vw,75px);
 
-    line-height: 1;
+    line-height:.9;
 
-    margin-bottom: 20px;
+    font-weight:1000;
 
-    font-weight: 1000;
+    margin-bottom:20px;
 }
 
-.section-title p {
-    color: #777;
+.section-title p{
+    color:#666;
 
-    font-size: 16px;
+    font-size:15px;
 }
 
 
 /* =========================================================
-   REVEAL ANIMATION
+   SCROLL REVEAL
 ========================================================= */
 
-.reveal {
-    opacity: 0;
+.reveal{
+    opacity:0;
 
     transform:
-        translateY(70px)
-        scale(.97);
+        translateY(100px)
+        scale(.88);
+
+    filter:blur(10px);
 
     transition:
-        opacity .9s cubic-bezier(.16,1,.3,1),
-        transform .9s cubic-bezier(.16,1,.3,1);
+        opacity 1s
+        cubic-bezier(.16,1,.3,1),
+
+        transform 1s
+        cubic-bezier(.16,1,.3,1),
+
+        filter 1s
+        cubic-bezier(.16,1,.3,1);
 }
 
-.reveal.visible {
-    opacity: 1;
+.reveal.visible{
+    opacity:1;
 
     transform:
         translateY(0)
         scale(1);
+
+    filter:blur(0);
 }
 
 
@@ -657,75 +1004,69 @@ section {
    STATS
 ========================================================= */
 
-.stats {
-    max-width: 1100px;
-
-    margin:
-        -40px auto
-        50px;
-
-    display:
-        grid;
+.stats{
+    display:grid;
 
     grid-template-columns:
         repeat(4,1fr);
 
-    gap: 15px;
+    gap:15px;
 
-    position: relative;
+    margin:
+        -30px auto 50px;
 
-    z-index: 5;
+    max-width:1100px;
 }
 
-.stat {
-    background:
-        linear-gradient(
-            145deg,
-            rgba(255,255,255,.055),
-            rgba(255,255,255,.015)
-        );
+.stat{
+    text-align:center;
+
+    padding:35px 15px;
 
     border:
         1px solid rgba(255,255,255,.08);
 
-    border-radius: 16px;
+    background:
+        rgba(255,255,255,.025);
 
-    padding: 32px 15px;
+    border-radius:16px;
 
-    text-align: center;
+    transition:.4s;
 
-    transition: .3s;
+    transform-style:preserve-3d;
 }
 
-.stat:hover {
+.stat:hover{
     transform:
-        translateY(-10px);
+        translateY(-12px)
+        rotateX(5deg)
+        rotateY(-5deg);
 
     border-color:
         rgba(255,215,0,.4);
 
     box-shadow:
-        0 20px 50px rgba(0,0,0,.35);
+        0 30px 70px rgba(0,0,0,.4);
 }
 
-.stat-number {
-    font-size: 38px;
+.stat-number{
+    font-size:38px;
 
-    color: #ffd700;
+    color:#ffd700;
 
-    font-weight: 1000;
+    font-weight:1000;
 }
 
-.stat-label {
-    color: #666;
+.stat-label{
+    color:#555;
 
-    font-size: 12px;
+    margin-top:5px;
 
-    margin-top: 5px;
+    font-size:10px;
 
-    text-transform: uppercase;
+    letter-spacing:2px;
 
-    letter-spacing: 1px;
+    font-weight:900;
 }
 
 
@@ -733,31 +1074,30 @@ section {
    CARDS
 ========================================================= */
 
-.cards {
-    display:
-        grid;
+.cards{
+    display:grid;
 
     grid-template-columns:
         repeat(3,1fr);
 
-    gap: 18px;
+    gap:18px;
 }
 
-.card {
-    position: relative;
+.card{
+    position:relative;
 
-    overflow: hidden;
+    overflow:hidden;
 
-    padding: 35px;
+    min-height:230px;
 
-    min-height: 220px;
+    padding:35px;
 
-    border-radius: 18px;
+    border-radius:20px;
 
     background:
         linear-gradient(
             145deg,
-            rgba(255,255,255,.055),
+            rgba(255,255,255,.06),
             rgba(255,255,255,.015)
         );
 
@@ -765,93 +1105,122 @@ section {
         1px solid rgba(255,255,255,.08);
 
     transition:
-        transform .4s cubic-bezier(.16,1,.3,1),
+        transform .15s,
         border-color .3s,
-        box-shadow .4s;
+        box-shadow .3s;
+
+    transform-style:preserve-3d;
 }
 
-.card::after {
-    content: "";
+.card::before{
+    content:"";
 
-    position: absolute;
+    position:absolute;
 
-    width: 180px;
-    height: 180px;
+    width:250px;
+    height:250px;
 
-    right: -100px;
-    bottom: -100px;
-
-    border-radius: 50%;
+    border-radius:50%;
 
     background:
-        rgba(255,215,0,.08);
+        radial-gradient(
+            circle,
+            rgba(255,215,0,.12),
+            transparent 70%
+        );
 
-    filter: blur(35px);
+    top:
+        var(--mouse-y,-100px);
 
-    transition: .4s;
-}
+    left:
+        var(--mouse-x,-100px);
 
-.card:hover {
     transform:
-        translateY(-12px)
-        rotateX(2deg);
+        translate(-50%,-50%);
 
-    border-color:
-        rgba(255,215,0,.35);
-
-    box-shadow:
-        0 30px 70px rgba(0,0,0,.4);
+    pointer-events:none;
 }
 
-.card:hover::after {
-    transform: scale(1.5);
-}
+.card::after{
+    content:"";
 
-.icon {
-    width: 55px;
-    height: 55px;
+    position:absolute;
 
-    display: flex;
+    left:0;
+    right:0;
 
-    align-items: center;
-    justify-content: center;
+    bottom:0;
 
-    border-radius: 14px;
+    height:2px;
 
     background:
-        rgba(255,215,0,.08);
+        linear-gradient(
+            90deg,
+            transparent,
+            #ffd700,
+            transparent
+        );
+
+    transform:
+        scaleX(0);
+
+    transition:.4s;
+}
+
+.card:hover::after{
+    transform:scaleX(1);
+}
+
+.icon{
+    width:58px;
+    height:58px;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    border-radius:15px;
+
+    background:
+        rgba(255,215,0,.07);
 
     border:
         1px solid rgba(255,215,0,.2);
 
-    font-size: 25px;
+    font-size:25px;
 
-    margin-bottom: 25px;
+    margin-bottom:25px;
 
-    transition: .3s;
+    transition:.4s;
 }
 
-.card:hover .icon {
+.card:hover .icon{
     transform:
-        rotate(-5deg)
+        translateZ(25px)
+        rotate(-8deg)
         scale(1.1);
 
-    background:
-        rgba(255,215,0,.14);
+    box-shadow:
+        0 0 30px rgba(255,215,0,.15);
 }
 
-.card h3 {
-    font-size: 21px;
+.card h3{
+    font-size:21px;
 
-    margin-bottom: 10px;
+    margin-bottom:10px;
 
-    font-weight: 900;
+    font-weight:1000;
+
+    transform:translateZ(20px);
 }
 
-.card p {
-    color: #777;
+.card p{
+    color:#666;
 
-    font-size: 14px;
+    font-size:14px;
+
+    transform:translateZ(10px);
 }
 
 
@@ -859,14 +1228,14 @@ section {
    REQUIREMENTS
 ========================================================= */
 
-.requirements {
-    max-width: 850px;
+.requirements{
+    max-width:850px;
 
-    margin: auto;
+    margin:auto;
 
-    padding: 10px;
+    padding:10px;
 
-    border-radius: 22px;
+    border-radius:25px;
 
     background:
         linear-gradient(
@@ -876,165 +1245,136 @@ section {
         );
 
     border:
-        1px solid rgba(255,215,0,.18);
+        1px solid rgba(255,215,0,.2);
 
     box-shadow:
-        0 30px 100px rgba(0,0,0,.25);
+        0 40px 100px rgba(0,0,0,.4);
 }
 
-.requirement {
-    display:
-        flex;
+.requirement{
+    display:flex;
 
-    align-items: center;
+    align-items:center;
 
-    gap: 18px;
+    gap:18px;
 
-    padding: 22px 25px;
+    padding:22px 25px;
 
-    margin: 4px;
+    margin:4px;
 
-    border-radius: 13px;
+    border-radius:13px;
 
     background:
-        rgba(5,5,5,.5);
+        rgba(0,0,0,.35);
 
-    transition: .25s;
+    transition:.3s;
 }
 
-.requirement:hover {
+.requirement:hover{
     transform:
-        translateX(8px);
+        translateX(10px)
+        scale(1.01);
 
     background:
         rgba(255,215,0,.05);
 }
 
-.check {
-    width: 30px;
-    height: 30px;
+.check{
+    width:32px;
+    height:32px;
 
-    display: flex;
+    flex-shrink:0;
 
-    align-items: center;
-    justify-content: center;
+    display:flex;
 
-    flex-shrink: 0;
+    align-items:center;
+    justify-content:center;
 
-    border-radius: 50%;
+    border-radius:50%;
 
-    color: #ffd700;
+    color:#ffd700;
 
     background:
         rgba(255,215,0,.1);
 
     border:
-        1px solid rgba(255,215,0,.2);
+        1px solid rgba(255,215,0,.25);
+
+    box-shadow:
+        0 0 20px rgba(255,215,0,.05);
 }
 
-.requirement strong {
-    min-width: 180px;
+.requirement strong{
+    min-width:190px;
 
-    font-size: 15px;
+    font-size:15px;
 }
 
-.requirement span:last-child {
-    color: #666;
+.requirement span:last-child{
+    color:#666;
 
-    font-size: 13px;
+    font-size:13px;
 }
 
 
 /* =========================================================
-   PROCESS
+   STEPS
 ========================================================= */
 
-.process {
-    display:
-        grid;
+.steps{
+    display:grid;
 
     grid-template-columns:
         repeat(4,1fr);
 
-    gap: 15px;
-
-    counter-reset: steps;
+    gap:15px;
 }
 
-.step {
-    counter-increment: steps;
+.step{
+    text-align:center;
 
-    position: relative;
-
-    padding: 35px 25px;
-
-    text-align: center;
+    padding:35px 25px;
 
     border:
         1px solid rgba(255,255,255,.08);
 
+    border-radius:18px;
+
     background:
         rgba(255,255,255,.025);
 
-    border-radius: 18px;
-
-    transition: .3s;
+    transition:.4s;
 }
 
-.step:hover {
+.step:hover{
     transform:
-        translateY(-10px);
+        translateY(-12px);
 
     border-color:
         rgba(255,215,0,.3);
+
+    box-shadow:
+        0 30px 60px rgba(0,0,0,.3);
 }
 
-.step::before {
-    content:
-        "0" counter(steps);
+.step-number{
+    font-size:55px;
 
-    display: block;
+    font-weight:1000;
 
-    color: #ffd700;
+    color:#ffd700;
 
-    font-size: 45px;
-
-    font-weight: 1000;
-
-    margin-bottom: 15px;
+    margin-bottom:15px;
 }
 
-.step h3 {
-    margin-bottom: 8px;
+.step h3{
+    margin-bottom:8px;
 }
 
-.step p {
-    color: #666;
+.step p{
+    color:#666;
 
-    font-size: 13px;
-}
-
-
-/* =========================================================
-   RANKS
-========================================================= */
-
-.rank-card {
-    text-align: center;
-
-    min-height: auto;
-}
-
-.rank-number {
-    font-size: 13px;
-
-    color: #ffd700;
-
-    font-weight: 900;
-
-    letter-spacing: 2px;
-
-    margin-bottom: 10px;
+    font-size:13px;
 }
 
 
@@ -1042,75 +1382,129 @@ section {
    DISCORD
 ========================================================= */
 
-.discord-box {
-    position: relative;
+.discord{
+    max-width:1000px;
 
-    overflow: hidden;
+    margin:auto;
 
-    max-width: 1000px;
+    text-align:center;
 
-    margin: auto;
+    padding:90px 30px;
 
-    padding: 80px 35px;
+    border-radius:30px;
 
-    text-align: center;
+    position:relative;
 
-    border-radius: 28px;
+    overflow:hidden;
 
     background:
         radial-gradient(
             circle at center,
-            rgba(255,215,0,.12),
-            transparent 60%
+            rgba(255,215,0,.13),
+            transparent 55%
         ),
 
         linear-gradient(
             145deg,
             rgba(255,255,255,.06),
-            rgba(255,255,255,.015)
+            rgba(255,255,255,.01)
         );
 
     border:
-        1px solid rgba(255,215,0,.22);
+        1px solid rgba(255,215,0,.25);
 
     box-shadow:
-        0 40px 100px rgba(0,0,0,.35);
+        0 40px 120px rgba(0,0,0,.4);
 }
 
-.discord-logo {
-    font-size: 60px;
+.discord::before,
+.discord::after{
+    content:"";
 
-    margin-bottom: 20px;
+    position:absolute;
+
+    width:350px;
+    height:350px;
+
+    border:
+        1px solid rgba(255,215,0,.08);
+
+    border-radius:50%;
+
+    left:50%;
+    top:50%;
+
+    transform:
+        translate(-50%,-50%);
 
     animation:
-        discordFloat 3s ease-in-out infinite;
+        discordRing 8s linear infinite;
 }
 
-@keyframes discordFloat {
+.discord::after{
+    width:600px;
+    height:600px;
 
-    0%,100% {
-        transform: translateY(0);
-    }
-
-    50% {
-        transform: translateY(-10px);
-    }
-
+    animation-duration:14s;
 }
 
-.discord-box h2 {
+@keyframes discordRing{
+    from{
+        transform:
+            translate(-50%,-50%)
+            rotate(0deg);
+    }
+
+    to{
+        transform:
+            translate(-50%,-50%)
+            rotate(360deg);
+    }
+}
+
+.discord-content{
+    position:relative;
+
+    z-index:2;
+}
+
+.discord-icon{
+    font-size:70px;
+
+    margin-bottom:20px;
+
+    animation:
+        discordBounce 3s ease-in-out infinite;
+}
+
+@keyframes discordBounce{
+
+    0%,100%{
+        transform:
+            translateY(0)
+            rotate(0);
+    }
+
+    50%{
+        transform:
+            translateY(-12px)
+            rotate(4deg);
+    }
+}
+
+.discord h2{
     font-size:
-        clamp(40px,6vw,70px);
+        clamp(40px,7vw,70px);
 
-    font-weight: 1000;
+    font-weight:1000;
 
-    margin-bottom: 15px;
+    margin-bottom:15px;
 }
 
-.discord-box p {
-    color: #777;
+.discord p{
+    color:#666;
 
-    max-width: 650px;
+    max-width:650px;
 
     margin:
         0 auto 30px;
@@ -1121,65 +1515,82 @@ section {
    FAQ
 ========================================================= */
 
-.faq {
-    max-width: 850px;
+.faq{
+    max-width:850px;
 
-    margin: auto;
+    margin:auto;
 }
 
-details {
+details{
+    padding:22px;
+
+    margin-bottom:12px;
+
+    border-radius:14px;
+
     background:
         rgba(255,255,255,.025);
 
     border:
         1px solid rgba(255,255,255,.08);
 
-    border-radius: 14px;
-
-    padding: 20px 23px;
-
-    margin-bottom: 12px;
-
-    transition: .25s;
+    transition:.3s;
 }
 
-details:hover {
+details:hover{
     border-color:
-        rgba(255,215,0,.25);
+        rgba(255,215,0,.3);
 }
 
-summary {
-    cursor: pointer;
+summary{
+    cursor:pointer;
 
-    font-weight: 800;
+    font-weight:900;
 
-    list-style: none;
+    list-style:none;
 }
 
-summary::-webkit-details-marker {
-    display: none;
+summary::-webkit-details-marker{
+    display:none;
 }
 
-summary::after {
-    content: "+";
+summary::after{
+    content:"+";
 
-    float: right;
+    float:right;
 
-    color: #ffd700;
+    color:#ffd700;
 
-    font-size: 22px;
+    font-size:20px;
+
+    transition:.3s;
 }
 
-details[open] summary::after {
-    content: "−";
+details[open] summary::after{
+    content:"−";
 }
 
-details p {
-    color: #777;
+details p{
+    color:#666;
 
-    margin-top: 15px;
+    margin-top:15px;
 
-    font-size: 14px;
+    font-size:14px;
+
+    animation:
+        faqOpen .4s ease;
+}
+
+@keyframes faqOpen{
+    from{
+        opacity:0;
+        transform:translateY(-10px);
+    }
+
+    to{
+        opacity:1;
+        transform:none;
+    }
 }
 
 
@@ -1187,47 +1598,62 @@ details p {
    FINAL CTA
 ========================================================= */
 
-.final-cta {
-    position: relative;
+.final{
+    min-height:650px;
 
-    overflow: hidden;
+    display:flex;
 
-    text-align: center;
+    align-items:center;
+    justify-content:center;
 
-    padding:
-        150px 25px;
+    text-align:center;
 
-    border-top:
-        1px solid rgba(255,255,255,.06);
+    position:relative;
 
-    border-bottom:
-        1px solid rgba(255,255,255,.06);
+    overflow:hidden;
 
     background:
         radial-gradient(
             circle at center,
-            rgba(255,215,0,.12),
-            transparent 50%
+            rgba(255,215,0,.13),
+            transparent 45%
         );
 }
 
-.final-cta h2 {
+.final h2{
     font-size:
-        clamp(50px,9vw,100px);
+        clamp(60px,11vw,140px);
 
-    line-height: .9;
+    line-height:.8;
 
-    font-weight: 1000;
+    font-weight:1000;
 
-    color: #ffd700;
+    color:#ffd700;
 
-    margin-bottom: 25px;
+    text-shadow:
+        0 0 50px rgba(255,215,0,.15);
+
+    animation:
+        finalPulse 4s infinite;
 }
 
-.final-cta p {
-    color: #777;
+@keyframes finalPulse{
+    0%,100%{
+        transform:scale(1);
+    }
 
-    margin-bottom: 30px;
+    50%{
+        transform:scale(1.03);
+    }
+}
+
+.final p{
+    color:#666;
+
+    margin:
+        30px auto;
+
+    font-size:16px;
 }
 
 
@@ -1235,27 +1661,30 @@ details p {
    FOOTER
 ========================================================= */
 
-footer {
+footer{
     padding:
-        50px 25px;
+        60px 25px;
 
-    text-align: center;
+    text-align:center;
 
-    color: #555;
+    background:#020202;
 
-    background: #030303;
+    border-top:
+        1px solid rgba(255,255,255,.06);
+
+    color:#444;
 }
 
-.footer-logo {
-    color: #ffd700;
+.footer-logo{
+    color:#ffd700;
 
-    font-size: 25px;
+    font-size:30px;
 
-    font-weight: 1000;
+    font-weight:1000;
 
-    letter-spacing: 4px;
+    letter-spacing:5px;
 
-    margin-bottom: 10px;
+    margin-bottom:10px;
 }
 
 
@@ -1263,54 +1692,54 @@ footer {
    RESPONSIVE
 ========================================================= */
 
-@media (max-width: 900px) {
+@media(max-width:900px){
 
-    .cards {
+    .cards{
         grid-template-columns:
             repeat(2,1fr);
     }
 
-    .stats {
+    .stats{
         grid-template-columns:
             repeat(2,1fr);
     }
 
-    .process {
+    .steps{
         grid-template-columns:
             repeat(2,1fr);
     }
 
 }
 
-@media (max-width: 650px) {
+@media(max-width:650px){
 
-    .nav-links {
-        display: none;
+    .nav-links{
+        display:none;
     }
 
-    .cards {
-        grid-template-columns: 1fr;
+    .cards{
+        grid-template-columns:1fr;
     }
 
-    .stats {
+    .stats{
         grid-template-columns:
             repeat(2,1fr);
     }
 
-    .process {
-        grid-template-columns: 1fr;
+    .steps{
+        grid-template-columns:1fr;
     }
 
-    .hero h1 {
-        letter-spacing: -5px;
+    .requirement{
+        align-items:flex-start;
     }
 
-    .requirement {
-        align-items: flex-start;
+    .requirement strong{
+        min-width:auto;
     }
 
-    .requirement strong {
-        min-width: auto;
+    .hero h1{
+        letter-spacing:-6px;
     }
 
 }
@@ -1320,15 +1749,15 @@ footer {
    REDUCED MOTION
 ========================================================= */
 
-@media (prefers-reduced-motion: reduce) {
+@media(prefers-reduced-motion:reduce){
 
     *,
     *::before,
-    *::after {
-        animation-duration: .01ms !important;
-        animation-iteration-count: 1 !important;
-        scroll-behavior: auto !important;
-        transition-duration: .01ms !important;
+    *::after{
+        animation-duration:.01ms!important;
+        animation-iteration-count:1!important;
+        transition-duration:.01ms!important;
+        scroll-behavior:auto!important;
     }
 
 }
@@ -1340,42 +1769,89 @@ footer {
 <body>
 
 
+<!-- LOADING -->
+
+<div id="loader">
+
+    <div class="loader-inner">
+
+        <div class="loader-logo">
+            4EV
+        </div>
+
+        <div class="loader-text">
+            INITIALIZING FOREVER VICTORY
+        </div>
+
+        <div class="loader-line"></div>
+
+    </div>
+
+</div>
+
+
+<!-- PROGRESS -->
+
+<div id="progress"></div>
+
+
 <!-- BACKGROUND -->
 
 <div class="background">
+
     <div class="grid"></div>
+
+    <div class="ring"></div>
+    <div class="ring"></div>
+    <div class="ring"></div>
+    <div class="ring"></div>
 
     <div class="orb one"></div>
     <div class="orb two"></div>
     <div class="orb three"></div>
+
 </div>
 
-<div class="particles" id="particles"></div>
 
-<div class="cursor-glow" id="cursorGlow"></div>
+<div id="particles"></div>
+
+<div id="spotlight"></div>
 
 
 <!-- NAV -->
 
-<nav class="nav">
+<nav id="nav">
 
     <div class="nav-inner">
 
-        <a href="#" class="logo">
+        <a
+            class="logo"
+            href="#"
+        >
             4EV
         </a>
 
         <div class="nav-links">
 
-            <a href="#about">ABOUT</a>
+            <a href="#about">
+                ABOUT
+            </a>
 
-            <a href="#recruitment">RECRUITMENT</a>
+            <a href="#recruitment">
+                RECRUITMENT
+            </a>
 
-            <a href="#ranks">RANKS</a>
+            <a href="#ranks">
+                RANKS
+            </a>
 
-            <a href="#discord">DISCORD</a>
+            <a href="#discord">
+                DISCORD
+            </a>
 
-            <a href="#faq">FAQ</a>
+            <a href="#faq">
+                FAQ
+            </a>
 
         </div>
 
@@ -1388,7 +1864,10 @@ footer {
 
 <header class="hero">
 
-    <div class="hero-content">
+    <div
+        class="hero-content"
+        id="heroContent"
+    >
 
         <div class="status">
 
@@ -1403,18 +1882,20 @@ footer {
         </h1>
 
         <div class="hero-subtitle">
+
             FOREVER VICTORY
+
         </div>
 
         <p class="hero-description">
 
-            A competitive Roblox Rivals clan built for
+            A competitive Roblox Rivals clan for
             skilled, active and ambitious players.
 
-            <br>
+            <br><br>
 
             <strong>
-                Compete. Improve. Represent 4EV.
+                COMPETE • IMPROVE • REPRESENT
             </strong>
 
         </p>
@@ -1422,7 +1903,7 @@ footer {
         <div class="buttons">
 
             <a
-                class="btn btn-gold"
+                class="btn gold"
                 href="https://discord.gg/dUtnTEfYYb"
                 target="_blank"
             >
@@ -1430,18 +1911,19 @@ footer {
             </a>
 
             <a
-                class="btn btn-dark"
+                class="btn dark"
                 href="#recruitment"
             >
-                ⚔️ SEE REQUIREMENTS
+                ⚔️ VIEW RECRUITMENT
             </a>
 
         </div>
 
     </div>
 
+
     <div class="scroll">
-        SCROLL TO ENTER 4EV
+        SCROLL ↓
     </div>
 
 </header>
@@ -1455,18 +1937,16 @@ footer {
 
         <div class="stat">
 
-            <div
-                class="stat-number"
-                data-count="170"
-            >
+            <div class="stat-number">
                 170+
             </div>
 
             <div class="stat-label">
-                Minimum Level
+                MINIMUM LEVEL
             </div>
 
         </div>
+
 
         <div class="stat">
 
@@ -1475,10 +1955,11 @@ footer {
             </div>
 
             <div class="stat-label">
-                Minimum Rank
+                MINIMUM RANK
             </div>
 
         </div>
+
 
         <div class="stat">
 
@@ -1487,10 +1968,11 @@ footer {
             </div>
 
             <div class="stat-label">
-                Win Rate
+                WIN RATE
             </div>
 
         </div>
+
 
         <div class="stat">
 
@@ -1499,7 +1981,7 @@ footer {
             </div>
 
             <div class="stat-label">
-                Forever Victory
+                FOREVER VICTORY
             </div>
 
         </div>
@@ -1515,24 +1997,24 @@ footer {
 
     <div class="section-title reveal">
 
-        <div class="section-label">
-            WHO WE ARE
+        <div class="label">
+            WELCOME TO 4EV
         </div>
 
         <h2>
-            BUILT DIFFERENT.
+            NOT JUST ANOTHER CLAN.
         </h2>
 
         <p>
-            4EV is a Roblox Rivals clan focused on competition,
-            progression, teamwork and community.
+            4EV | Forever Victory is a competitive
+            Roblox Rivals community built around
+            improvement, competition and teamwork.
         </p>
 
     </div>
 
 
     <div class="cards">
-
 
         <div class="card reveal">
 
@@ -1545,9 +2027,8 @@ footer {
             </h3>
 
             <p>
-                We bring together players who enjoy
-                competitive Roblox Rivals and want to
-                constantly push their gameplay further.
+                Play with people who want to improve,
+                compete and take their gameplay seriously.
             </p>
 
         </div>
@@ -1560,13 +2041,12 @@ footer {
             </div>
 
             <h3>
-                Skill First
+                Skill
             </h3>
 
             <p>
-                4EV is built around players who want
-                to improve their mechanics, decision-making,
-                communication and overall performance.
+                Build better mechanics, smarter decisions,
+                stronger communication and better teamwork.
             </p>
 
         </div>
@@ -1575,7 +2055,7 @@ footer {
         <div class="card reveal">
 
             <div class="icon">
-                📈
+                🚀
             </div>
 
             <h3>
@@ -1583,9 +2063,8 @@ footer {
             </h3>
 
             <p>
-                Members can grow within the community,
-                earn trust and work toward higher clan
-                positions.
+                Start as a Recruit and work your way through
+                the 4EV progression system.
             </p>
 
         </div>
@@ -1602,9 +2081,8 @@ footer {
             </h3>
 
             <p>
-                From clan activities to competitive events,
-                4EV gives members opportunities to play
-                together and represent the clan.
+                Take part in clan activities, events,
+                battles and community competitions.
             </p>
 
         </div>
@@ -1621,9 +2099,8 @@ footer {
             </h3>
 
             <p>
-                Meet other Rivals players, find teammates,
-                talk strategy and become part of the
-                4EV community.
+                Find teammates, share clips, talk strategy
+                and meet other Rivals players.
             </p>
 
         </div>
@@ -1640,13 +2117,11 @@ footer {
             </h3>
 
             <p>
-                We want players who don't want to stay
-                average. If you're always trying to get
-                better, you're in the right place.
+                We're looking for players who want to
+                push beyond average and keep improving.
             </p>
 
         </div>
-
 
     </div>
 
@@ -1659,17 +2134,17 @@ footer {
 
     <div class="section-title reveal">
 
-        <div class="section-label">
-            YOUR SHOT
+        <div class="label">
+            RECRUITMENT
         </div>
 
         <h2>
-            THINK YOU'RE GOOD ENOUGH?
+            EARN YOUR PLACE.
         </h2>
 
         <p>
-            4EV is looking for skilled, active and competitive
-            players ready to represent Forever Victory.
+            Meet the current requirements and join
+            the 4EV recruitment process.
         </p>
 
     </div>
@@ -1723,7 +2198,7 @@ footer {
             </strong>
 
             <span>
-                Strong overall performance
+                Strong performance
             </span>
 
         </div>
@@ -1785,39 +2260,42 @@ footer {
 </section>
 
 
-<!-- TRYOUT PROCESS -->
+<!-- PROCESS -->
 
 <section>
 
     <div class="section-title reveal">
 
-        <div class="section-label">
-            HOW IT WORKS
+        <div class="label">
+            THE PROCESS
         </div>
 
         <h2>
-            YOUR ROAD TO 4EV
+            FROM PLAYER TO 4EV.
         </h2>
 
         <p>
-            A simple path from applicant to Forever Victory member.
+            Your path into Forever Victory.
         </p>
 
     </div>
 
 
-    <div class="process">
+    <div class="steps">
 
 
         <div class="step reveal">
 
+            <div class="step-number">
+                01
+            </div>
+
             <h3>
-                Join
+                JOIN
             </h3>
 
             <p>
-                Enter the official 4EV Discord and
-                check the current recruitment information.
+                Enter the official 4EV Discord.
             </p>
 
         </div>
@@ -1825,13 +2303,17 @@ footer {
 
         <div class="step reveal">
 
+            <div class="step-number">
+                02
+            </div>
+
             <h3>
-                Apply
+                APPLY
             </h3>
 
             <p>
-                Submit your information and show us
-                what kind of player you are.
+                Check recruitment information
+                and submit your application.
             </p>
 
         </div>
@@ -1839,13 +2321,17 @@ footer {
 
         <div class="step reveal">
 
+            <div class="step-number">
+                03
+            </div>
+
             <h3>
-                Tryout
+                TRYOUT
             </h3>
 
             <p>
-                Demonstrate your gameplay and competitive
-                ability when required.
+                Demonstrate your gameplay
+                when required.
             </p>
 
         </div>
@@ -1853,13 +2339,16 @@ footer {
 
         <div class="step reveal">
 
+            <div class="step-number">
+                04
+            </div>
+
             <h3>
-                Represent
+                REPRESENT
             </h3>
 
             <p>
-                Earn your place and represent
-                4EV | Forever Victory.
+                Earn your place and represent 4EV.
             </p>
 
         </div>
@@ -1876,17 +2365,17 @@ footer {
 
     <div class="section-title reveal">
 
-        <div class="section-label">
-            CLAN PROGRESSION
+        <div class="label">
+            PROGRESSION
         </div>
 
         <h2>
-            CLIMB THE RANKS
+            CLIMB THE RANKS.
         </h2>
 
         <p>
-            Activity, trust and contribution can help
-            members progress through the 4EV system.
+            Grow with the clan through activity,
+            contribution and trust.
         </p>
 
     </div>
@@ -1895,9 +2384,9 @@ footer {
     <div class="cards">
 
 
-        <div class="card rank-card reveal">
+        <div class="card reveal">
 
-            <div class="rank-number">
+            <div class="label">
                 R1
             </div>
 
@@ -1912,9 +2401,9 @@ footer {
         </div>
 
 
-        <div class="card rank-card reveal">
+        <div class="card reveal">
 
-            <div class="rank-number">
+            <div class="label">
                 R2
             </div>
 
@@ -1923,16 +2412,15 @@ footer {
             </h3>
 
             <p>
-                Active members establishing themselves
-                within the clan.
+                Active members establishing themselves.
             </p>
 
         </div>
 
 
-        <div class="card rank-card reveal">
+        <div class="card reveal">
 
-            <div class="rank-number">
+            <div class="label">
                 R3
             </div>
 
@@ -1941,16 +2429,15 @@ footer {
             </h3>
 
             <p>
-                Proven competitive members who contribute
-                to the clan.
+                Proven competitive members.
             </p>
 
         </div>
 
 
-        <div class="card rank-card reveal">
+        <div class="card reveal">
 
-            <div class="rank-number">
+            <div class="label">
                 R4
             </div>
 
@@ -1965,9 +2452,9 @@ footer {
         </div>
 
 
-        <div class="card rank-card reveal">
+        <div class="card reveal">
 
-            <div class="rank-number">
+            <div class="label">
                 R5
             </div>
 
@@ -1976,16 +2463,15 @@ footer {
             </h3>
 
             <p>
-                The highest member rank in the
-                4EV progression system.
+                The highest member rank.
             </p>
 
         </div>
 
 
-        <div class="card rank-card reveal">
+        <div class="card reveal">
 
-            <div class="rank-number">
+            <div class="label">
                 STAFF
             </div>
 
@@ -1994,8 +2480,7 @@ footer {
             </h3>
 
             <p>
-                Members responsible for managing,
-                supporting and developing 4EV.
+                The people helping build and manage 4EV.
             </p>
 
         </div>
@@ -2012,16 +2497,16 @@ footer {
 
     <div class="section-title reveal">
 
-        <div class="section-label">
-            MORE THAN A CLAN
+        <div class="label">
+            THE COMMUNITY
         </div>
 
         <h2>
-            THE 4EV COMMUNITY
+            STAY. PLAY. CONNECT.
         </h2>
 
         <p>
-            Your clan experience doesn't stop when the match ends.
+            There's always something happening inside 4EV.
         </p>
 
     </div>
@@ -2037,30 +2522,12 @@ footer {
             </div>
 
             <h3>
-                Community Chat
+                Community
             </h3>
 
             <p>
-                Talk with other members, share clips,
-                discuss gameplay and hang out.
-            </p>
-
-        </div>
-
-
-        <div class="card reveal">
-
-            <div class="icon">
-                📢
-            </div>
-
-            <h3>
-                Announcements
-            </h3>
-
-            <p>
-                Stay informed about recruitment,
-                events and important clan updates.
+                Talk, chill and connect with other
+                Roblox Rivals players.
             </p>
 
         </div>
@@ -2077,8 +2544,8 @@ footer {
             </h3>
 
             <p>
-                Meet other Roblox Rivals players
-                and find people to play with.
+                Meet players and build your competitive
+                squad.
             </p>
 
         </div>
@@ -2091,12 +2558,11 @@ footer {
             </div>
 
             <h3>
-                Clips & Highlights
+                Clips
             </h3>
 
             <p>
-                Share your best plays and show the
-                community what you can do.
+                Share your best plays and moments.
             </p>
 
         </div>
@@ -2105,16 +2571,34 @@ footer {
         <div class="card reveal">
 
             <div class="icon">
-                🏅
+                📢
             </div>
 
             <h3>
-                Recognition
+                Updates
             </h3>
 
             <p>
-                Stand out through activity, contribution
-                and competitive performance.
+                Keep up with recruitment and
+                community announcements.
+            </p>
+
+        </div>
+
+
+        <div class="card reveal">
+
+            <div class="icon">
+                🏆
+            </div>
+
+            <h3>
+                Events
+            </h3>
+
+            <p>
+                Participate in community and
+                competitive activities.
             </p>
 
         </div>
@@ -2127,12 +2611,12 @@ footer {
             </div>
 
             <h3>
-                Grow With 4EV
+                Build The Future
             </h3>
 
             <p>
-                Help build the clan and become part
-                of its future.
+                Help make 4EV bigger, stronger
+                and better.
             </p>
 
         </div>
@@ -2147,31 +2631,35 @@ footer {
 
 <section id="discord">
 
-    <div class="discord-box reveal">
+    <div class="discord reveal">
 
-        <div class="discord-logo">
-            💬
-        </div>
+        <div class="discord-content">
 
-        <h2>
-            JOIN THE 4EV DISCORD
-        </h2>
+            <div class="discord-icon">
+                💬
+            </div>
 
-        <p>
-            This is where the 4EV community lives.
-            Get recruitment information, announcements,
-            community discussions, events and more.
-        </p>
+            <h2>
+                ENTER THE 4EV DISCORD
+            </h2>
 
-        <div class="buttons">
+            <p>
+                Recruitment, announcements, community,
+                events, teammates and everything 4EV
+                starts here.
+            </p>
 
-            <a
-                class="btn btn-gold"
-                href="https://discord.gg/dUtnTEfYYb"
-                target="_blank"
-            >
-                JOIN THE SERVER
-            </a>
+            <div class="buttons">
+
+                <a
+                    class="btn gold"
+                    href="https://discord.gg/dUtnTEfYYb"
+                    target="_blank"
+                >
+                    ⚔️ JOIN THE SERVER
+                </a>
+
+            </div>
 
         </div>
 
@@ -2186,16 +2674,16 @@ footer {
 
     <div class="section-title reveal">
 
-        <div class="section-label">
-            QUESTIONS?
+        <div class="label">
+            FAQ
         </div>
 
         <h2>
-            FREQUENTLY ASKED
+            GOT QUESTIONS?
         </h2>
 
         <p>
-            Everything you need to know before joining 4EV.
+            Here's what you need to know.
         </p>
 
     </div>
@@ -2212,8 +2700,8 @@ footer {
 
             <p>
                 4EV | Forever Victory is a competitive
-                Roblox Rivals clan focused on skilled players,
-                improvement, competition and community.
+                Roblox Rivals clan focused on competition,
+                improvement and community.
             </p>
 
         </details>
@@ -2222,12 +2710,12 @@ footer {
         <details class="reveal">
 
             <summary>
-                How do I join 4EV?
+                How do I join?
             </summary>
 
             <p>
-                Join the official 4EV Discord and check
-                the current recruitment information.
+                Join the official 4EV Discord and
+                check the current recruitment information.
             </p>
 
         </details>
@@ -2236,13 +2724,13 @@ footer {
         <details class="reveal">
 
             <summary>
-                What are the current requirements?
+                What are the requirements?
             </summary>
 
             <p>
-                The current listed requirements are Platinum 1+,
-                Level 170+, 60%+ win rate, activity and
-                a competitive mindset.
+                Current requirements include Platinum 1+,
+                Level 170+, 60%+ win rate, activity
+                and a competitive mindset.
             </p>
 
         </details>
@@ -2251,13 +2739,12 @@ footer {
         <details class="reveal">
 
             <summary>
-                Do I have to be active?
+                Is 4EV competitive?
             </summary>
 
             <p>
-                Yes. 4EV is designed for active players who
-                want to participate in the community and
-                competitive activities.
+                4EV is designed around competitive Roblox
+                Rivals players and people who want to improve.
             </p>
 
         </details>
@@ -2266,27 +2753,12 @@ footer {
         <details class="reveal">
 
             <summary>
-                Where can I find recruitment updates?
+                Where are recruitment updates?
             </summary>
 
             <p>
-                Recruitment information and updates are
-                available through the official 4EV Discord.
-            </p>
-
-        </details>
-
-
-        <details class="reveal">
-
-            <summary>
-                Can I help build 4EV?
-            </summary>
-
-            <p>
-                Absolutely. Community members can contribute
-                through activity, participation, events,
-                content and helping create a positive community.
+                Recruitment information is posted through
+                the official 4EV Discord.
             </p>
 
         </details>
@@ -2297,43 +2769,37 @@ footer {
 </section>
 
 
-<!-- FINAL CTA -->
+<!-- FINAL -->
 
-<div class="final-cta">
+<section class="final">
 
     <div class="reveal">
 
         <h2>
-            READY FOR 4EV?
+            4EV
         </h2>
 
         <p>
-            Don't just play Roblox Rivals.
-            Represent something.
+            FOREVER VICTORY.
+            <br>
+            MAKE YOUR NAME MEAN SOMETHING.
         </p>
 
         <div class="buttons">
 
             <a
-                class="btn btn-gold"
+                class="btn gold"
                 href="https://discord.gg/dUtnTEfYYb"
                 target="_blank"
             >
                 ⚔️ JOIN 4EV
             </a>
 
-            <a
-                class="btn btn-dark"
-                href="#recruitment"
-            >
-                VIEW REQUIREMENTS
-            </a>
-
         </div>
 
     </div>
 
-</div>
+</section>
 
 
 <!-- FOOTER -->
@@ -2348,11 +2814,11 @@ footer {
         Forever Victory
     </p>
 
-    <p style="margin-top:15px;">
+    <p style="margin-top:10px;">
         Competitive Roblox Rivals Clan
     </p>
 
-    <p style="margin-top:25px; font-size:12px;">
+    <p style="margin-top:25px;font-size:11px;">
         © 2026 4EV | Forever Victory
     </p>
 
@@ -2362,16 +2828,48 @@ footer {
 <script>
 
 /* =========================================================
+   LOADER
+========================================================= */
+
+window.addEventListener(
+    "load",
+    () => {
+
+        setTimeout(
+            () => {
+
+                document
+                    .getElementById("loader")
+                    .classList
+                    .add("hide");
+
+            },
+            1000
+        );
+
+    }
+);
+
+
+/* =========================================================
    PARTICLES
 ========================================================= */
 
 const particleContainer =
-    document.getElementById("particles");
+    document.getElementById(
+        "particles"
+    );
 
-for (let i = 0; i < 55; i++) {
+for(
+    let i = 0;
+    i < 100;
+    i++
+){
 
     const particle =
-        document.createElement("div");
+        document.createElement(
+            "div"
+        );
 
     particle.className =
         "particle";
@@ -2380,13 +2878,22 @@ for (let i = 0; i < 55; i++) {
         Math.random() * 100 + "%";
 
     particle.style.animationDuration =
-        (6 + Math.random() * 12) + "s";
+        (5 + Math.random() * 15) + "s";
 
     particle.style.animationDelay =
-        (-Math.random() * 15) + "s";
+        (-Math.random() * 20) + "s";
 
     particle.style.opacity =
-        (0.15 + Math.random() * 0.5);
+        .1 + Math.random() * .7;
+
+    const size =
+        1 + Math.random() * 3;
+
+    particle.style.width =
+        size + "px";
+
+    particle.style.height =
+        size + "px";
 
     particleContainer.appendChild(
         particle
@@ -2396,48 +2903,161 @@ for (let i = 0; i < 55; i++) {
 
 
 /* =========================================================
-   CURSOR GLOW
+   MOUSE SPOTLIGHT
 ========================================================= */
 
-const cursorGlow =
-    document.getElementById("cursorGlow");
+const spotlight =
+    document.getElementById(
+        "spotlight"
+    );
 
 document.addEventListener(
     "mousemove",
-    (event) => {
+    e => {
 
-        cursorGlow.style.left =
-            event.clientX + "px";
+        spotlight.style.left =
+            e.clientX + "px";
 
-        cursorGlow.style.top =
-            event.clientY + "px";
+        spotlight.style.top =
+            e.clientY + "px";
 
     }
 );
 
 
 /* =========================================================
+   HERO 3D MOUSE EFFECT
+========================================================= */
+
+const hero =
+    document.getElementById(
+        "heroContent"
+    );
+
+document.addEventListener(
+    "mousemove",
+    e => {
+
+        if(
+            window.innerWidth < 700
+        ) return;
+
+        const x =
+            (e.clientX /
+            window.innerWidth -
+            .5);
+
+        const y =
+            (e.clientY /
+            window.innerHeight -
+            .5);
+
+        hero.style.transform =
+            `rotateY(${x * 5}deg)
+             rotateX(${-y * 4}deg)`;
+
+    }
+);
+
+
+/* =========================================================
+   CARD 3D TILT
+========================================================= */
+
+document
+.querySelectorAll(".card")
+.forEach(card => {
+
+    card.addEventListener(
+        "mousemove",
+        e => {
+
+            if(
+                window.innerWidth < 700
+            ) return;
+
+            const rect =
+                card.getBoundingClientRect();
+
+            const x =
+                e.clientX -
+                rect.left;
+
+            const y =
+                e.clientY -
+                rect.top;
+
+            const centerX =
+                rect.width / 2;
+
+            const centerY =
+                rect.height / 2;
+
+            const rotateX =
+                (y - centerY) /
+                15;
+
+            const rotateY =
+                (centerX - x) /
+                15;
+
+            card.style.transform =
+                `perspective(900px)
+                 rotateX(${rotateX}deg)
+                 rotateY(${rotateY}deg)
+                 scale(1.03)`;
+
+            card.style.setProperty(
+                "--mouse-x",
+                x + "px"
+            );
+
+            card.style.setProperty(
+                "--mouse-y",
+                y + "px"
+            );
+
+        }
+    );
+
+    card.addEventListener(
+        "mouseleave",
+        () => {
+
+            card.style.transform =
+                "";
+
+        }
+    );
+
+});
+
+
+/* =========================================================
    SCROLL REVEAL
 ========================================================= */
 
-const observer =
+const revealObserver =
     new IntersectionObserver(
-        (entries) => {
+        entries => {
 
             entries.forEach(
-                (entry) => {
+                entry => {
 
-                    if (
+                    if(
                         entry.isIntersecting
-                    ) {
+                    ){
 
                         entry.target
                             .classList
-                            .add("visible");
+                            .add(
+                                "visible"
+                            );
 
-                        observer.unobserve(
-                            entry.target
-                        );
+                        revealObserver
+                            .unobserve(
+                                entry.target
+                            );
 
                     }
 
@@ -2446,100 +3066,70 @@ const observer =
 
         },
         {
-            threshold: 0.12
+            threshold:.12
         }
     );
 
 
 document
-    .querySelectorAll(".reveal")
-    .forEach(
-        (element) => {
-
-            observer.observe(
-                element
-            );
-
-        }
-    );
+.querySelectorAll(".reveal")
+.forEach(
+    el =>
+        revealObserver.observe(el)
+);
 
 
 /* =========================================================
-   STAGGER CARD ANIMATIONS
+   STAGGER
 ========================================================= */
 
 document
-    .querySelectorAll(".cards")
+.querySelectorAll(".cards")
+.forEach(container => {
+
+    container
+    .querySelectorAll(".card")
     .forEach(
-        (container) => {
+        (card,index) => {
 
-            const cards =
-                container.querySelectorAll(
-                    ".card"
-                );
-
-            cards.forEach(
-                (card, index) => {
-
-                    card.style.transitionDelay =
-                        (index * 80) + "ms";
-
-                }
-            );
+            card.style.transitionDelay =
+                index * 70 + "ms";
 
         }
     );
 
+});
+
 
 /* =========================================================
-   MAGNETIC BUTTON EFFECT
+   SCROLL PROGRESS
 ========================================================= */
 
-document
-    .querySelectorAll(".btn")
-    .forEach(
-        (button) => {
+window.addEventListener(
+    "scroll",
+    () => {
 
-            button.addEventListener(
-                "mousemove",
-                (event) => {
+        const scrollTop =
+            window.scrollY;
 
-                    const rect =
-                        button.getBoundingClientRect();
+        const height =
+            document.body.scrollHeight -
+            window.innerHeight;
 
-                    const x =
-                        event.clientX -
-                        rect.left -
-                        rect.width / 2;
+        const percent =
+            (scrollTop / height) * 100;
 
-                    const y =
-                        event.clientY -
-                        rect.top -
-                        rect.height / 2;
+        document
+            .getElementById("progress")
+            .style.width =
+            percent + "%";
 
-                    button.style.transform =
-                        `translate(${x * .08}px,
-                        ${y * .08}px)`;
-
-                }
-            );
-
-            button.addEventListener(
-                "mouseleave",
-                () => {
-
-                    button.style.transform =
-                        "";
-
-                }
-            );
-
-        }
-    );
+    }
+);
 
 
 /* =========================================================
-   NAVBAR SCROLL EFFECT
+   NAV SCROLL
 ========================================================= */
 
 window.addEventListener(
@@ -2547,25 +3137,225 @@ window.addEventListener(
     () => {
 
         const nav =
-            document.querySelector(".nav");
+            document.getElementById(
+                "nav"
+            );
 
-        if (window.scrollY > 30) {
+        if(
+            window.scrollY > 40
+        ){
 
-            nav.style.background =
-                "rgba(3,3,3,.92)";
+            nav.classList.add(
+                "scrolled"
+            );
 
-        } else {
+        }else{
 
-            nav.style.background =
-                "rgba(5,5,5,.72)";
+            nav.classList.remove(
+                "scrolled"
+            );
 
         }
 
     }
 );
 
+
+/* =========================================================
+   MAGNETIC BUTTONS
+========================================================= */
+
+document
+.querySelectorAll(".btn")
+.forEach(button => {
+
+    button.addEventListener(
+        "mousemove",
+        e => {
+
+            const rect =
+                button.getBoundingClientRect();
+
+            const x =
+                e.clientX -
+                rect.left -
+                rect.width / 2;
+
+            const y =
+                e.clientY -
+                rect.top -
+                rect.height / 2;
+
+            button.style.transform =
+                `translate(
+                    ${x * .08}px,
+                    ${y * .08}px
+                ) scale(1.03)`;
+
+        }
+    );
+
+    button.addEventListener(
+        "mouseleave",
+        () => {
+
+            button.style.transform =
+                "";
+
+        }
+    );
+
+});
+
+
+/* =========================================================
+   CLICK FLASH
+========================================================= */
+
+document
+.querySelectorAll(".btn")
+.forEach(button => {
+
+    button.addEventListener(
+        "click",
+        e => {
+
+            const flash =
+                document.createElement(
+                    "div"
+                );
+
+            flash.style.position =
+                "fixed";
+
+            flash.style.left =
+                e.clientX + "px";
+
+            flash.style.top =
+                e.clientY + "px";
+
+            flash.style.width =
+                "10px";
+
+            flash.style.height =
+                "10px";
+
+            flash.style.borderRadius =
+                "50%";
+
+            flash.style.background =
+                "#ffd700";
+
+            flash.style.pointerEvents =
+                "none";
+
+            flash.style.zIndex =
+                "99999";
+
+            flash.style.boxShadow =
+                "0 0 30px #ffd700";
+
+            flash.animate(
+                [
+                    {
+                        transform:
+                            "translate(-50%,-50%) scale(1)",
+                        opacity:1
+                    },
+                    {
+                        transform:
+                            "translate(-50%,-50%) scale(25)",
+                        opacity:0
+                    }
+                ],
+                {
+                    duration:500,
+                    easing:
+                        "cubic-bezier(.16,1,.3,1)"
+                }
+            );
+
+            document.body.appendChild(
+                flash
+            );
+
+            setTimeout(
+                () => flash.remove(),
+                550
+            );
+
+        }
+    );
+
+});
+
+
+/* =========================================================
+   PARALLAX ORBS
+========================================================= */
+
+window.addEventListener(
+    "scroll",
+    () => {
+
+        const y =
+            window.scrollY;
+
+        document
+        .querySelector(".orb.one")
+        .style.transform =
+            `translateY(${y * .08}px)`;
+
+        document
+        .querySelector(".orb.two")
+        .style.transform =
+            `translateY(${y * -.05}px)`;
+
+        document
+        .querySelector(".orb.three")
+        .style.transform =
+            `translateY(${y * .03}px)`;
+
+    }
+);
+
+
+/* =========================================================
+   SMOOTH ANCHOR OFFSET
+========================================================= */
+
+document
+.querySelectorAll(
+    'a[href^="#"]'
+)
+.forEach(anchor => {
+
+    anchor.addEventListener(
+        "click",
+        e => {
+
+            const target =
+                document.querySelector(
+                    anchor.getAttribute(
+                        "href"
+                    )
+                );
+
+            if(!target) return;
+
+            e.preventDefault();
+
+            target.scrollIntoView({
+                behavior:"smooth",
+                block:"start"
+            });
+
+        }
+    );
+
+});
+
 </script>
 
 </body>
 </html>
-```
