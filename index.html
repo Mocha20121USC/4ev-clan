@@ -2,4601 +2,2774 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-
-<title>4EV | Forever Victory — Roblox Rivals Clan</title>
-
-<meta name="description"
-content="4EV | Forever Victory is a competitive Roblox Rivals clan focused on skilled players, competition, clan wars, events, improvement and community.">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#050609">
+<meta name="description" content="4EV | Forever Victory — Competitive Roblox Rivals Clan">
+<title>4EV | Forever Victory</title>
 
 <style>
-
 /* =========================================================
-   RESET
-========================================================= */
+   4EV | FOREVER VICTORY
+   Single-file GitHub Pages website
+   ========================================================= */
+
+:root{
+  --bg:#030408;
+  --bg2:#070a12;
+  --panel:rgba(12,16,26,.72);
+  --panel2:rgba(18,23,36,.58);
+  --line:rgba(255,255,255,.09);
+  --white:#f5f7ff;
+  --muted:#8c95aa;
+  --accent:#7c5cff;
+  --accent2:#36c8ff;
+  --accent3:#b58cff;
+  --success:#5dffb0;
+  --max:1280px;
+  --nav:78px;
+}
 
 *{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
 }
 
 html{
-    scroll-behavior:smooth;
+  scroll-behavior:smooth;
+  background:var(--bg);
 }
 
 body{
-    background:#020202;
-    color:white;
-    font-family:Arial,Helvetica,sans-serif;
-    overflow-x:hidden;
+  background:
+    radial-gradient(circle at 50% -20%,rgba(124,92,255,.13),transparent 35%),
+    var(--bg);
+  color:var(--white);
+  font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  overflow-x:hidden;
+  line-height:1.5;
 }
 
 body.loading{
-    overflow:hidden;
+  overflow:hidden;
 }
 
 a{
-    text-decoration:none;
-    color:inherit;
+  color:inherit;
+  text-decoration:none;
+}
+
+button{
+  font:inherit;
 }
 
 ::selection{
-    background:#ffd700;
-    color:#000;
+  background:rgba(124,92,255,.4);
 }
-
 
 /* =========================================================
-   PAGE PROTECTION
-========================================================= */
-
-#site{
-    opacity:0;
-    transform:scale(1.08);
-    filter:blur(10px);
-    transition:
-        opacity 1.8s cubic-bezier(.16,1,.3,1),
-        transform 2s cubic-bezier(.16,1,.3,1),
-        filter 1.6s ease;
-}
-
-body.entered #site{
-    opacity:1;
-    transform:scale(1);
-    filter:blur(0);
-}
-
-
-/* =========================================================
-   CINEMATIC LOADER
-========================================================= */
-
-#cinematicLoader{
-    position:fixed;
-    inset:0;
-    z-index:999999;
-    overflow:hidden;
-    background:#000;
-    color:#fff;
-    transition:
-        opacity 1.5s ease,
-        visibility 1.5s ease;
-}
-
-#cinematicLoader.complete{
-    opacity:0;
-    visibility:hidden;
-    pointer-events:none;
-}
-
-
-/* =========================================================
-   SPACE BACKGROUND
-========================================================= */
-
-.space{
-    position:absolute;
-    inset:0;
-    background:
-        radial-gradient(
-            ellipse at center,
-            rgba(255,215,0,.06),
-            transparent 35%
-        ),
-        radial-gradient(
-            ellipse at center,
-            #071018 0%,
-            #020408 50%,
-            #000 100%
-        );
-}
-
-
-/* =========================================================
-   STARS
-========================================================= */
-
-.stars,
-.stars2,
-.stars3{
-    position:absolute;
-    inset:-100%;
-    background-repeat:repeat;
-    transform:translateZ(0);
-}
-
-.stars{
-    background-image:
-        radial-gradient(circle,rgba(255,255,255,.9) 0 1px,transparent 1.5px);
-    background-size:83px 83px;
-    animation:starDrift 25s linear infinite;
-}
-
-.stars2{
-    background-image:
-        radial-gradient(circle,rgba(255,215,0,.7) 0 1px,transparent 1.5px);
-    background-size:137px 137px;
-    animation:starDrift 14s linear infinite;
-}
-
-.stars3{
-    background-image:
-        radial-gradient(circle,rgba(255,255,255,.5) 0 1px,transparent 1.2px);
-    background-size:211px 211px;
-    animation:starDrift 40s linear infinite;
-}
-
-@keyframes starDrift{
-    from{
-        transform:translate(0,0) scale(1);
-    }
-    to{
-        transform:translate(180px,260px) scale(1.08);
-    }
-}
-
-
-/* =========================================================
-   HYPERSPACE
-========================================================= */
-
-#hyperspace{
-    position:absolute;
-    inset:0;
-    perspective:700px;
-    opacity:0;
-    transition:opacity 1s ease;
-}
-
-#hyperspace.active{
-    opacity:1;
-}
-
-.spaceLine{
-    position:absolute;
-    left:50%;
-    top:50%;
-
-    width:2px;
-    height:100px;
-
-    transform-origin:center bottom;
-
-    background:
-        linear-gradient(
-            to bottom,
-            transparent,
-            rgba(255,215,0,.85)
-        );
-
-    box-shadow:
-        0 0 12px rgba(255,215,0,.5);
-
-    animation:
-        warpLine 1.2s linear infinite;
-}
-
-@keyframes warpLine{
-    from{
-        transform:
-            rotate(var(--angle))
-            translateY(0)
-            scaleY(.2);
-        opacity:0;
-    }
-
-    20%{
-        opacity:1;
-    }
-
-    to{
-        transform:
-            rotate(var(--angle))
-            translateY(-650px)
-            scaleY(2);
-        opacity:0;
-    }
-}
-
-
-/* =========================================================
-   CENTRAL LIGHT
-========================================================= */
-
-.core{
-    position:absolute;
-
-    left:50%;
-    top:50%;
-
-    width:80px;
-    height:80px;
-
-    border-radius:50%;
-
-    transform:
-        translate(-50%,-50%)
-        scale(.1);
-
-    background:
-        radial-gradient(
-            circle,
-            #fff 0%,
-            #ffd700 15%,
-            rgba(255,215,0,.35) 40%,
-            transparent 70%
-        );
-
-    box-shadow:
-        0 0 40px #ffd700,
-        0 0 100px rgba(255,215,0,.7),
-        0 0 220px rgba(255,215,0,.25);
-
-    opacity:0;
-
-    transition:
-        transform 2s cubic-bezier(.16,1,.3,1),
-        opacity 1s ease;
-}
-
-.core.active{
-    opacity:1;
-
-    transform:
-        translate(-50%,-50%)
-        scale(3);
-}
-
-
-/* =========================================================
-   ORBITAL RINGS
-========================================================= */
-
-.orbits{
-    position:absolute;
-
-    left:50%;
-    top:50%;
-
-    width:600px;
-    height:600px;
-
-    transform:
-        translate(-50%,-50%)
-        scale(.2);
-
-    opacity:0;
-
-    transition:
-        transform 2s cubic-bezier(.16,1,.3,1),
-        opacity 1.2s ease;
-}
-
-.orbits.active{
-    opacity:1;
-
-    transform:
-        translate(-50%,-50%)
-        scale(1);
-}
-
-.orbit{
-    position:absolute;
-
-    inset:0;
-
-    border:
-        1px solid rgba(255,215,0,.15);
-
-    border-radius:50%;
-
-    transform:
-        rotateX(65deg)
-        rotateZ(var(--rotation));
-
-    animation:
-        orbitSpin var(--speed) linear infinite;
-}
-
-.orbit:nth-child(2){
-    transform:
-        rotateY(65deg)
-        rotateZ(var(--rotation));
-}
-
-.orbit:nth-child(3){
-    transform:
-        rotateX(75deg)
-        rotateY(20deg)
-        rotateZ(var(--rotation));
-}
-
-@keyframes orbitSpin{
-    from{
-        transform:
-            rotateX(65deg)
-            rotateZ(0deg);
-    }
-
-    to{
-        transform:
-            rotateX(65deg)
-            rotateZ(360deg);
-    }
-}
-
-
-/* =========================================================
-   SCANNER
-========================================================= */
-
-.scanner{
-    position:absolute;
-
-    left:0;
-    right:0;
-
-    top:-10%;
-
-    height:3px;
-
-    background:
-        linear-gradient(
-            90deg,
-            transparent,
-            rgba(255,215,0,.8),
-            transparent
-        );
-
-    box-shadow:
-        0 0 25px rgba(255,215,0,.6);
-
-    opacity:.7;
-
-    animation:
-        scannerMove 3s linear infinite;
-}
-
-@keyframes scannerMove{
-    from{
-        top:-10%;
-    }
-
-    to{
-        top:110%;
-    }
-}
-
-
-/* =========================================================
-   HUD
-========================================================= */
-
-.hud{
-    position:absolute;
-    inset:0;
-    pointer-events:none;
-}
-
-.hudCorner{
-    position:absolute;
-
-    width:120px;
-    height:120px;
-
-    border-color:rgba(255,215,0,.35);
-    border-style:solid;
-}
-
-.hudTL{
-    top:35px;
-    left:35px;
-    border-width:1px 0 0 1px;
-}
-
-.hudTR{
-    top:35px;
-    right:35px;
-    border-width:1px 1px 0 0;
-}
-
-.hudBL{
-    bottom:35px;
-    left:35px;
-    border-width:0 0 1px 1px;
-}
-
-.hudBR{
-    bottom:35px;
-    right:35px;
-    border-width:0 1px 1px 0;
-}
-
-.hudText{
-    position:absolute;
-
-    color:rgba(255,215,0,.6);
-
-    font-size:9px;
-
-    letter-spacing:3px;
-
-    font-weight:bold;
-}
-
-.hudTopLeft{
-    top:48px;
-    left:48px;
-}
-
-.hudTopRight{
-    top:48px;
-    right:48px;
-    text-align:right;
-}
-
-.hudBottomLeft{
-    bottom:48px;
-    left:48px;
-}
-
-.hudBottomRight{
-    bottom:48px;
-    right:48px;
-    text-align:right;
-}
-
-
-/* =========================================================
-   RADAR
-========================================================= */
-
-.radar{
-    position:absolute;
-
-    width:150px;
-    height:150px;
-
-    right:70px;
-    bottom:80px;
-
-    border:
-        1px solid rgba(255,215,0,.2);
-
-    border-radius:50%;
-
-    opacity:.5;
-}
-
-.radar::before,
-.radar::after{
-    content:"";
-
-    position:absolute;
-
-    left:50%;
-    top:50%;
-
-    transform:translate(-50%,-50%);
-
-    border:
-        1px solid rgba(255,215,0,.1);
-
-    border-radius:50%;
-}
-
-.radar::before{
-    width:100px;
-    height:100px;
-}
-
-.radar::after{
-    width:50px;
-    height:50px;
-}
-
-.radarLine{
-    position:absolute;
-
-    width:50%;
-    height:1px;
-
-    left:50%;
-    top:50%;
-
-    transform-origin:left center;
-
-    background:
-        linear-gradient(
-            90deg,
-            rgba(255,215,0,.8),
-            transparent
-        );
-
-    animation:
-        radarSpin 3s linear infinite;
-}
-
-@keyframes radarSpin{
-    to{
-        transform:
-            rotate(360deg);
-    }
-}
-
-
-/* =========================================================
-   TELEMETRY
-========================================================= */
-
-.telemetry{
-    position:absolute;
-
-    left:50%;
-    bottom:75px;
-
-    transform:
-        translateX(-50%);
-
-    width:min(500px,80%);
-
-    font-family:
-        "Courier New",
-        monospace;
-
-    font-size:9px;
-
-    color:rgba(255,255,255,.35);
-
-    text-align:center;
-
-    letter-spacing:2px;
-
-    line-height:2;
-}
-
-
-/* =========================================================
-   MAIN LOADER CONTENT
-========================================================= */
-
-.loaderCenter{
-    position:absolute;
-
-    left:50%;
-    top:50%;
-
-    transform:
-        translate(-50%,-50%);
-
-    text-align:center;
-
-    width:90%;
-
-    z-index:10;
-}
-
-.system{
-    font-family:
-        "Courier New",
-        monospace;
-
-    font-size:10px;
-
-    letter-spacing:5px;
-
-    color:rgba(255,215,0,.65);
-
-    margin-bottom:20px;
-
-    opacity:0;
-
-    animation:
-        bootText 1s 1.2s forwards;
-}
-
-@keyframes bootText{
-    from{
-        opacity:0;
-        letter-spacing:12px;
-    }
-
-    to{
-        opacity:1;
-        letter-spacing:5px;
-    }
-}
-
-.loaderLogo{
-    font-size:
-        clamp(90px,20vw,220px);
-
-    font-weight:1000;
-
-    letter-spacing:-14px;
-
-    line-height:.75;
-
-    color:#ffd700;
-
-    opacity:0;
-
-    transform:
-        scale(2.5)
-        translateY(40px);
-
-    filter:
-        blur(25px);
-
-    text-shadow:
-        0 0 20px rgba(255,215,0,.3),
-        0 0 100px rgba(255,215,0,.2);
-
-    transition:
-        opacity 1.2s ease,
-        transform 1.8s cubic-bezier(.16,1,.3,1),
-        filter 1.2s ease;
-}
-
-.loaderLogo.reveal{
-    opacity:1;
-
-    transform:
-        scale(1)
-        translateY(0);
-
-    filter:blur(0);
-}
-
-.loaderSubtitle{
-    margin-top:25px;
-
-    font-size:
-        clamp(14px,3vw,25px);
-
-    font-weight:1000;
-
-    letter-spacing:
-        clamp(3px,1vw,8px);
-
-    opacity:0;
-
-    transform:translateY(20px);
-
-    transition:
-        opacity .8s ease,
-        transform .8s ease;
-}
-
-.loaderSubtitle.reveal{
-    opacity:1;
-
-    transform:translateY(0);
-}
-
-
-/* =========================================================
-   LOADING BAR
-========================================================= */
-
-.loaderProgress{
-    margin:40px auto 0;
-
-    width:min(450px,75%);
-
-    opacity:0;
-
-    transition:opacity .6s ease;
-}
-
-.loaderProgress.show{
-    opacity:1;
-}
-
-.progressTop{
-    display:flex;
-
-    justify-content:space-between;
-
-    font-family:
-        "Courier New",
-        monospace;
-
-    font-size:9px;
-
-    letter-spacing:2px;
-
-    color:#777;
-
-    margin-bottom:8px;
-}
-
-#percent{
-    color:#ffd700;
-}
-
-.progressTrack{
-    height:3px;
-
-    background:
-        rgba(255,255,255,.08);
-
-    overflow:hidden;
-}
-
-.progressFill{
-    height:100%;
-
-    width:0%;
-
-    background:
-        linear-gradient(
-            90deg,
-            #8c7600,
-            #ffd700,
-            #fff,
-            #ffd700
-        );
-
-    box-shadow:
-        0 0 20px #ffd700;
-
-    transition:
-        width .15s linear;
-}
-
-
-/* =========================================================
-   SYSTEM MESSAGE
-========================================================= */
-
-.systemMessage{
-    margin-top:20px;
-
-    height:18px;
-
-    color:#666;
-
-    font-family:
-        "Courier New",
-        monospace;
-
-    font-size:9px;
-
-    letter-spacing:2px;
-}
-
-
-/* =========================================================
-   LANDING SHOCKWAVE
-========================================================= */
-
-.shockwave{
-    position:absolute;
-
-    left:50%;
-    top:50%;
-
-    width:20px;
-    height:20px;
-
-    border:
-        2px solid #ffd700;
-
-    border-radius:50%;
-
-    transform:
-        translate(-50%,-50%)
-        scale(0);
-
-    opacity:0;
-
-    z-index:20;
-}
-
-.shockwave.fire{
-    animation:
-        shockwave 1.6s cubic-bezier(.16,1,.3,1);
-}
-
-@keyframes shockwave{
-
-    0%{
-        transform:
-            translate(-50%,-50%)
-            scale(0);
-
-        opacity:1;
-    }
-
-    100%{
-        transform:
-            translate(-50%,-50%)
-            scale(70);
-
-        opacity:0;
-    }
-}
-
-
-/* =========================================================
-   LANDING FLASH
-========================================================= */
-
-.landingFlash{
-    position:absolute;
-
-    inset:0;
-
-    background:#fff;
-
-    opacity:0;
-
-    pointer-events:none;
-
-    z-index:30;
-}
-
-.landingFlash.fire{
-    animation:
-        flash .8s ease;
-}
-
-@keyframes flash{
-    0%{
-        opacity:0;
-    }
-
-    12%{
-        opacity:.8;
-    }
-
-    100%{
-        opacity:0;
-    }
-}
-
-
-/* =========================================================
-   SCREEN SHAKE
-========================================================= */
-
-#cinematicLoader.shake{
-    animation:
-        cameraShake .8s ease;
-}
-
-@keyframes cameraShake{
-
-    0%,100%{
-        transform:translate(0);
-    }
-
-    10%{
-        transform:translate(-8px,5px);
-    }
-
-    20%{
-        transform:translate(8px,-4px);
-    }
-
-    30%{
-        transform:translate(-6px,-5px);
-    }
-
-    40%{
-        transform:translate(7px,4px);
-    }
-
-    50%{
-        transform:translate(-4px,2px);
-    }
-
-    60%{
-        transform:translate(4px,-3px);
-    }
-}
-
-
-/* =========================================================
-   SITE BACKGROUND
-========================================================= */
-
-.background{
-    position:fixed;
-
-    inset:0;
-
-    z-index:-20;
-
-    overflow:hidden;
-
-    background:
-        radial-gradient(
-            circle at 50% 15%,
-            rgba(255,215,0,.12),
-            transparent 32%
-        ),
-        #030303;
+   GLOBAL BACKGROUND
+   ========================================================= */
+
+#background{
+  position:fixed;
+  inset:0;
+  z-index:-20;
+  overflow:hidden;
+  pointer-events:none;
 }
 
 .grid{
-    position:absolute;
-
-    inset:-100px;
-
-    background-image:
-        linear-gradient(
-            rgba(255,255,255,.025) 1px,
-            transparent 1px
-        ),
-        linear-gradient(
-            90deg,
-            rgba(255,255,255,.025) 1px,
-            transparent 1px
-        );
-
-    background-size:55px 55px;
-
-    transform:
-        perspective(500px)
-        rotateX(55deg)
-        translateY(-100px)
-        scale(1.5);
-
-    animation:
-        gridMove 12s linear infinite;
-
-    mask-image:
-        linear-gradient(
-            to bottom,
-            transparent,
-            black 25%,
-            black 70%,
-            transparent
-        );
+  position:absolute;
+  inset:-50%;
+  background-image:
+    linear-gradient(rgba(124,92,255,.035) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(124,92,255,.035) 1px,transparent 1px);
+  background-size:70px 70px;
+  transform:perspective(700px) rotateX(58deg) translateY(25%);
+  transform-origin:center;
+  mask-image:linear-gradient(to bottom,transparent,black 30%,black 70%,transparent);
+  animation:gridMove 18s linear infinite;
 }
 
 @keyframes gridMove{
-    from{
-        background-position:0 0;
-    }
-
-    to{
-        background-position:0 550px;
-    }
+  to{transform:perspective(700px) rotateX(58deg) translateY(31%);}
 }
-
-
-/* =========================================================
-   SITE RINGS
-========================================================= */
-
-.ring{
-    position:absolute;
-
-    left:50%;
-    top:25%;
-
-    border:
-        1px solid rgba(255,215,0,.08);
-
-    border-radius:50%;
-
-    transform:
-        translate(-50%,-50%);
-
-    animation:
-        ringSpin 30s linear infinite;
-}
-
-.ring:nth-child(1){
-    width:350px;
-    height:350px;
-}
-
-.ring:nth-child(2){
-    width:650px;
-    height:650px;
-
-    animation-duration:45s;
-}
-
-.ring:nth-child(3){
-    width:950px;
-    height:950px;
-
-    animation-duration:65s;
-}
-
-.ring:nth-child(4){
-    width:1300px;
-    height:1300px;
-
-    animation-duration:90s;
-}
-
-@keyframes ringSpin{
-    from{
-        transform:
-            translate(-50%,-50%)
-            rotate(0);
-    }
-
-    to{
-        transform:
-            translate(-50%,-50%)
-            rotate(360deg);
-    }
-}
-
-
-/* =========================================================
-   ORBS
-========================================================= */
 
 .orb{
-    position:absolute;
-
-    border-radius:50%;
-
-    filter:blur(90px);
-
-    opacity:.14;
-
-    animation:
-        orbFloat 12s ease-in-out infinite;
+  position:absolute;
+  border-radius:50%;
+  filter:blur(80px);
+  opacity:.18;
+  will-change:transform;
 }
 
 .orb.one{
-    width:450px;
-    height:450px;
-
-    background:#ffd700;
-
-    left:-200px;
-    top:10%;
+  width:430px;
+  height:430px;
+  background:var(--accent);
+  top:5%;
+  left:-10%;
 }
 
 .orb.two{
-    width:350px;
-    height:350px;
-
-    background:#fff;
-
-    right:-180px;
-    top:45%;
-
-    animation-delay:-4s;
+  width:500px;
+  height:500px;
+  background:var(--accent2);
+  right:-15%;
+  top:35%;
 }
 
 .orb.three{
-    width:300px;
-    height:300px;
-
-    background:#ffd700;
-
-    left:40%;
-    top:80%;
-
-    animation-delay:-7s;
+  width:420px;
+  height:420px;
+  background:#643cff;
+  left:25%;
+  bottom:-15%;
 }
 
-@keyframes orbFloat{
-    0%,100%{
-        transform:translate(0,0) scale(1);
-    }
-
-    50%{
-        transform:
-            translate(50px,-60px)
-            scale(1.2);
-    }
+#stars{
+  position:absolute;
+  inset:0;
 }
-
 
 /* =========================================================
-   PARTICLES
-========================================================= */
+   LOADING SCREEN
+   ========================================================= */
 
-#particles{
-    position:fixed;
-
-    inset:0;
-
-    z-index:-5;
-
-    pointer-events:none;
+#loader{
+  position:fixed;
+  inset:0;
+  z-index:9999;
+  background:#020307;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  overflow:hidden;
+  transition:opacity .8s ease,visibility .8s ease;
 }
 
-.particle{
-    position:absolute;
-
-    width:2px;
-    height:2px;
-
-    background:#ffd700;
-
-    border-radius:50%;
-
-    box-shadow:
-        0 0 8px #ffd700;
-
-    animation:
-        particleUp linear infinite;
+#loader.done{
+  opacity:0;
+  visibility:hidden;
+  pointer-events:none;
 }
 
-@keyframes particleUp{
-    from{
-        transform:
-            translate3d(
-                0,
-                110vh,
-                0
-            )
-            scale(.3);
-
-        opacity:0;
-    }
-
-    15%{
-        opacity:.8;
-    }
-
-    80%{
-        opacity:.5;
-    }
-
-    to{
-        transform:
-            translate3d(
-                100px,
-                -10vh,
-                0
-            )
-            scale(1.5);
-
-        opacity:0;
-    }
+.loader-stars{
+  position:absolute;
+  inset:0;
+  background:
+    radial-gradient(circle at 20% 30%,rgba(255,255,255,.8) 0 1px,transparent 2px),
+    radial-gradient(circle at 70% 20%,rgba(255,255,255,.65) 0 1px,transparent 2px),
+    radial-gradient(circle at 40% 75%,rgba(124,92,255,.8) 0 1px,transparent 2px),
+    radial-gradient(circle at 90% 65%,rgba(54,200,255,.8) 0 1px,transparent 2px);
+  background-size:220px 180px,270px 230px,320px 270px,290px 240px;
+  animation:starDrift 12s linear infinite;
 }
 
+@keyframes starDrift{
+  to{transform:translate3d(-50px,40px,0);}
+}
+
+.loader-hud{
+  position:absolute;
+  top:7%;
+  left:6%;
+  right:6%;
+  display:flex;
+  justify-content:space-between;
+  color:rgba(255,255,255,.48);
+  font-size:10px;
+  letter-spacing:.24em;
+  text-transform:uppercase;
+}
+
+.loader-center{
+  position:relative;
+  width:min(800px,90vw);
+  height:420px;
+}
+
+.space-glow{
+  position:absolute;
+  left:50%;
+  top:50%;
+  width:330px;
+  height:330px;
+  transform:translate(-50%,-50%);
+  border-radius:50%;
+  background:radial-gradient(circle,rgba(124,92,255,.25),transparent 65%);
+  filter:blur(18px);
+  animation:pulseGlow 2s ease-in-out infinite;
+}
+
+@keyframes pulseGlow{
+  50%{transform:translate(-50%,-50%) scale(1.15);opacity:.65;}
+}
+
+.ship{
+  position:absolute;
+  left:50%;
+  top:46%;
+  width:270px;
+  height:90px;
+  transform:translate(-50%,-50%);
+  animation:shipFloat 1.8s ease-in-out infinite;
+  filter:drop-shadow(0 0 22px rgba(124,92,255,.45));
+}
+
+@keyframes shipFloat{
+  50%{transform:translate(-50%,-54%) rotate(-1deg);}
+}
+
+.ship-body{
+  position:absolute;
+  left:20px;
+  top:20px;
+  width:230px;
+  height:48px;
+  background:
+    linear-gradient(90deg,#101422,#28304a,#101422);
+  clip-path:polygon(0 65%,12% 20%,68% 0,100% 43%,84% 72%,35% 100%);
+  border:1px solid rgba(255,255,255,.2);
+}
+
+.ship-wing{
+  position:absolute;
+  width:95px;
+  height:40px;
+  top:42px;
+  background:#111728;
+}
+
+.ship-wing.left{
+  left:8px;
+  clip-path:polygon(0 100%,100% 0,75% 100%);
+}
+
+.ship-wing.right{
+  right:8px;
+  clip-path:polygon(0 0,100% 100%,25% 100%);
+}
+
+.ship-window{
+  position:absolute;
+  width:35px;
+  height:18px;
+  left:112px;
+  top:30px;
+  border-radius:50%;
+  background:linear-gradient(90deg,#7c5cff,#36c8ff);
+  box-shadow:0 0 18px rgba(54,200,255,.8);
+}
+
+.engine{
+  position:absolute;
+  left:5px;
+  top:45px;
+  width:80px;
+  height:18px;
+  background:linear-gradient(90deg,transparent,#36c8ff,transparent);
+  filter:blur(7px);
+  animation:engine 0.35s ease-in-out infinite alternate;
+}
+
+@keyframes engine{
+  from{width:60px;opacity:.45;}
+  to{width:105px;opacity:1;}
+}
+
+.landing-beam{
+  position:absolute;
+  left:50%;
+  bottom:5%;
+  width:260px;
+  height:160px;
+  transform:translateX(-50%);
+  background:linear-gradient(to bottom,rgba(124,92,255,.18),transparent);
+  clip-path:polygon(42% 0,58% 0,100% 100%,0 100%);
+  opacity:.6;
+}
+
+.loader-text{
+  position:absolute;
+  left:50%;
+  bottom:28px;
+  transform:translateX(-50%);
+  text-align:center;
+  width:100%;
+}
+
+.loader-title{
+  font-size:12px;
+  letter-spacing:.35em;
+  color:#cdd3e5;
+  margin-bottom:12px;
+}
+
+.loader-status{
+  font-size:10px;
+  letter-spacing:.2em;
+  color:#68728b;
+  text-transform:uppercase;
+}
+
+.loader-progress{
+  width:min(420px,70vw);
+  height:2px;
+  background:rgba(255,255,255,.08);
+  margin:17px auto 0;
+  overflow:hidden;
+}
+
+.loader-progress span{
+  display:block;
+  width:0%;
+  height:100%;
+  background:linear-gradient(90deg,var(--accent),var(--accent2));
+  box-shadow:0 0 15px var(--accent);
+  transition:width .12s linear;
+}
+
+.loader-percent{
+  margin-top:9px;
+  font-size:10px;
+  color:#59637a;
+  letter-spacing:.15em;
+}
 
 /* =========================================================
-   SPOTLIGHT
-========================================================= */
+   NAVIGATION
+   ========================================================= */
 
-#spotlight{
-    position:fixed;
-
-    width:500px;
-    height:500px;
-
-    border-radius:50%;
-
-    pointer-events:none;
-
-    background:
-        radial-gradient(
-            circle,
-            rgba(255,215,0,.09),
-            transparent 70%
-        );
-
-    transform:
-        translate(-50%,-50%);
-
-    z-index:-1;
+.nav{
+  position:fixed;
+  z-index:1000;
+  top:0;
+  left:0;
+  right:0;
+  height:var(--nav);
+  display:flex;
+  align-items:center;
+  transition:.4s ease;
 }
 
-
-/* =========================================================
-   NAV
-========================================================= */
-
-nav{
-    position:fixed;
-
-    top:0;
-    left:0;
-
-    width:100%;
-
-    z-index:5000;
-
-    background:
-        rgba(3,3,3,.55);
-
-    backdrop-filter:
-        blur(20px);
-
-    border-bottom:
-        1px solid rgba(255,255,255,.06);
-
-    transition:.4s;
-}
-
-nav.scrolled{
-    background:
-        rgba(3,3,3,.92);
-
-    box-shadow:
-        0 10px 50px rgba(0,0,0,.4);
+.nav.scrolled{
+  background:rgba(3,4,8,.7);
+  backdrop-filter:blur(20px);
+  border-bottom:1px solid rgba(255,255,255,.06);
 }
 
 .nav-inner{
-    max-width:1250px;
-
-    height:75px;
-
-    margin:auto;
-
-    padding:0 25px;
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:space-between;
+  width:min(var(--max),calc(100% - 40px));
+  margin:auto;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
 }
 
 .logo{
-    color:#ffd700;
-
-    font-size:28px;
-
-    font-weight:1000;
-
-    letter-spacing:4px;
-
-    text-shadow:
-        0 0 20px rgba(255,215,0,.4);
-
-    transition:.3s;
+  display:flex;
+  align-items:center;
+  gap:11px;
+  font-weight:900;
+  letter-spacing:.08em;
 }
 
-.logo:hover{
-    transform:
-        scale(1.1)
-        rotate(-2deg);
+.logo-mark{
+  width:38px;
+  height:38px;
+  border-radius:11px;
+  display:grid;
+  place-items:center;
+  background:linear-gradient(135deg,var(--accent),var(--accent2));
+  box-shadow:0 0 30px rgba(124,92,255,.3);
+  font-size:13px;
+}
+
+.logo-text span{
+  display:block;
+  font-size:13px;
+}
+
+.logo-text small{
+  display:block;
+  font-size:8px;
+  color:#70798d;
+  letter-spacing:.22em;
+  margin-top:2px;
 }
 
 .nav-links{
-    display:flex;
-    gap:30px;
+  display:flex;
+  gap:28px;
+  align-items:center;
 }
 
 .nav-links a{
-    color:#777;
-
-    font-size:12px;
-
-    font-weight:900;
-
-    letter-spacing:1px;
-
-    position:relative;
+  position:relative;
+  font-size:11px;
+  font-weight:700;
+  color:#8f97aa;
+  text-transform:uppercase;
+  letter-spacing:.12em;
+  transition:.3s;
 }
 
-.nav-links a::after{
-    content:"";
-
-    position:absolute;
-
-    left:50%;
-    bottom:-8px;
-
-    width:0;
-    height:2px;
-
-    background:#ffd700;
-
-    transform:
-        translateX(-50%);
-
-    transition:.3s;
+.nav-links a:hover,
+.nav-links a.active{
+  color:white;
 }
 
-.nav-links a:hover{
-    color:#fff;
+.nav-links a.active::after{
+  content:"";
+  position:absolute;
+  left:0;
+  right:0;
+  bottom:-10px;
+  height:2px;
+  background:linear-gradient(90deg,var(--accent),var(--accent2));
+  box-shadow:0 0 12px var(--accent);
 }
 
-.nav-links a:hover::after{
-    width:100%;
+.nav-join{
+  padding:11px 17px;
+  border:1px solid rgba(124,92,255,.45);
+  border-radius:9px;
+  background:rgba(124,92,255,.08);
+  font-size:10px;
+  font-weight:800;
+  letter-spacing:.12em;
+  transition:.3s;
 }
 
+.nav-join:hover{
+  transform:translateY(-2px);
+  background:rgba(124,92,255,.18);
+  box-shadow:0 10px 35px rgba(124,92,255,.18);
+}
 
 /* =========================================================
-   HERO
-========================================================= */
+   GENERAL
+   ========================================================= */
 
-.hero{
-    min-height:100vh;
-
-    display:flex;
-
-    align-items:center;
-    justify-content:center;
-
-    text-align:center;
-
-    position:relative;
-
-    padding:
-        130px 25px
-        100px;
-
-    perspective:1200px;
+main{
+  position:relative;
 }
 
-.hero-content{
-    max-width:1100px;
-
-    transform-style:preserve-3d;
-
-    animation:
-        heroIn 1.5s
-        cubic-bezier(.16,1,.3,1);
+.section{
+  position:relative;
+  width:min(var(--max),calc(100% - 40px));
+  margin:auto;
+  padding:150px 0;
 }
 
-@keyframes heroIn{
-    from{
-        opacity:0;
-
-        transform:
-            translateY(80px)
-            scale(.7)
-            rotateX(20deg);
-
-        filter:blur(15px);
-    }
-
-    to{
-        opacity:1;
-
-        transform:
-            translateY(0)
-            scale(1)
-            rotateX(0);
-
-        filter:blur(0);
-    }
+.section-label{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  color:#7f89a1;
+  font-size:10px;
+  font-weight:800;
+  letter-spacing:.25em;
+  text-transform:uppercase;
+  margin-bottom:20px;
 }
 
-.status{
-    display:inline-flex;
-
-    align-items:center;
-
-    gap:10px;
-
-    padding:10px 18px;
-
-    border:
-        1px solid rgba(255,215,0,.25);
-
-    background:
-        rgba(255,215,0,.06);
-
-    border-radius:50px;
-
-    color:#ffd700;
-
-    font-size:11px;
-
-    font-weight:900;
-
-    letter-spacing:2px;
-}
-
-.status-dot{
-    width:8px;
-    height:8px;
-
-    background:#00ff88;
-
-    border-radius:50%;
-
-    box-shadow:
-        0 0 15px #00ff88;
-
-    animation:
-        statusBlink 1.2s infinite;
-}
-
-@keyframes statusBlink{
-    0%,100%{
-        transform:scale(1);
-    }
-
-    50%{
-        transform:scale(1.6);
-    }
-}
-
-.hero h1{
-    margin-top:30px;
-
-    font-size:
-        clamp(90px,19vw,210px);
-
-    line-height:.75;
-
-    font-weight:1000;
-
-    letter-spacing:-12px;
-
-    color:#ffd700;
-
-    text-shadow:
-        0 0 20px rgba(255,215,0,.15),
-        0 0 80px rgba(255,215,0,.12);
-
-    animation:
-        titlePulse 4s 2s infinite;
-}
-
-@keyframes titlePulse{
-    0%,100%{
-        text-shadow:
-            0 0 20px rgba(255,215,0,.15),
-            0 0 80px rgba(255,215,0,.12);
-    }
-
-    50%{
-        text-shadow:
-            0 0 40px rgba(255,215,0,.4),
-            0 0 120px rgba(255,215,0,.18);
-    }
-}
-
-.hero-subtitle{
-    margin-top:30px;
-
-    font-size:
-        clamp(20px,4vw,42px);
-
-    font-weight:1000;
-
-    letter-spacing:
-        clamp(3px,1vw,9px);
-}
-
-.hero-description{
-    max-width:750px;
-
-    margin:30px auto;
-
-    color:#777;
-
-    font-size:17px;
-}
-
-.hero-description strong{
-    color:#aaa;
-}
-
-.buttons{
-    display:flex;
-
-    justify-content:center;
-
-    gap:15px;
-
-    flex-wrap:wrap;
-
-    margin-top:35px;
-}
-
-
-/* =========================================================
-   BUTTONS
-========================================================= */
-
-.btn{
-    position:relative;
-
-    display:inline-flex;
-
-    align-items:center;
-    justify-content:center;
-
-    gap:10px;
-
-    padding:16px 28px;
-
-    border-radius:10px;
-
-    font-size:13px;
-
-    font-weight:1000;
-
-    overflow:hidden;
-
-    transition:
-        transform .25s,
-        box-shadow .25s;
-}
-
-.btn::before{
-    content:"";
-
-    position:absolute;
-
-    top:0;
-    left:-120%;
-
-    width:70%;
-    height:100%;
-
-    background:
-        linear-gradient(
-            90deg,
-            transparent,
-            rgba(255,255,255,.5),
-            transparent
-        );
-
-    transform:
-        skewX(-20deg);
-
-    transition:.6s;
-}
-
-.btn:hover::before{
-    left:150%;
-}
-
-.btn:hover{
-    transform:
-        translateY(-6px)
-        scale(1.03);
-}
-
-.gold{
-    background:#ffd700;
-
-    color:#050505;
-
-    box-shadow:
-        0 10px 40px rgba(255,215,0,.15);
-}
-
-.gold:hover{
-    box-shadow:
-        0 15px 70px rgba(255,215,0,.35);
-}
-
-.dark{
-    color:#fff;
-
-    background:
-        rgba(255,255,255,.04);
-
-    border:
-        1px solid rgba(255,255,255,.12);
-}
-
-.dark:hover{
-    border-color:#ffd700;
-
-    color:#ffd700;
-}
-
-
-/* =========================================================
-   SCROLL
-========================================================= */
-
-.scroll{
-    position:absolute;
-
-    bottom:30px;
-
-    left:50%;
-
-    transform:
-        translateX(-50%);
-
-    color:#555;
-
-    font-size:10px;
-
-    letter-spacing:4px;
-
-    animation:
-        scrollFloat 2s infinite;
-}
-
-@keyframes scrollFloat{
-    0%,100%{
-        transform:
-            translate(-50%,0);
-    }
-
-    50%{
-        transform:
-            translate(-50%,12px);
-    }
-}
-
-
-/* =========================================================
-   SECTIONS
-========================================================= */
-
-section{
-    max-width:1250px;
-
-    margin:auto;
-
-    padding:
-        130px 25px;
+.section-label::before{
+  content:"";
+  width:30px;
+  height:1px;
+  background:linear-gradient(90deg,var(--accent),var(--accent2));
 }
 
 .section-title{
-    max-width:800px;
-
-    text-align:center;
-
-    margin:
-        0 auto 65px;
+  font-size:clamp(42px,6vw,82px);
+  line-height:.95;
+  letter-spacing:-.055em;
+  font-weight:950;
+  max-width:850px;
 }
 
-.label{
-    color:#ffd700;
-
-    font-size:11px;
-
-    font-weight:1000;
-
-    letter-spacing:5px;
-
-    margin-bottom:15px;
+.section-title span{
+  background:linear-gradient(100deg,#fff 20%,#a7a1ff 60%,#5bdcff);
+  -webkit-background-clip:text;
+  color:transparent;
 }
 
-.section-title h2{
-    font-size:
-        clamp(40px,7vw,75px);
-
-    line-height:.9;
-
-    font-weight:1000;
-
-    margin-bottom:20px;
+.section-copy{
+  max-width:650px;
+  color:#8d96a9;
+  margin-top:25px;
+  font-size:16px;
 }
-
-.section-title p{
-    color:#666;
-
-    font-size:15px;
-}
-
 
 /* =========================================================
-   REVEAL
-========================================================= */
+   HERO
+   ========================================================= */
 
-.reveal{
-    opacity:0;
-
-    transform:
-        translateY(100px)
-        scale(.88);
-
-    filter:blur(10px);
-
-    transition:
-        opacity 1s cubic-bezier(.16,1,.3,1),
-        transform 1s cubic-bezier(.16,1,.3,1),
-        filter 1s cubic-bezier(.16,1,.3,1);
+.hero{
+  min-height:100svh;
+  display:flex;
+  align-items:center;
+  position:relative;
+  overflow:hidden;
 }
 
-.reveal.visible{
-    opacity:1;
-
-    transform:
-        translateY(0)
-        scale(1);
-
-    filter:blur(0);
+.hero::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:
+    radial-gradient(circle at 50% 45%,rgba(124,92,255,.14),transparent 30%),
+    radial-gradient(circle at 85% 25%,rgba(54,200,255,.08),transparent 25%);
+  pointer-events:none;
 }
 
+.hero-inner{
+  width:min(var(--max),calc(100% - 40px));
+  margin:auto;
+  padding-top:70px;
+  position:relative;
+  z-index:2;
+}
+
+.hero-kicker{
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  border:1px solid rgba(255,255,255,.09);
+  background:rgba(255,255,255,.025);
+  backdrop-filter:blur(10px);
+  border-radius:999px;
+  padding:9px 14px;
+  color:#9ca5b8;
+  font-size:10px;
+  font-weight:800;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+}
+
+.kicker-dot{
+  width:7px;
+  height:7px;
+  border-radius:50%;
+  background:var(--success);
+  box-shadow:0 0 15px var(--success);
+}
+
+.hero h1{
+  margin-top:25px;
+  font-size:clamp(75px,15vw,210px);
+  line-height:.78;
+  letter-spacing:-.09em;
+  font-weight:1000;
+  text-transform:uppercase;
+  background:linear-gradient(110deg,#fff 25%,#9d95ff 55%,#45d6ff 90%);
+  -webkit-background-clip:text;
+  color:transparent;
+  filter:drop-shadow(0 0 40px rgba(124,92,255,.15));
+}
+
+.hero-sub{
+  margin-top:28px;
+  font-size:clamp(18px,2vw,25px);
+  color:#b2b9ca;
+  letter-spacing:.02em;
+}
+
+.hero-desc{
+  max-width:570px;
+  margin-top:13px;
+  color:#727c91;
+  font-size:14px;
+}
+
+.hero-actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:13px;
+  margin-top:34px;
+}
+
+.btn{
+  position:relative;
+  overflow:hidden;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:12px;
+  min-height:50px;
+  padding:0 21px;
+  border-radius:11px;
+  border:1px solid rgba(255,255,255,.1);
+  cursor:pointer;
+  font-size:11px;
+  font-weight:900;
+  letter-spacing:.13em;
+  text-transform:uppercase;
+  transition:.35s cubic-bezier(.2,.8,.2,1);
+}
+
+.btn-primary{
+  color:white;
+  border-color:rgba(124,92,255,.6);
+  background:linear-gradient(135deg,rgba(124,92,255,.95),rgba(70,101,255,.85));
+  box-shadow:0 12px 40px rgba(86,72,255,.2);
+}
+
+.btn-secondary{
+  background:rgba(255,255,255,.035);
+  color:#d9deea;
+  backdrop-filter:blur(10px);
+}
+
+.btn:hover{
+  transform:translateY(-4px) scale(1.025);
+}
+
+.btn-primary:hover{
+  box-shadow:0 18px 55px rgba(86,72,255,.38);
+}
+
+.btn-secondary:hover{
+  border-color:rgba(124,92,255,.4);
+  background:rgba(124,92,255,.08);
+}
+
+.btn-arrow{
+  transition:.3s;
+}
+
+.btn:hover .btn-arrow{
+  transform:translateX(5px);
+}
+
+.ripple{
+  position:absolute;
+  border-radius:50%;
+  transform:scale(0);
+  background:rgba(255,255,255,.28);
+  animation:ripple .6s linear;
+  pointer-events:none;
+}
+
+@keyframes ripple{
+  to{transform:scale(4);opacity:0;}
+}
+
+.hero-status{
+  position:absolute;
+  right:0;
+  bottom:20%;
+  width:220px;
+  border-left:1px solid rgba(124,92,255,.3);
+  padding-left:18px;
+  color:#596277;
+  font-size:9px;
+  letter-spacing:.17em;
+  text-transform:uppercase;
+}
+
+.hero-status strong{
+  display:block;
+  color:#c9cfdd;
+  font-size:11px;
+  margin-bottom:7px;
+}
+
+.scroll-indicator{
+  position:absolute;
+  bottom:35px;
+  left:50%;
+  transform:translateX(-50%);
+  color:#646d80;
+  font-size:9px;
+  letter-spacing:.25em;
+  text-transform:uppercase;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:10px;
+}
+
+.scroll-line{
+  width:1px;
+  height:45px;
+  background:linear-gradient(var(--accent),transparent);
+  animation:scrollLine 1.5s ease-in-out infinite;
+}
+
+@keyframes scrollLine{
+  50%{height:65px;opacity:.45;}
+}
 
 /* =========================================================
-   STATS
-========================================================= */
+   CINEMATIC DIVIDER
+   ========================================================= */
 
-.stats{
-    display:grid;
-
-    grid-template-columns:
-        repeat(4,1fr);
-
-    gap:15px;
-
-    margin:
-        -30px auto 50px;
-
-    max-width:1100px;
+.divider{
+  height:1px;
+  width:min(var(--max),calc(100% - 40px));
+  margin:auto;
+  background:linear-gradient(90deg,transparent,rgba(124,92,255,.45),rgba(54,200,255,.45),transparent);
+  position:relative;
 }
 
-.stat{
-    text-align:center;
-
-    padding:35px 15px;
-
-    border:
-        1px solid rgba(255,255,255,.08);
-
-    background:
-        rgba(255,255,255,.025);
-
-    border-radius:16px;
-
-    transition:.4s;
-
-    transform-style:preserve-3d;
+.divider::after{
+  content:"";
+  position:absolute;
+  width:100px;
+  height:8px;
+  top:-4px;
+  left:0;
+  background:linear-gradient(90deg,transparent,var(--accent),transparent);
+  filter:blur(5px);
+  animation:lineTravel 4s linear infinite;
 }
 
-.stat:hover{
-    transform:
-        translateY(-12px)
-        rotateX(5deg)
-        rotateY(-5deg);
-
-    border-color:
-        rgba(255,215,0,.4);
-
-    box-shadow:
-        0 30px 70px rgba(0,0,0,.4);
+@keyframes lineTravel{
+  to{left:100%;}
 }
-
-.stat-number{
-    font-size:38px;
-
-    color:#ffd700;
-
-    font-weight:1000;
-}
-
-.stat-label{
-    color:#555;
-
-    margin-top:5px;
-
-    font-size:10px;
-
-    letter-spacing:2px;
-
-    font-weight:900;
-}
-
 
 /* =========================================================
-   CARDS
-========================================================= */
+   ABOUT
+   ========================================================= */
 
-.cards{
-    display:grid;
-
-    grid-template-columns:
-        repeat(3,1fr);
-
-    gap:18px;
+.about-grid{
+  display:grid;
+  grid-template-columns:1fr 1.2fr;
+  gap:70px;
+  align-items:center;
 }
 
-.card{
-    position:relative;
-
-    overflow:hidden;
-
-    min-height:230px;
-
-    padding:35px;
-
-    border-radius:20px;
-
-    background:
-        linear-gradient(
-            145deg,
-            rgba(255,255,255,.06),
-            rgba(255,255,255,.015)
-        );
-
-    border:
-        1px solid rgba(255,255,255,.08);
-
-    transition:
-        transform .15s,
-        border-color .3s,
-        box-shadow .3s;
-
-    transform-style:preserve-3d;
+.about-visual{
+  position:relative;
+  min-height:450px;
+  border:1px solid var(--line);
+  border-radius:28px;
+  background:
+    radial-gradient(circle at center,rgba(124,92,255,.12),transparent 50%),
+    rgba(255,255,255,.015);
+  overflow:hidden;
+  perspective:1000px;
 }
 
-.card::before{
-    content:"";
-
-    position:absolute;
-
-    width:250px;
-    height:250px;
-
-    border-radius:50%;
-
-    background:
-        radial-gradient(
-            circle,
-            rgba(255,215,0,.12),
-            transparent 70%
-        );
-
-    top:
-        var(--mouse-y,-100px);
-
-    left:
-        var(--mouse-x,-100px);
-
-    transform:
-        translate(-50%,-50%);
-
-    pointer-events:none;
+.about-core{
+  position:absolute;
+  left:50%;
+  top:50%;
+  width:170px;
+  height:170px;
+  transform:translate(-50%,-50%);
+  border-radius:50%;
+  border:1px solid rgba(124,92,255,.45);
+  box-shadow:
+    0 0 40px rgba(124,92,255,.18),
+    inset 0 0 35px rgba(54,200,255,.08);
+  display:grid;
+  place-items:center;
 }
 
-.card::after{
-    content:"";
-
-    position:absolute;
-
-    left:0;
-    right:0;
-
-    bottom:0;
-
-    height:2px;
-
-    background:
-        linear-gradient(
-            90deg,
-            transparent,
-            #ffd700,
-            transparent
-        );
-
-    transform:
-        scaleX(0);
-
-    transition:.4s;
+.about-core::before,
+.about-core::after{
+  content:"";
+  position:absolute;
+  inset:18px;
+  border:1px dashed rgba(54,200,255,.25);
+  border-radius:50%;
+  animation:spin 10s linear infinite;
 }
 
-.card:hover::after{
-    transform:scaleX(1);
+.about-core::after{
+  inset:-28px;
+  border-color:rgba(124,92,255,.15);
+  animation-direction:reverse;
+  animation-duration:16s;
 }
 
-.icon{
-    width:58px;
-    height:58px;
-
-    display:flex;
-
-    align-items:center;
-    justify-content:center;
-
-    border-radius:15px;
-
-    background:
-        rgba(255,215,0,.07);
-
-    border:
-        1px solid rgba(255,215,0,.2);
-
-    font-size:25px;
-
-    margin-bottom:25px;
-
-    transition:.4s;
+@keyframes spin{
+  to{transform:rotate(360deg);}
 }
 
-.card:hover .icon{
-    transform:
-        translateZ(25px)
-        rotate(-8deg)
-        scale(1.1);
-
-    box-shadow:
-        0 0 30px rgba(255,215,0,.15);
+.core-logo{
+  font-size:42px;
+  font-weight:1000;
+  letter-spacing:-.08em;
+  background:linear-gradient(135deg,#fff,#8b82ff,#47d9ff);
+  -webkit-background-clip:text;
+  color:transparent;
 }
 
-.card h3{
-    font-size:21px;
-
-    margin-bottom:10px;
-
-    font-weight:1000;
-
-    transform:translateZ(20px);
+.orbit{
+  position:absolute;
+  left:50%;
+  top:50%;
+  width:300px;
+  height:150px;
+  transform:translate(-50%,-50%) rotate(-20deg);
+  border:1px solid rgba(124,92,255,.15);
+  border-radius:50%;
+  animation:spin 13s linear infinite;
 }
 
-.card p{
-    color:#666;
-
-    font-size:14px;
-
-    transform:translateZ(10px);
+.orbit.two{
+  width:380px;
+  height:190px;
+  transform:translate(-50%,-50%) rotate(55deg);
+  animation-duration:18s;
+  animation-direction:reverse;
 }
 
+.feature-grid{
+  margin-top:65px;
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:15px;
+}
+
+.feature-card{
+  position:relative;
+  min-height:190px;
+  padding:25px;
+  border:1px solid var(--line);
+  border-radius:18px;
+  background:linear-gradient(145deg,rgba(255,255,255,.035),rgba(255,255,255,.008));
+  overflow:hidden;
+  transition:.4s cubic-bezier(.2,.8,.2,1);
+  transform-style:preserve-3d;
+}
+
+.feature-card::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:radial-gradient(circle at var(--mx,50%) var(--my,50%),rgba(124,92,255,.18),transparent 35%);
+  opacity:0;
+  transition:.3s;
+}
+
+.feature-card:hover{
+  transform:translateY(-8px);
+  border-color:rgba(124,92,255,.35);
+  box-shadow:0 25px 70px rgba(0,0,0,.25);
+}
+
+.feature-card:hover::before{
+  opacity:1;
+}
+
+.feature-icon{
+  font-size:23px;
+  margin-bottom:25px;
+}
+
+.feature-card h3{
+  font-size:14px;
+  letter-spacing:.08em;
+  margin-bottom:8px;
+}
+
+.feature-card p{
+  color:#778196;
+  font-size:12px;
+}
 
 /* =========================================================
    REQUIREMENTS
-========================================================= */
+   ========================================================= */
 
 .requirements{
-    max-width:850px;
-
-    margin:auto;
-
-    padding:10px;
-
-    border-radius:25px;
-
-    background:
-        linear-gradient(
-            145deg,
-            rgba(255,215,0,.08),
-            rgba(255,255,255,.02)
-        );
-
-    border:
-        1px solid rgba(255,215,0,.2);
-
-    box-shadow:
-        0 40px 100px rgba(0,0,0,.4);
+  text-align:center;
 }
 
-.requirement{
-    display:flex;
-
-    align-items:center;
-
-    gap:18px;
-
-    padding:22px 25px;
-
-    margin:4px;
-
-    border-radius:13px;
-
-    background:
-        rgba(0,0,0,.35);
-
-    transition:.3s;
+.requirements .section-label{
+  justify-content:center;
 }
 
-.requirement:hover{
-    transform:
-        translateX(10px)
-        scale(1.01);
-
-    background:
-        rgba(255,215,0,.05);
+.requirements .section-title{
+  margin:auto;
 }
 
-.check{
-    width:32px;
-    height:32px;
-
-    flex-shrink:0;
-
-    display:flex;
-
-    align-items:center;
-    justify-content:center;
-
-    border-radius:50%;
-
-    color:#ffd700;
-
-    background:
-        rgba(255,215,0,.1);
-
-    border:
-        1px solid rgba(255,215,0,.25);
+.req-grid{
+  margin-top:75px;
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:15px;
 }
 
-.requirement strong{
-    min-width:190px;
-
-    font-size:15px;
+.req-card{
+  min-height:270px;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  border:1px solid var(--line);
+  background:
+    radial-gradient(circle at center,rgba(124,92,255,.07),transparent 55%),
+    rgba(255,255,255,.018);
+  border-radius:20px;
+  position:relative;
+  overflow:hidden;
+  transition:.45s;
 }
 
-.requirement span:last-child{
-    color:#666;
-
-    font-size:13px;
+.req-card::after{
+  content:"";
+  position:absolute;
+  left:15%;
+  right:15%;
+  bottom:0;
+  height:1px;
+  background:linear-gradient(90deg,transparent,var(--accent),transparent);
+  transform:scaleX(0);
+  transition:.6s;
 }
 
+.req-card:hover{
+  transform:translateY(-10px);
+  border-color:rgba(124,92,255,.3);
+  box-shadow:0 30px 80px rgba(55,40,150,.15);
+}
+
+.req-card:hover::after{
+  transform:scaleX(1);
+}
+
+.req-value{
+  font-size:clamp(37px,4vw,62px);
+  font-weight:1000;
+  letter-spacing:-.07em;
+  background:linear-gradient(120deg,#fff,#958cff,#4edcff);
+  -webkit-background-clip:text;
+  color:transparent;
+}
+
+.req-label{
+  margin-top:9px;
+  color:#747e92;
+  font-size:9px;
+  font-weight:800;
+  letter-spacing:.2em;
+  text-transform:uppercase;
+}
+
+.disclaimer{
+  margin-top:30px;
+  color:#555e72;
+  font-size:11px;
+}
 
 /* =========================================================
-   STEPS
-========================================================= */
+   WHY
+   ========================================================= */
 
-.steps{
-    display:grid;
-
-    grid-template-columns:
-        repeat(4,1fr);
-
-    gap:15px;
+.why-grid{
+  margin-top:65px;
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:13px;
 }
 
-.step{
-    text-align:center;
-
-    padding:35px 25px;
-
-    border:
-        1px solid rgba(255,255,255,.08);
-
-    border-radius:18px;
-
-    background:
-        rgba(255,255,255,.025);
-
-    transition:.4s;
+.why-item{
+  padding:25px;
+  min-height:150px;
+  border:1px solid var(--line);
+  border-radius:16px;
+  background:rgba(255,255,255,.018);
+  transition:.4s;
 }
 
-.step:hover{
-    transform:
-        translateY(-12px);
-
-    border-color:
-        rgba(255,215,0,.3);
-
-    box-shadow:
-        0 30px 60px rgba(0,0,0,.3);
+.why-item:hover{
+  transform:translateY(-6px);
+  border-color:rgba(54,200,255,.25);
+  background:rgba(54,200,255,.025);
 }
 
-.step-number{
-    font-size:55px;
-
-    font-weight:1000;
-
-    color:#ffd700;
-
-    margin-bottom:15px;
+.why-icon{
+  font-size:22px;
+  margin-bottom:20px;
 }
 
-.step h3{
-    margin-bottom:8px;
+.why-item h3{
+  font-size:12px;
+  letter-spacing:.05em;
 }
 
-.step p{
-    color:#666;
-
-    font-size:13px;
+.why-item p{
+  color:#6e778b;
+  font-size:11px;
+  margin-top:7px;
 }
-
 
 /* =========================================================
-   DISCORD
-========================================================= */
+   EXPERIENCE
+   ========================================================= */
 
-.discord{
-    max-width:1000px;
-
-    margin:auto;
-
-    text-align:center;
-
-    padding:90px 30px;
-
-    border-radius:30px;
-
-    position:relative;
-
-    overflow:hidden;
-
-    background:
-        radial-gradient(
-            circle at center,
-            rgba(255,215,0,.13),
-            transparent 55%
-        ),
-
-        linear-gradient(
-            145deg,
-            rgba(255,255,255,.06),
-            rgba(255,255,255,.01)
-        );
-
-    border:
-        1px solid rgba(255,215,0,.25);
-
-    box-shadow:
-        0 40px 120px rgba(0,0,0,.4);
+.experience{
+  min-height:850px;
 }
 
-.discord::before,
-.discord::after{
-    content:"";
-
-    position:absolute;
-
-    width:350px;
-    height:350px;
-
-    border:
-        1px solid rgba(255,215,0,.08);
-
-    border-radius:50%;
-
-    left:50%;
-    top:50%;
-
-    transform:
-        translate(-50%,-50%);
-
-    animation:
-        discordRing 8s linear infinite;
+.experience-wrap{
+  position:relative;
+  margin-top:70px;
+  min-height:580px;
+  display:grid;
+  place-items:center;
 }
 
-.discord::after{
-    width:600px;
-    height:600px;
-
-    animation-duration:14s;
+.experience-core{
+  width:280px;
+  height:280px;
+  border-radius:50%;
+  border:1px solid rgba(124,92,255,.4);
+  display:grid;
+  place-items:center;
+  position:relative;
+  background:
+    radial-gradient(circle,rgba(124,92,255,.18),rgba(8,10,18,.9) 62%);
+  box-shadow:
+    0 0 100px rgba(124,92,255,.15),
+    inset 0 0 70px rgba(54,200,255,.05);
 }
 
-@keyframes discordRing{
-    from{
-        transform:
-            translate(-50%,-50%)
-            rotate(0);
-    }
-
-    to{
-        transform:
-            translate(-50%,-50%)
-            rotate(360deg);
-    }
+.experience-core::before{
+  content:"";
+  position:absolute;
+  inset:-45px;
+  border:1px dashed rgba(124,92,255,.18);
+  border-radius:50%;
+  animation:spin 18s linear infinite;
 }
 
-.discord-content{
-    position:relative;
-
-    z-index:2;
+.experience-core strong{
+  font-size:58px;
+  letter-spacing:-.08em;
 }
 
-.discord-icon{
-    font-size:70px;
-
-    margin-bottom:20px;
-
-    animation:
-        discordBounce 3s ease-in-out infinite;
+.experience-core small{
+  position:absolute;
+  bottom:87px;
+  color:#717b91;
+  font-size:8px;
+  letter-spacing:.25em;
 }
 
-@keyframes discordBounce{
-    0%,100%{
-        transform:
-            translateY(0)
-            rotate(0);
-    }
-
-    50%{
-        transform:
-            translateY(-12px)
-            rotate(4deg);
-    }
+.exp-panel{
+  position:absolute;
+  width:190px;
+  padding:18px;
+  border:1px solid var(--line);
+  border-radius:14px;
+  background:rgba(8,11,18,.8);
+  backdrop-filter:blur(12px);
+  transition:.5s;
 }
 
-.discord h2{
-    font-size:
-        clamp(40px,7vw,70px);
-
-    font-weight:1000;
-
-    margin-bottom:15px;
+.exp-panel:hover{
+  transform:scale(1.06) !important;
+  border-color:rgba(124,92,255,.4);
+  box-shadow:0 20px 60px rgba(0,0,0,.3);
 }
 
-.discord p{
-    color:#666;
+.exp-panel:nth-child(2){left:4%;top:7%;}
+.exp-panel:nth-child(3){right:4%;top:10%;}
+.exp-panel:nth-child(4){left:0;bottom:10%;}
+.exp-panel:nth-child(5){right:0;bottom:9%;}
+.exp-panel:nth-child(6){left:50%;top:0;transform:translateX(-50%);}
+.exp-panel:nth-child(7){left:50%;bottom:0;transform:translateX(-50%);}
 
-    max-width:650px;
-
-    margin:
-        0 auto 30px;
+.exp-panel small{
+  display:block;
+  color:#68738a;
+  font-size:8px;
+  letter-spacing:.2em;
+  margin-bottom:8px;
 }
 
+.exp-panel strong{
+  font-size:12px;
+  letter-spacing:.06em;
+}
+
+.connection{
+  position:absolute;
+  height:1px;
+  background:linear-gradient(90deg,transparent,rgba(124,92,255,.35),transparent);
+  transform-origin:left;
+  opacity:.45;
+}
+
+.c1{width:300px;left:20%;top:27%;transform:rotate(28deg);}
+.c2{width:300px;right:20%;top:27%;transform:rotate(152deg);}
+.c3{width:260px;left:20%;bottom:29%;transform:rotate(-24deg);}
+.c4{width:260px;right:20%;bottom:29%;transform:rotate(204deg);}
 
 /* =========================================================
-   FAQ
-========================================================= */
+   STATS
+   ========================================================= */
 
-.faq{
-    max-width:850px;
-
-    margin:auto;
+.stats{
+  border-top:1px solid var(--line);
+  border-bottom:1px solid var(--line);
+  background:linear-gradient(90deg,transparent,rgba(124,92,255,.025),transparent);
 }
 
-details{
-    padding:22px;
-
-    margin-bottom:12px;
-
-    border-radius:14px;
-
-    background:
-        rgba(255,255,255,.025);
-
-    border:
-        1px solid rgba(255,255,255,.08);
-
-    transition:.3s;
+.stats-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
 }
 
-details:hover{
-    border-color:
-        rgba(255,215,0,.3);
+.stat{
+  padding:75px 25px;
+  text-align:center;
+  border-right:1px solid var(--line);
+  position:relative;
 }
 
-summary{
-    cursor:pointer;
-
-    font-weight:900;
-
-    list-style:none;
+.stat:last-child{
+  border-right:0;
 }
 
-summary::-webkit-details-marker{
-    display:none;
+.stat-number{
+  font-size:clamp(40px,5vw,75px);
+  font-weight:1000;
+  letter-spacing:-.08em;
+  background:linear-gradient(120deg,#fff,#958cff,#4edcff);
+  -webkit-background-clip:text;
+  color:transparent;
 }
 
-summary::after{
-    content:"+";
-
-    float:right;
-
-    color:#ffd700;
-
-    font-size:20px;
-
-    transition:.3s;
+.stat-label{
+  color:#687287;
+  font-size:9px;
+  letter-spacing:.2em;
+  font-weight:800;
+  text-transform:uppercase;
 }
-
-details[open] summary::after{
-    content:"−";
-}
-
-details p{
-    color:#666;
-
-    margin-top:15px;
-
-    font-size:14px;
-
-    animation:
-        faqOpen .4s ease;
-}
-
-@keyframes faqOpen{
-    from{
-        opacity:0;
-        transform:translateY(-10px);
-    }
-
-    to{
-        opacity:1;
-        transform:none;
-    }
-}
-
 
 /* =========================================================
-   FINAL
-========================================================= */
+   COMMUNITY
+   ========================================================= */
+
+.community-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:80px;
+  align-items:center;
+}
+
+.discord-window{
+  border:1px solid var(--line);
+  border-radius:22px;
+  background:rgba(10,13,21,.8);
+  overflow:hidden;
+  box-shadow:0 35px 100px rgba(0,0,0,.35);
+  transform:perspective(1000px) rotateY(-4deg);
+  transition:.6s;
+}
+
+.discord-window:hover{
+  transform:perspective(1000px) rotateY(0) translateY(-8px);
+}
+
+.discord-top{
+  height:45px;
+  display:flex;
+  align-items:center;
+  gap:7px;
+  padding:0 16px;
+  border-bottom:1px solid var(--line);
+}
+
+.win-dot{
+  width:7px;
+  height:7px;
+  border-radius:50%;
+  background:#3d4658;
+}
+
+.discord-body{
+  padding:20px;
+}
+
+.discord-channel{
+  color:#727d91;
+  font-size:9px;
+  letter-spacing:.15em;
+  margin-bottom:18px;
+}
+
+.chat{
+  display:flex;
+  gap:12px;
+  padding:12px 0;
+  border-bottom:1px solid rgba(255,255,255,.04);
+}
+
+.avatar{
+  flex:none;
+  width:30px;
+  height:30px;
+  border-radius:9px;
+  display:grid;
+  place-items:center;
+  background:linear-gradient(135deg,var(--accent),var(--accent2));
+  font-size:9px;
+  font-weight:900;
+}
+
+.chat strong{
+  font-size:10px;
+}
+
+.chat p{
+  margin-top:3px;
+  color:#687287;
+  font-size:10px;
+}
+
+.community-points{
+  display:grid;
+  gap:12px;
+  margin-top:30px;
+}
+
+.community-point{
+  display:flex;
+  align-items:center;
+  gap:13px;
+  color:#a4adbf;
+  font-size:12px;
+}
+
+.community-point span{
+  width:25px;
+  height:25px;
+  display:grid;
+  place-items:center;
+  border:1px solid rgba(124,92,255,.25);
+  border-radius:7px;
+  font-size:11px;
+}
+
+/* =========================================================
+   FINAL CTA
+   ========================================================= */
 
 .final{
-    min-height:650px;
+  min-height:90svh;
+  display:grid;
+  place-items:center;
+  text-align:center;
+  overflow:hidden;
+}
 
-    display:flex;
+.final::before{
+  content:"";
+  position:absolute;
+  width:700px;
+  height:700px;
+  border-radius:50%;
+  background:radial-gradient(circle,rgba(124,92,255,.14),transparent 65%);
+  filter:blur(20px);
+}
 
-    align-items:center;
-    justify-content:center;
+.final-content{
+  position:relative;
+  z-index:2;
+}
 
-    text-align:center;
-
-    position:relative;
-
-    overflow:hidden;
-
-    background:
-        radial-gradient(
-            circle at center,
-            rgba(255,215,0,.13),
-            transparent 45%
-        );
+.final-logo{
+  width:90px;
+  height:90px;
+  margin:0 auto 30px;
+  border-radius:25px;
+  display:grid;
+  place-items:center;
+  font-size:27px;
+  font-weight:1000;
+  background:linear-gradient(135deg,var(--accent),var(--accent2));
+  box-shadow:
+    0 0 70px rgba(124,92,255,.3),
+    0 0 120px rgba(54,200,255,.08);
 }
 
 .final h2{
-    font-size:
-        clamp(60px,11vw,140px);
-
-    line-height:.8;
-
-    font-weight:1000;
-
-    color:#ffd700;
-
-    text-shadow:
-        0 0 50px rgba(255,215,0,.15);
-
-    animation:
-        finalPulse 4s infinite;
+  font-size:clamp(55px,10vw,135px);
+  line-height:.84;
+  letter-spacing:-.085em;
+  font-weight:1000;
 }
 
-@keyframes finalPulse{
-    0%,100%{
-        transform:scale(1);
-    }
-
-    50%{
-        transform:scale(1.03);
-    }
+.final h2 span{
+  background:linear-gradient(110deg,#fff,#9d95ff,#46d8ff);
+  -webkit-background-clip:text;
+  color:transparent;
 }
 
 .final p{
-    color:#666;
-
-    margin:
-        30px auto;
-
-    font-size:16px;
+  color:#707a8e;
+  margin:25px auto 30px;
+  letter-spacing:.18em;
+  font-size:11px;
+  text-transform:uppercase;
 }
 
+.footer{
+  padding:30px 20px;
+  text-align:center;
+  border-top:1px solid var(--line);
+  color:#4e576a;
+  font-size:9px;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+}
 
 /* =========================================================
-   FOOTER
-========================================================= */
+   SCROLL REVEALS
+   ========================================================= */
 
-footer{
-    padding:
-        60px 25px;
-
-    text-align:center;
-
-    background:#020202;
-
-    border-top:
-        1px solid rgba(255,255,255,.06);
-
-    color:#444;
+.reveal{
+  opacity:0;
+  transform:translateY(50px) scale(.97);
+  filter:blur(8px);
+  transition:
+    opacity .9s cubic-bezier(.2,.8,.2,1),
+    transform .9s cubic-bezier(.2,.8,.2,1),
+    filter .9s ease;
 }
 
-.footer-logo{
-    color:#ffd700;
-
-    font-size:30px;
-
-    font-weight:1000;
-
-    letter-spacing:5px;
-
-    margin-bottom:10px;
+.reveal.visible{
+  opacity:1;
+  transform:none;
+  filter:none;
 }
 
+.reveal-left{
+  opacity:0;
+  transform:translateX(-60px);
+  filter:blur(7px);
+  transition:1s cubic-bezier(.2,.8,.2,1);
+}
+
+.reveal-left.visible{
+  opacity:1;
+  transform:none;
+  filter:none;
+}
+
+.reveal-right{
+  opacity:0;
+  transform:translateX(60px);
+  filter:blur(7px);
+  transition:1s cubic-bezier(.2,.8,.2,1);
+}
+
+.reveal-right.visible{
+  opacity:1;
+  transform:none;
+  filter:none;
+}
+
+.stagger > *{
+  opacity:0;
+  transform:translateY(35px);
+  transition:.8s cubic-bezier(.2,.8,.2,1);
+}
+
+.stagger.visible > *{
+  opacity:1;
+  transform:none;
+}
+
+.stagger.visible > *:nth-child(1){transition-delay:.05s;}
+.stagger.visible > *:nth-child(2){transition-delay:.13s;}
+.stagger.visible > *:nth-child(3){transition-delay:.21s;}
+.stagger.visible > *:nth-child(4){transition-delay:.29s;}
+.stagger.visible > *:nth-child(5){transition-delay:.37s;}
+.stagger.visible > *:nth-child(6){transition-delay:.45s;}
+.stagger.visible > *:nth-child(7){transition-delay:.53s;}
+.stagger.visible > *:nth-child(8){transition-delay:.61s;}
 
 /* =========================================================
-   RESPONSIVE
-========================================================= */
+   MOBILE
+   ========================================================= */
 
 @media(max-width:900px){
 
-    .cards{
-        grid-template-columns:
-            repeat(2,1fr);
-    }
+  .nav-links{
+    display:none;
+  }
 
-    .stats{
-        grid-template-columns:
-            repeat(2,1fr);
-    }
+  .nav-join{
+    display:block;
+  }
 
-    .steps{
-        grid-template-columns:
-            repeat(2,1fr);
-    }
+  .hero-status{
+    display:none;
+  }
 
-    .radar{
-        display:none;
-    }
+  .about-grid,
+  .community-grid{
+    grid-template-columns:1fr;
+    gap:45px;
+  }
 
+  .about-visual{
+    min-height:350px;
+  }
+
+  .req-grid{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .why-grid{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .stats-grid{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .stat:nth-child(2){
+    border-right:0;
+  }
+
+  .stat:nth-child(-n+2){
+    border-bottom:1px solid var(--line);
+  }
+
+  .experience{
+    min-height:auto;
+  }
+
+  .experience-wrap{
+    min-height:600px;
+  }
+
+  .exp-panel{
+    width:145px;
+    padding:14px;
+  }
+
+  .exp-panel:nth-child(2){left:0;}
+  .exp-panel:nth-child(3){right:0;}
+  .exp-panel:nth-child(4){left:0;}
+  .exp-panel:nth-child(5){right:0;}
+
+  .experience-core{
+    width:220px;
+    height:220px;
+  }
+
+  .experience-core strong{
+    font-size:45px;
+  }
+
+  .connection{
+    display:none;
+  }
 }
 
-@media(max-width:650px){
+@media(max-width:600px){
 
-    .nav-links{
-        display:none;
-    }
+  :root{
+    --nav:68px;
+  }
 
-    .cards{
-        grid-template-columns:1fr;
-    }
+  .section{
+    padding:100px 0;
+  }
 
-    .stats{
-        grid-template-columns:
-            repeat(2,1fr);
-    }
+  .hero-inner,
+  .section,
+  .nav-inner{
+    width:min(100% - 28px,var(--max));
+  }
 
-    .steps{
-        grid-template-columns:1fr;
-    }
+  .hero h1{
+    font-size:clamp(68px,24vw,125px);
+  }
 
-    .requirement{
-        align-items:flex-start;
-        flex-wrap:wrap;
-    }
+  .hero-sub{
+    font-size:17px;
+  }
 
-    .requirement strong{
-        min-width:auto;
-    }
+  .hero-actions{
+    display:grid;
+    grid-template-columns:1fr;
+  }
 
-    .hero h1{
-        letter-spacing:-6px;
-    }
+  .btn{
+    width:100%;
+  }
 
-    .hudCorner{
-        width:70px;
-        height:70px;
-    }
+  .feature-grid,
+  .req-grid,
+  .why-grid{
+    grid-template-columns:1fr;
+  }
 
-    .hudText{
-        font-size:7px;
-    }
+  .feature-card{
+    min-height:155px;
+  }
 
-    .loaderLogo{
-        letter-spacing:-7px;
-    }
+  .req-card{
+    min-height:200px;
+  }
 
+  .stats-grid{
+    grid-template-columns:1fr 1fr;
+  }
+
+  .stat{
+    padding:50px 10px;
+  }
+
+  .stat-number{
+    font-size:42px;
+  }
+
+  .discord-window{
+    transform:none;
+  }
+
+  .experience-wrap{
+    min-height:620px;
+  }
+
+  .exp-panel{
+    width:125px;
+  }
+
+  .exp-panel strong{
+    font-size:10px;
+  }
+
+  .exp-panel:nth-child(2){top:5%;}
+  .exp-panel:nth-child(3){top:17%;}
+  .exp-panel:nth-child(4){bottom:18%;}
+  .exp-panel:nth-child(5){bottom:5%;}
+  .exp-panel:nth-child(6){top:35%;}
+  .exp-panel:nth-child(7){bottom:35%;}
+
+  .final{
+    min-height:80svh;
+  }
+
+  .final-logo{
+    width:72px;
+    height:72px;
+    border-radius:20px;
+  }
+
+  .loader-center{
+    height:360px;
+  }
+
+  .ship{
+    transform:translate(-50%,-50%) scale(.8);
+  }
 }
-
 
 /* =========================================================
    REDUCED MOTION
-========================================================= */
+   ========================================================= */
 
 @media(prefers-reduced-motion:reduce){
 
-    *,
-    *::before,
-    *::after{
-        animation-duration:.01ms!important;
-        animation-iteration-count:1!important;
-        transition-duration:.01ms!important;
-        scroll-behavior:auto!important;
-    }
+  *,
+  *::before,
+  *::after{
+    scroll-behavior:auto !important;
+    animation-duration:.001ms !important;
+    animation-iteration-count:1 !important;
+    transition-duration:.001ms !important;
+  }
 
+  .reveal,
+  .reveal-left,
+  .reveal-right,
+  .stagger > *{
+    opacity:1;
+    transform:none;
+    filter:none;
+  }
 }
-
 </style>
 </head>
 
-
 <body class="loading">
 
+<!-- =======================================================
+     LOADING EXPERIENCE
+     ======================================================= -->
 
-<!-- ======================================================
-     CINEMATIC LOADER
-======================================================= -->
+<div id="loader">
 
-<div id="cinematicLoader">
+  <div class="loader-stars"></div>
 
-    <div class="space"></div>
+  <div class="loader-hud">
+    <span>4EV // SYSTEM</span>
+    <span>CONNECTION: SECURE</span>
+  </div>
 
-    <div class="stars"></div>
-    <div class="stars2"></div>
-    <div class="stars3"></div>
+  <div class="loader-center">
 
-    <div id="hyperspace"></div>
+    <div class="space-glow"></div>
 
-    <div class="core"></div>
+    <div class="landing-beam"></div>
 
-    <div class="orbits">
-        <div
-            class="orbit"
-            style="--rotation:0deg;--speed:12s"
-        ></div>
-
-        <div
-            class="orbit"
-            style="--rotation:45deg;--speed:18s"
-        ></div>
-
-        <div
-            class="orbit"
-            style="--rotation:90deg;--speed:25s"
-        ></div>
+    <div class="ship" id="ship">
+      <div class="ship-wing left"></div>
+      <div class="ship-wing right"></div>
+      <div class="ship-body"></div>
+      <div class="ship-window"></div>
+      <div class="engine"></div>
     </div>
 
-    <div class="scanner"></div>
+    <div class="loader-text">
+      <div class="loader-title" id="loaderTitle">
+        4EV SYSTEMS INITIALIZING
+      </div>
 
+      <div class="loader-status" id="loaderStatus">
+        ESTABLISHING CONNECTION
+      </div>
 
-    <!-- HUD -->
+      <div class="loader-progress">
+        <span id="loaderBar"></span>
+      </div>
 
-    <div class="hud">
-
-        <div class="hudCorner hudTL"></div>
-        <div class="hudCorner hudTR"></div>
-        <div class="hudCorner hudBL"></div>
-        <div class="hudCorner hudBR"></div>
-
-        <div class="hudText hudTopLeft">
-            4EV // SYSTEM
-        </div>
-
-        <div class="hudText hudTopRight">
-            SECTOR 04 // ONLINE
-        </div>
-
-        <div class="hudText hudBottomLeft">
-            FOREVER VICTORY
-        </div>
-
-        <div class="hudText hudBottomRight">
-            CONNECTION: STABLE
-        </div>
-
+      <div class="loader-percent" id="loaderPercent">
+        0%
+      </div>
     </div>
 
-
-    <!-- RADAR -->
-
-    <div class="radar">
-        <div class="radarLine"></div>
-    </div>
-
-
-    <!-- TELEMETRY -->
-
-    <div class="telemetry">
-
-        [ SYSTEM TELEMETRY ]<br>
-
-        NAVIGATION: ONLINE
-        &nbsp; //
-        POWER: 100%
-        &nbsp; //
-        NETWORK: STABLE
-        <br>
-
-        RIVALS COMPETITIVE NETWORK
-        &nbsp; //
-        4EV PROTOCOL ACTIVE
-
-    </div>
-
-
-    <!-- CENTER -->
-
-    <div class="loaderCenter">
-
-        <div class="system">
-            4EV // INITIALIZING FOREVER VICTORY
-        </div>
-
-        <div
-            id="loaderLogo"
-            class="loaderLogo"
-        >
-            4EV
-        </div>
-
-        <div
-            id="loaderSubtitle"
-            class="loaderSubtitle"
-        >
-            FOREVER VICTORY
-        </div>
-
-        <div
-            id="loaderProgress"
-            class="loaderProgress"
-        >
-
-            <div class="progressTop">
-
-                <span id="statusText">
-                    BOOTING SYSTEM
-                </span>
-
-                <span id="percent">
-                    0%
-                </span>
-
-            </div>
-
-            <div class="progressTrack">
-
-                <div
-                    id="progressFill"
-                    class="progressFill"
-                ></div>
-
-            </div>
-
-            <div
-                id="systemMessage"
-                class="systemMessage"
-            >
-                INITIALIZING...
-
-            </div>
-
-        </div>
-
-    </div>
-
-
-    <!-- LANDING EFFECTS -->
-
-    <div
-        id="shockwave"
-        class="shockwave"
-    ></div>
-
-    <div
-        id="landingFlash"
-        class="landingFlash"
-    ></div>
-
+  </div>
 </div>
 
+<!-- =======================================================
+     GLOBAL BACKGROUND
+     ======================================================= -->
 
-<!-- ======================================================
-     WEBSITE
-======================================================= -->
-
-<div id="site">
-
-
-<div class="background">
-
-    <div class="grid"></div>
-
-    <div class="ring"></div>
-    <div class="ring"></div>
-    <div class="ring"></div>
-    <div class="ring"></div>
-
-    <div class="orb one"></div>
-    <div class="orb two"></div>
-    <div class="orb three"></div>
-
+<div id="background">
+  <div id="stars"></div>
+  <div class="orb one" data-parallax="0.02"></div>
+  <div class="orb two" data-parallax="0.035"></div>
+  <div class="orb three" data-parallax="0.015"></div>
+  <div class="grid"></div>
 </div>
 
+<!-- =======================================================
+     NAVIGATION
+     ======================================================= -->
 
-<div id="particles"></div>
+<header class="nav" id="nav">
+  <div class="nav-inner">
 
-<div id="spotlight"></div>
+    <a href="#home" class="logo">
+      <div class="logo-mark">4EV</div>
+      <div class="logo-text">
+        <span>FOREVER VICTORY</span>
+        <small>RIVALS // COMPETITIVE</small>
+      </div>
+    </a>
 
+    <nav class="nav-links">
+      <a href="#about">ABOUT</a>
+      <a href="#requirements">REQUIREMENTS</a>
+      <a href="#experience">EXPERIENCE</a>
+      <a href="#community">COMMUNITY</a>
+    </nav>
 
-<div id="progress"></div>
-
-
-<!-- NAV -->
-
-<nav id="nav">
-
-    <div class="nav-inner">
-
-        <a
-            class="logo"
-            href="#"
-        >
-            4EV
-        </a>
-
-        <div class="nav-links">
-
-            <a href="#about">
-                ABOUT
-            </a>
-
-            <a href="#recruitment">
-                RECRUITMENT
-            </a>
-
-            <a href="#ranks">
-                RANKS
-            </a>
-
-            <a href="#discord">
-                DISCORD
-            </a>
-
-            <a href="#faq">
-                FAQ
-            </a>
-
-        </div>
-
-    </div>
-
-</nav>
-
-
-<!-- ======================================================
-     HERO
-======================================================= -->
-
-<header class="hero">
-
-    <div
-        class="hero-content"
-        id="heroContent"
+    <a
+      class="nav-join"
+      href="https://discord.gg/dUtnTEfYYb"
+      target="_blank"
+      rel="noopener noreferrer"
     >
+      JOIN 4EV
+    </a>
 
-        <div class="status">
-
-            <span class="status-dot"></span>
-
-            RECRUITMENT OPEN
-
-        </div>
-
-
-        <h1>
-            4EV
-        </h1>
-
-
-        <div class="hero-subtitle">
-
-            FOREVER VICTORY
-
-        </div>
-
-
-        <p class="hero-description">
-
-            A competitive Roblox Rivals clan for
-            skilled, active and ambitious players.
-
-            <br><br>
-
-            <strong>
-                COMPETE • IMPROVE • REPRESENT
-            </strong>
-
-        </p>
-
-
-        <div class="buttons">
-
-            <a
-                class="btn gold"
-                href="https://discord.gg/dUtnTEfYYb"
-                target="_blank"
-            >
-                💬 JOIN 4EV DISCORD
-            </a>
-
-            <a
-                class="btn dark"
-                href="#recruitment"
-            >
-                ⚔️ VIEW RECRUITMENT
-            </a>
-
-        </div>
-
-    </div>
-
-
-    <div class="scroll">
-        SCROLL ↓
-    </div>
-
+  </div>
 </header>
 
+<!-- =======================================================
+     MAIN
+     ======================================================= -->
 
-<!-- ======================================================
-     STATS
-======================================================= -->
+<main>
 
-<section>
+<!-- HERO -->
 
-    <div class="stats reveal">
+<section class="hero" id="home">
 
-        <div class="stat">
+  <div class="hero-inner">
 
-            <div class="stat-number">
-                170+
-            </div>
+    <div class="hero-kicker reveal">
+      <span class="kicker-dot"></span>
+      COMPETITIVE ROBLOX RIVALS CLAN
+    </div>
 
-            <div class="stat-label">
-                MINIMUM LEVEL
-            </div>
+    <h1 class="reveal">4EV</h1>
 
-        </div>
+    <div class="hero-sub reveal">
+      FOREVER VICTORY
+    </div>
 
+    <p class="hero-desc reveal">
+      A competitive Roblox Rivals clan built around skill,
+      teamwork, improvement, competition, and community.
+    </p>
 
-        <div class="stat">
+    <div class="hero-actions reveal">
 
-            <div class="stat-number">
-                P1+
-            </div>
+      <a
+        class="btn btn-primary ripple-button"
+        href="https://discord.gg/dUtnTEfYYb"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        JOIN 4EV
+        <span class="btn-arrow">→</span>
+      </a>
 
-            <div class="stat-label">
-                MINIMUM RANK
-            </div>
-
-        </div>
-
-
-        <div class="stat">
-
-            <div class="stat-number">
-                60%+
-            </div>
-
-            <div class="stat-label">
-                WIN RATE
-            </div>
-
-        </div>
-
-
-        <div class="stat">
-
-            <div class="stat-number">
-                4EV
-            </div>
-
-            <div class="stat-label">
-                FOREVER VICTORY
-            </div>
-
-        </div>
+      <a class="btn btn-secondary" href="#about">
+        DISCOVER 4EV
+        <span class="btn-arrow">↓</span>
+      </a>
 
     </div>
+
+    <div class="hero-status reveal">
+      <strong>4EV // ONLINE</strong>
+      BUILDING THE NEXT GENERATION OF COMPETITIVE RIVALS.
+    </div>
+
+  </div>
+
+  <div class="scroll-indicator">
+    SCROLL TO ENTER
+    <span class="scroll-line"></span>
+  </div>
 
 </section>
 
+<div class="divider"></div>
 
-<!-- ======================================================
-     ABOUT
-======================================================= -->
+<!-- ABOUT -->
 
-<section id="about">
+<section class="section" id="about">
 
-    <div class="section-title reveal">
+  <div class="about-grid">
 
-        <div class="label">
-            WELCOME TO 4EV
-        </div>
+    <div class="reveal-left">
 
-        <h2>
-            NOT JUST ANOTHER CLAN.
-        </h2>
+      <div class="section-label">
+        01 // THE CLAN
+      </div>
 
-        <p>
-            4EV | Forever Victory is a competitive
-            Roblox Rivals community built around
-            improvement, competition and teamwork.
-        </p>
+      <h2 class="section-title">
+        <span>FOREVER</span><br>
+        VICTORY.
+      </h2>
+
+      <p class="section-copy">
+        4EV | Forever Victory is a competitive Roblox Rivals clan
+        built around skill, competition, improvement, teamwork,
+        and community.
+      </p>
+
+    </div>
+
+    <div class="about-visual reveal-right" data-tilt>
+
+      <div class="orbit"></div>
+      <div class="orbit two"></div>
+
+      <div class="about-core">
+        <div class="core-logo">4EV</div>
+      </div>
 
     </div>
 
+  </div>
 
-    <div class="cards">
+  <div class="feature-grid stagger">
 
-        <div class="card reveal">
+    <article class="feature-card tilt-card">
+      <div class="feature-icon">⚔️</div>
+      <h3>COMPETITION</h3>
+      <p>
+        Compete against strong players and clans
+        while pushing your limits.
+      </p>
+    </article>
 
-            <div class="icon">⚔️</div>
+    <article class="feature-card tilt-card">
+      <div class="feature-icon">🏆</div>
+      <h3>CLAN WARS</h3>
+      <p>
+        Participate in clan wars, events,
+        and competitive activities.
+      </p>
+    </article>
 
-            <h3>
-                Competitive
-            </h3>
+    <article class="feature-card tilt-card">
+      <div class="feature-icon">📈</div>
+      <h3>IMPROVEMENT</h3>
+      <p>
+        Improve your gameplay alongside
+        skilled and motivated players.
+      </p>
+    </article>
 
-            <p>
-                Play with people who want to improve,
-                compete and take their gameplay seriously.
-            </p>
+    <article class="feature-card tilt-card">
+      <div class="feature-icon">🤝</div>
+      <h3>COMMUNITY</h3>
+      <p>
+        Build friendships and become part
+        of the 4EV community.
+      </p>
+    </article>
 
-        </div>
-
-
-        <div class="card reveal">
-
-            <div class="icon">🎯</div>
-
-            <h3>
-                Skill
-            </h3>
-
-            <p>
-                Build better mechanics, smarter decisions,
-                stronger communication and teamwork.
-            </p>
-
-        </div>
-
-
-        <div class="card reveal">
-
-            <div class="icon">🚀</div>
-
-            <h3>
-                Progression
-            </h3>
-
-            <p>
-                Start as a Recruit and work your way
-                through the 4EV progression system.
-            </p>
-
-        </div>
-
-
-        <div class="card reveal">
-
-            <div class="icon">🏆</div>
-
-            <h3>
-                Competition
-            </h3>
-
-            <p>
-                Take part in clan activities, events,
-                battles and community competitions.
-            </p>
-
-        </div>
-
-
-        <div class="card reveal">
-
-            <div class="icon">👥</div>
-
-            <h3>
-                Community
-            </h3>
-
-            <p>
-                Find teammates, share clips, talk strategy
-                and meet other Rivals players.
-            </p>
-
-        </div>
-
-
-        <div class="card reveal">
-
-            <div class="icon">🔥</div>
-
-            <h3>
-                Ambition
-            </h3>
-
-            <p>
-                We're looking for players who want to
-                push beyond average and keep improving.
-            </p>
-
-        </div>
-
-    </div>
+  </div>
 
 </section>
 
+<!-- REQUIREMENTS -->
 
-<!-- ======================================================
-     RECRUITMENT
-======================================================= -->
+<section class="section requirements" id="requirements">
 
-<section id="recruitment">
+  <div class="section-label reveal">
+    02 // ENTRY PROTOCOL
+  </div>
 
-    <div class="section-title reveal">
+  <h2 class="section-title reveal">
+    ARE <span>YOU READY?</span>
+  </h2>
 
-        <div class="label">
-            RECRUITMENT
-        </div>
+  <p class="section-copy reveal" style="margin-left:auto;margin-right:auto;">
+    4EV is looking for active, skilled, and competitive
+    players ready to improve and compete.
+  </p>
 
-        <h2>
-            EARN YOUR PLACE.
-        </h2>
+  <div class="req-grid stagger">
 
-        <p>
-            Meet the current requirements and join
-            the 4EV recruitment process.
-        </p>
+    <article class="req-card tilt-card">
+      <div class="req-value">P1+</div>
+      <div class="req-label">MINIMUM RANK</div>
+    </article>
 
-    </div>
+    <article class="req-card tilt-card">
+      <div class="req-value">170+</div>
+      <div class="req-label">MINIMUM LEVEL</div>
+    </article>
 
+    <article class="req-card tilt-card">
+      <div class="req-value">60%+</div>
+      <div class="req-label">WIN RATE</div>
+    </article>
 
-    <div class="requirements reveal">
+    <article class="req-card tilt-card">
+      <div class="req-value">ACTIVE</div>
+      <div class="req-label">COMPETITIVE PLAYER</div>
+    </article>
 
+  </div>
 
-        <div class="requirement">
-
-            <span class="check">✓</span>
-
-            <strong>
-                Platinum 1+
-            </strong>
-
-            <span>
-                Competitive ranked experience
-            </span>
-
-        </div>
-
-
-        <div class="requirement">
-
-            <span class="check">✓</span>
-
-            <strong>
-                Level 170+
-            </strong>
-
-            <span>
-                Experienced Rivals player
-            </span>
-
-        </div>
-
-
-        <div class="requirement">
-
-            <span class="check">✓</span>
-
-            <strong>
-                60%+ Win Rate
-            </strong>
-
-            <span>
-                Strong performance
-            </span>
-
-        </div>
-
-
-        <div class="requirement">
-
-            <span class="check">✓</span>
-
-            <strong>
-                Active
-            </strong>
-
-            <span>
-                Participate in the community
-            </span>
-
-        </div>
-
-
-        <div class="requirement">
-
-            <span class="check">✓</span>
-
-            <strong>
-                Competitive Mindset
-            </strong>
-
-            <span>
-                Always looking to improve
-            </span>
-
-        </div>
-
-
-        <div class="requirement">
-
-            <span class="check">✓</span>
-
-            <strong>
-                Team Player
-            </strong>
-
-            <span>
-                Respect teammates and opponents
-            </span>
-
-        </div>
-
-
-    </div>
+  <p class="disclaimer">
+    Requirements may be reviewed by staff depending on competitive experience.
+  </p>
 
 </section>
 
+<!-- WHY 4EV -->
 
-<!-- ======================================================
-     PROCESS
-======================================================= -->
+<section class="section" id="why">
 
-<section>
+  <div class="section-label reveal">
+    03 // WHY 4EV
+  </div>
 
-    <div class="section-title reveal">
+  <h2 class="section-title reveal">
+    BUILT TO <span>COMPETE.</span>
+  </h2>
 
-        <div class="label">
-            THE PROCESS
-        </div>
+  <p class="section-copy reveal">
+    More than a clan tag. 4EV is an environment designed
+    for players who want to compete, improve, and build
+    something together.
+  </p>
 
-        <h2>
-            FROM PLAYER TO 4EV.
-        </h2>
+  <div class="why-grid stagger">
 
-        <p>
-            Your path into Forever Victory.
-        </p>
+    <article class="why-item tilt-card">
+      <div class="why-icon">🔥</div>
+      <h3>COMPETITIVE ENVIRONMENT</h3>
+      <p>Surround yourself with motivated players.</p>
+    </article>
 
-    </div>
+    <article class="why-item tilt-card">
+      <div class="why-icon">🏆</div>
+      <h3>CLAN WARS & EVENTS</h3>
+      <p>Take part in organized competitive activities.</p>
+    </article>
 
+    <article class="why-item tilt-card">
+      <div class="why-icon">⚔️</div>
+      <h3>SKILLED PLAYERS</h3>
+      <p>Meet players who take Rivals seriously.</p>
+    </article>
 
-    <div class="steps">
+    <article class="why-item tilt-card">
+      <div class="why-icon">📈</div>
+      <h3>IMPROVE YOUR GAMEPLAY</h3>
+      <p>Learn, practice, compete, and get better.</p>
+    </article>
 
+    <article class="why-item tilt-card">
+      <div class="why-icon">🎮</div>
+      <h3>ACTIVE COMMUNITY</h3>
+      <p>Stay connected with the 4EV community.</p>
+    </article>
 
-        <div class="step reveal">
+    <article class="why-item tilt-card">
+      <div class="why-icon">🌐</div>
+      <h3>COMPETITIVE OPPORTUNITIES</h3>
+      <p>Push toward higher levels of competition.</p>
+    </article>
 
-            <div class="step-number">
-                01
-            </div>
+    <article class="why-item tilt-card">
+      <div class="why-icon">💬</div>
+      <h3>ORGANIZED DISCORD</h3>
+      <p>A central place for communication and events.</p>
+    </article>
 
-            <h3>
-                JOIN
-            </h3>
+    <article class="why-item tilt-card">
+      <div class="why-icon">🚀</div>
+      <h3>CONSTANT DEVELOPMENT</h3>
+      <p>4EV continues to evolve and grow.</p>
+    </article>
 
-            <p>
-                Enter the official 4EV Discord.
-            </p>
-
-        </div>
-
-
-        <div class="step reveal">
-
-            <div class="step-number">
-                02
-            </div>
-
-            <h3>
-                APPLY
-            </h3>
-
-            <p>
-                Check recruitment information
-                and submit your application.
-            </p>
-
-        </div>
-
-
-        <div class="step reveal">
-
-            <div class="step-number">
-                03
-            </div>
-
-            <h3>
-                TRYOUT
-            </h3>
-
-            <p>
-                Demonstrate your gameplay
-                when required.
-            </p>
-
-        </div>
-
-
-        <div class="step reveal">
-
-            <div class="step-number">
-                04
-            </div>
-
-            <h3>
-                REPRESENT
-            </h3>
-
-            <p>
-                Earn your place and represent 4EV.
-            </p>
-
-        </div>
-
-
-    </div>
+  </div>
 
 </section>
 
+<!-- EXPERIENCE -->
 
-<!-- ======================================================
-     RANKS
-======================================================= -->
+<section class="section experience" id="experience">
 
-<section id="ranks">
+  <div class="section-label reveal">
+    04 // ENTER THE WORLD
+  </div>
 
-    <div class="section-title reveal">
+  <h2 class="section-title reveal">
+    ENTER THE <span>4EV EXPERIENCE.</span>
+  </h2>
 
-        <div class="label">
-            PROGRESSION
-        </div>
+  <p class="section-copy reveal">
+    Everything connects around one goal:
+    becoming better and competing together.
+  </p>
 
-        <h2>
-            CLIMB THE RANKS.
-        </h2>
+  <div class="experience-wrap reveal">
 
-        <p>
-            Grow with the clan through activity,
-            contribution and trust.
-        </p>
+    <div class="connection c1"></div>
+    <div class="connection c2"></div>
+    <div class="connection c3"></div>
+    <div class="connection c4"></div>
 
+    <div class="exp-panel tilt-card">
+      <small>01</small>
+      <strong>RANKED</strong>
     </div>
 
-
-    <div class="cards">
-
-
-        <div class="card reveal">
-
-            <div class="label">
-                R1
-            </div>
-
-            <h3>
-                Recruit
-            </h3>
-
-            <p>
-                The beginning of your 4EV journey.
-            </p>
-
-        </div>
-
-
-        <div class="card reveal">
-
-            <div class="label">
-                R2
-            </div>
-
-            <h3>
-                Contender
-            </h3>
-
-            <p>
-                Active members establishing themselves.
-            </p>
-
-        </div>
-
-
-        <div class="card reveal">
-
-            <div class="label">
-                R3
-            </div>
-
-            <h3>
-                Elite
-            </h3>
-
-            <p>
-                Proven competitive members.
-            </p>
-
-        </div>
-
-
-        <div class="card reveal">
-
-            <div class="label">
-                R4
-            </div>
-
-            <h3>
-                Veteran
-            </h3>
-
-            <p>
-                Experienced and trusted members.
-            </p>
-
-        </div>
-
-
-        <div class="card reveal">
-
-            <div class="label">
-                R5
-            </div>
-
-            <h3>
-                Apex
-            </h3>
-
-            <p>
-                The highest member rank.
-            </p>
-
-        </div>
-
-
-        <div class="card reveal">
-
-            <div class="label">
-                STAFF
-            </div>
-
-            <h3>
-                Leadership
-            </h3>
-
-            <p>
-                The people helping build and manage 4EV.
-            </p>
-
-        </div>
-
-
+    <div class="exp-panel tilt-card">
+      <small>02</small>
+      <strong>COMPETITIVE</strong>
     </div>
+
+    <div class="exp-panel tilt-card">
+      <small>03</small>
+      <strong>CLAN WARS</strong>
+    </div>
+
+    <div class="exp-panel tilt-card">
+      <small>04</small>
+      <strong>EVENTS</strong>
+    </div>
+
+    <div class="exp-panel tilt-card">
+      <small>05</small>
+      <strong>TRAINING</strong>
+    </div>
+
+    <div class="exp-panel tilt-card">
+      <small>06</small>
+      <strong>COMMUNITY</strong>
+    </div>
+
+    <div class="experience-core">
+      <strong>4EV</strong>
+      <small>FOREVER VICTORY</small>
+    </div>
+
+  </div>
 
 </section>
 
+<!-- STATS -->
 
-<!-- ======================================================
-     COMMUNITY
-======================================================= -->
+<section class="stats">
 
-<section>
+  <div class="stats-grid">
 
-    <div class="section-title reveal">
-
-        <div class="label">
-            THE COMMUNITY
-        </div>
-
-        <h2>
-            STAY. PLAY. CONNECT.
-        </h2>
-
-        <p>
-            There's always something happening inside 4EV.
-        </p>
-
+    <div class="stat reveal">
+      <div class="stat-number counter" data-target="170" data-suffix="+">0</div>
+      <div class="stat-label">Minimum Level</div>
     </div>
 
-
-    <div class="cards">
-
-
-        <div class="card reveal">
-
-            <div class="icon">
-                💬
-            </div>
-
-            <h3>
-                Community
-            </h3>
-
-            <p>
-                Talk, chill and connect with other
-                Roblox Rivals players.
-            </p>
-
-        </div>
-
-
-        <div class="card reveal">
-
-            <div class="icon">
-                🎮
-            </div>
-
-            <h3>
-                Find Teammates
-            </h3>
-
-            <p>
-                Meet players and build your
-                competitive squad.
-            </p>
-
-        </div>
-
-
-        <div class="card reveal">
-
-            <div class="icon">
-                🎬
-            </div>
-
-            <h3>
-                Clips
-            </h3>
-
-            <p>
-                Share your best plays and moments.
-            </p>
-
-        </div>
-
-
-        <div class="card reveal">
-
-            <div class="icon">
-                📢
-            </div>
-
-            <h3>
-                Updates
-            </h3>
-
-            <p>
-                Keep up with recruitment and
-                community announcements.
-            </p>
-
-        </div>
-
-
-        <div class="card reveal">
-
-            <div class="icon">
-                🏆
-            </div>
-
-            <h3>
-                Events
-            </h3>
-
-            <p>
-                Participate in community and
-                competitive activities.
-            </p>
-
-        </div>
-
-
-        <div class="card reveal">
-
-            <div class="icon">
-                🚀
-            </div>
-
-            <h3>
-                Build The Future
-            </h3>
-
-            <p>
-                Help make 4EV bigger, stronger
-                and better.
-            </p>
-
-        </div>
-
-
+    <div class="stat reveal">
+      <div class="stat-number">60%+</div>
+      <div class="stat-label">Win Rate</div>
     </div>
+
+    <div class="stat reveal">
+      <div class="stat-number">P1+</div>
+      <div class="stat-label">Minimum Rank</div>
+    </div>
+
+    <div class="stat reveal">
+      <div class="stat-number">4EV</div>
+      <div class="stat-label">Forever Victory</div>
+    </div>
+
+  </div>
 
 </section>
 
+<!-- COMMUNITY -->
 
-<!-- ======================================================
-     DISCORD
-======================================================= -->
+<section class="section" id="community">
 
-<section id="discord">
+  <div class="community-grid">
 
-    <div class="discord reveal">
+    <div class="reveal-left">
 
-        <div class="discord-content">
+      <div class="section-label">
+        05 // COMMUNITY
+      </div>
 
-            <div class="discord-icon">
-                💬
-            </div>
+      <h2 class="section-title">
+        FIND YOUR <span>SQUAD.</span>
+      </h2>
 
-            <h2>
-                ENTER THE 4EV DISCORD
-            </h2>
+      <p class="section-copy">
+        Meet competitive Rivals players, participate in events,
+        communicate with the community, and improve together.
+      </p>
 
-            <p>
-                Recruitment, announcements, community,
-                events, teammates and everything 4EV
-                starts here.
-            </p>
+      <div class="community-points">
 
-            <div class="buttons">
-
-                <a
-                    class="btn gold"
-                    href="https://discord.gg/dUtnTEfYYb"
-                    target="_blank"
-                >
-                    ⚔️ JOIN THE SERVER
-                </a>
-
-            </div>
-
+        <div class="community-point">
+          <span>01</span>
+          Competitive players
         </div>
 
+        <div class="community-point">
+          <span>02</span>
+          Organized events
+        </div>
+
+        <div class="community-point">
+          <span>03</span>
+          Active communication
+        </div>
+
+        <div class="community-point">
+          <span>04</span>
+          Growing community
+        </div>
+
+      </div>
+
+      <div style="margin-top:30px;">
+        <a
+          class="btn btn-primary ripple-button"
+          href="https://discord.gg/dUtnTEfYYb"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          JOIN THE 4EV DISCORD
+          <span class="btn-arrow">→</span>
+        </a>
+      </div>
+
     </div>
+
+    <div class="discord-window reveal-right">
+
+      <div class="discord-top">
+        <span class="win-dot"></span>
+        <span class="win-dot"></span>
+        <span class="win-dot"></span>
+      </div>
+
+      <div class="discord-body">
+
+        <div class="discord-channel">
+          # 4EV-COMMUNITY
+        </div>
+
+        <div class="chat">
+          <div class="avatar">4E</div>
+          <div>
+            <strong>4EV SYSTEM</strong>
+            <p>Welcome to Forever Victory.</p>
+          </div>
+        </div>
+
+        <div class="chat">
+          <div class="avatar">P1</div>
+          <div>
+            <strong>PLAYER</strong>
+            <p>Looking for ranked teammates.</p>
+          </div>
+        </div>
+
+        <div class="chat">
+          <div class="avatar">4E</div>
+          <div>
+            <strong>4EV MEMBER</strong>
+            <p>Clan event starts soon. Be ready.</p>
+          </div>
+        </div>
+
+        <div class="chat">
+          <div class="avatar">4E</div>
+          <div>
+            <strong>4EV</strong>
+            <p>FOREVER VICTORY.</p>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
 
 </section>
 
+<!-- FINAL CTA -->
 
-<!-- ======================================================
-     FAQ
-======================================================= -->
+<section class="section final">
 
-<section id="faq">
+  <div class="final-content reveal">
 
-    <div class="section-title reveal">
-
-        <div class="label">
-            FAQ
-        </div>
-
-        <h2>
-            GOT QUESTIONS?
-        </h2>
-
-        <p>
-            Here's what you need to know.
-        </p>
-
+    <div class="final-logo">
+      4EV
     </div>
 
-
-    <div class="faq">
-
-
-        <details class="reveal">
-
-            <summary>
-                What is 4EV?
-            </summary>
-
-            <p>
-                4EV | Forever Victory is a competitive
-                Roblox Rivals clan focused on competition,
-                improvement and community.
-            </p>
-
-        </details>
-
-
-        <details class="reveal">
-
-            <summary>
-                How do I join?
-            </summary>
-
-            <p>
-                Join the official 4EV Discord and
-                check the current recruitment information.
-            </p>
-
-        </details>
-
-
-        <details class="reveal">
-
-            <summary>
-                What are the requirements?
-            </summary>
-
-            <p>
-                Current requirements include Platinum 1+,
-                Level 170+, 60%+ win rate, activity
-                and a competitive mindset.
-            </p>
-
-        </details>
-
-
-        <details class="reveal">
-
-            <summary>
-                Is 4EV competitive?
-            </summary>
-
-            <p>
-                4EV is designed around competitive Roblox
-                Rivals players and people who want to improve.
-            </p>
-
-        </details>
-
-
-    </div>
-
-</section>
-
-
-<!-- ======================================================
-     FINAL
-======================================================= -->
-
-<section class="final">
-
-    <div class="reveal">
-
-        <h2>
-            4EV
-        </h2>
-
-        <p>
-            FOREVER VICTORY.
-            <br>
-            MAKE YOUR NAME MEAN SOMETHING.
-        </p>
-
-        <div class="buttons">
-
-            <a
-                class="btn gold"
-                href="https://discord.gg/dUtnTEfYYb"
-                target="_blank"
-            >
-                ⚔️ JOIN 4EV
-            </a>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<footer>
-
-    <div class="footer-logo">
-        4EV
-    </div>
+    <h2>
+      READY TO<br>
+      <span>JOIN 4EV?</span>
+    </h2>
 
     <p>
-        Forever Victory
+      FOREVER VICTORY.
     </p>
 
-    <p style="margin-top:10px;">
-        Competitive Roblox Rivals Clan
-    </p>
+    <a
+      class="btn btn-primary ripple-button"
+      href="https://discord.gg/dUtnTEfYYb"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      JOIN 4EV
+      <span class="btn-arrow">→</span>
+    </a>
 
-    <p style="margin-top:25px;font-size:11px;">
-        © 2026 4EV | Forever Victory
-    </p>
+  </div>
 
+</section>
+
+</main>
+
+<footer class="footer">
+  4EV | FOREVER VICTORY — COMPETITIVE ROBLOX RIVALS
 </footer>
 
-</div>
-
-
 <script>
-
 /* =========================================================
-   CINEMATIC LOADER ENGINE
-========================================================= */
+   4EV JAVASCRIPT ENGINE
+   ========================================================= */
 
-const loader =
-    document.getElementById(
-        "cinematicLoader"
-    );
+(() => {
+  "use strict";
 
-const loaderLogo =
-    document.getElementById(
-        "loaderLogo"
-    );
+  const reducedMotion =
+    window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-const loaderSubtitle =
-    document.getElementById(
-        "loaderSubtitle"
-    );
+  /* =======================================================
+     LOADING / LANDING
+     ======================================================= */
 
-const progressBox =
-    document.getElementById(
-        "loaderProgress"
-    );
+  const loader = document.getElementById("loader");
+  const loaderBar = document.getElementById("loaderBar");
+  const loaderPercent = document.getElementById("loaderPercent");
+  const loaderStatus = document.getElementById("loaderStatus");
+  const ship = document.getElementById("ship");
 
-const progressFill =
-    document.getElementById(
-        "progressFill"
-    );
+  const statuses = [
+    ["4EV SYSTEMS INITIALIZING", "ESTABLISHING CONNECTION"],
+    ["NAVIGATION ONLINE", "ENTERING 4EV SPACE"],
+    ["LANDING SEQUENCE", "APPROACHING 4EV"],
+    ["4EV SYSTEM READY", "FOREVER VICTORY"]
+  ];
 
-const percent =
-    document.getElementById(
-        "percent"
-    );
+  let progress = 0;
 
-const statusText =
-    document.getElementById(
-        "statusText"
-    );
+  if (!reducedMotion) {
+    const start = performance.now();
+    const duration = 2700;
 
-const systemMessage =
-    document.getElementById(
-        "systemMessage"
-    );
+    function loadingLoop(now) {
+      const elapsed = now - start;
+      const raw = Math.min(elapsed / duration, 1);
 
-const hyperspace =
-    document.getElementById(
-        "hyperspace"
-    );
+      // Smooth progress.
+      progress = Math.floor(
+        (1 - Math.pow(1 - raw, 2.2)) * 100
+      );
 
-const core =
-    document.querySelector(
-        ".core"
-    );
+      loaderBar.style.width = progress + "%";
+      loaderPercent.textContent = progress + "%";
 
-const orbits =
-    document.querySelector(
-        ".orbits"
-    );
+      const stage = raw < .28
+        ? 0
+        : raw < .55
+          ? 1
+          : raw < .82
+            ? 2
+            : 3;
 
-const shockwave =
-    document.getElementById(
-        "shockwave"
-    );
+      loaderStatus.textContent = statuses[stage][1];
+      document.getElementById("loaderTitle").textContent =
+        statuses[stage][0];
 
-const flash =
-    document.getElementById(
-        "landingFlash"
-    );
+      // Final spaceship landing.
+      if (raw > .75) {
+        const landing = (raw - .75) / .25;
 
+        ship.style.transform =
+          `translate(-50%,-50%) translateY(${landing * 90}px) scale(${1 + landing * .18})`;
 
-/* =========================================================
-   CREATE HYPERSPACE LINES
-========================================================= */
+        ship.style.filter =
+          `drop-shadow(0 0 ${22 + landing * 35}px rgba(124,92,255,.65))`;
+      }
 
-for(
-    let i = 0;
-    i < 70;
-    i++
-){
-
-    const line =
-        document.createElement(
-            "div"
-        );
-
-    line.className =
-        "spaceLine";
-
-    const angle =
-        Math.random() * 360;
-
-    line.style.setProperty(
-        "--angle",
-        angle + "deg"
-    );
-
-    line.style.animationDelay =
-        (-Math.random() * 1.5) + "s";
-
-    line.style.animationDuration =
-        (0.7 + Math.random() * 1.5) + "s";
-
-    hyperspace.appendChild(
-        line
-    );
-
-}
-
-
-/* =========================================================
-   LOADER SEQUENCE
-========================================================= */
-
-const stages = [
-
-    {
-        at:0,
-        status:"BOOTING SYSTEM",
-        message:"POWERING 4EV CORE..."
-    },
-
-    {
-        at:12,
-        status:"SCANNING",
-        message:"SCANNING COMPETITIVE NETWORK..."
-    },
-
-    {
-        at:24,
-        status:"NAVIGATION ONLINE",
-        message:"CALCULATING LANDING VECTOR..."
-    },
-
-    {
-        at:38,
-        status:"POWER SYSTEMS",
-        message:"ENERGY CORE STABLE..."
-    },
-
-    {
-        at:52,
-        status:"HYPERSPACE",
-        message:"ENTERING HYPERSPACE..."
-    },
-
-    {
-        at:66,
-        status:"APPROACHING",
-        message:"4EV DESTINATION LOCKED..."
-    },
-
-    {
-        at:78,
-        status:"LANDING SEQUENCE",
-        message:"PREPARING CINEMATIC LANDING..."
-    },
-
-    {
-        at:90,
-        status:"SYSTEM ONLINE",
-        message:"FOREVER VICTORY INITIALIZED."
+      if (raw < 1) {
+        requestAnimationFrame(loadingLoop);
+      } else {
+        finishLoader();
+      }
     }
 
-];
+    requestAnimationFrame(loadingLoop);
 
+  } else {
+    loaderBar.style.width = "100%";
+    loaderPercent.textContent = "100%";
+    setTimeout(finishLoader, 250);
+  }
 
-function updateStage(value){
+  function finishLoader() {
 
-    let current =
-        stages[0];
+    document.body.classList.remove("loading");
 
-    for(
-        const stage of stages
-    ){
+    loader.classList.add("done");
 
-        if(
-            value >= stage.at
-        ){
+    window.setTimeout(() => {
+      loader.remove();
+    }, 1000);
 
-            current =
-                stage;
+    document.querySelectorAll(
+      ".hero .reveal"
+    ).forEach((element,index) => {
+      setTimeout(() => {
+        element.classList.add("visible");
+      }, 150 + index * 90);
+    });
+  }
 
+  /* =======================================================
+     STARS
+     ======================================================= */
+
+  const starsContainer = document.getElementById("stars");
+
+  if (!reducedMotion) {
+
+    const fragment = document.createDocumentFragment();
+
+    const count = window.innerWidth < 600 ? 45 : 90;
+
+    for (let i = 0; i < count; i++) {
+
+      const star = document.createElement("span");
+
+      const size = Math.random() * 2 + .5;
+
+      star.style.position = "absolute";
+      star.style.width = size + "px";
+      star.style.height = size + "px";
+      star.style.borderRadius = "50%";
+      star.style.background = "rgba(255,255,255,.75)";
+      star.style.left = Math.random() * 100 + "%";
+      star.style.top = Math.random() * 100 + "%";
+      star.style.opacity = Math.random() * .7 + .15;
+
+      const duration =
+        3 + Math.random() * 7;
+
+      star.style.animation =
+        `twinkle ${duration}s ease-in-out ${Math.random() * 4}s infinite`;
+
+      fragment.appendChild(star);
+    }
+
+    starsContainer.appendChild(fragment);
+
+    const starStyle = document.createElement("style");
+
+    starStyle.textContent = `
+      @keyframes twinkle{
+        0%,100%{opacity:.15;transform:scale(.8)}
+        50%{opacity:.9;transform:scale(1.35)}
+      }
+    `;
+
+    document.head.appendChild(starStyle);
+  }
+
+  /* =======================================================
+     INTERSECTION OBSERVER
+     ======================================================= */
+
+  const revealObserver =
+    new IntersectionObserver((entries) => {
+
+      entries.forEach(entry => {
+
+        if (entry.isIntersecting) {
+
+          entry.target.classList.add("visible");
+
+          if (
+            entry.target.classList.contains("counter")
+          ) {
+            animateCounter(entry.target);
+          }
+
+          revealObserver.unobserve(entry.target);
         }
 
+      });
+
+    }, {
+      threshold:.12,
+      rootMargin:"0px 0px -60px 0px"
+    });
+
+  document
+    .querySelectorAll(
+      ".reveal,.reveal-left,.reveal-right,.stagger,.counter"
+    )
+    .forEach(el => revealObserver.observe(el));
+
+  /* =======================================================
+     COUNTERS
+     ======================================================= */
+
+  function animateCounter(element) {
+
+    if (element.dataset.animated) return;
+
+    element.dataset.animated = "true";
+
+    const target = Number(element.dataset.target || 0);
+    const suffix = element.dataset.suffix || "";
+
+    if (!target) return;
+
+    const duration = 1200;
+    const start = performance.now();
+
+    function tick(now) {
+
+      const progress =
+        Math.min((now - start) / duration,1);
+
+      const eased =
+        1 - Math.pow(1 - progress,3);
+
+      element.textContent =
+        Math.floor(target * eased) + suffix;
+
+      if (progress < 1) {
+        requestAnimationFrame(tick);
+      }
+
     }
 
-    statusText.textContent =
-        current.status;
+    requestAnimationFrame(tick);
+  }
 
-    systemMessage.textContent =
-        current.message;
+  /* =======================================================
+     NAVIGATION
+     ======================================================= */
 
-}
+  const nav = document.getElementById("nav");
 
+  function updateNav() {
 
-/* =========================================================
-   PROGRESS ANIMATION
-========================================================= */
-
-let progress =
-    0;
-
-progressBox.classList.add(
-    "show"
-);
-
-const progressTimer =
-    setInterval(
-        () => {
-
-            progress +=
-                Math.random() * 1.7;
-
-            if(
-                progress > 100
-            ){
-
-                progress =
-                    100;
-
-                clearInterval(
-                    progressTimer
-                );
-
-                landingSequence();
-
-            }
-
-            progressFill.style.width =
-                progress + "%";
-
-            percent.textContent =
-                Math.floor(progress) + "%";
-
-            updateStage(progress);
-
-            if(
-                progress > 45
-            ){
-
-                hyperspace.classList.add(
-                    "active"
-                );
-
-            }
-
-            if(
-                progress > 60
-            ){
-
-                core.classList.add(
-                    "active"
-                );
-
-            }
-
-            if(
-                progress > 70
-            ){
-
-                orbits.classList.add(
-                    "active"
-                );
-
-            }
-
-        },
-        110
+    nav.classList.toggle(
+      "scrolled",
+      window.scrollY > 40
     );
 
+  }
 
-/* =========================================================
-   LANDING SEQUENCE
-========================================================= */
-
-function landingSequence(){
-
-    statusText.textContent =
-        "LANDING COMPLETE";
-
-    systemMessage.textContent =
-        "WELCOME TO FOREVER VICTORY.";
-
-    loader.classList.add(
-        "shake"
-    );
-
-    flash.classList.add(
-        "fire"
-    );
-
-    shockwave.classList.add(
-        "fire"
-    );
-
-    hyperspace.classList.remove(
-        "active"
-    );
-
-
-    setTimeout(
-        () => {
-
-            loaderLogo.classList.add(
-                "reveal"
-            );
-
-        },
-        200
-    );
-
-
-    setTimeout(
-        () => {
-
-            loaderSubtitle.classList.add(
-                "reveal"
-            );
-
-        },
-        650
-    );
-
-
-    setTimeout(
-        () => {
-
-            document.body.classList.add(
-                "entered"
-            );
-
-        },
-        1600
-    );
-
-
-    setTimeout(
-        () => {
-
-            loader.classList.add(
-                "complete"
-            );
-
-            document.body.classList.remove(
-                "loading"
-            );
-
-        },
-        3000
-    );
-
-}
-
-
-/* =========================================================
-   PARTICLES
-========================================================= */
-
-const particleContainer =
-    document.getElementById(
-        "particles"
-    );
-
-for(
-    let i = 0;
-    i < 110;
-    i++
-){
-
-    const particle =
-        document.createElement(
-            "div"
-        );
-
-    particle.className =
-        "particle";
-
-    particle.style.left =
-        Math.random() * 100 + "%";
-
-    particle.style.animationDuration =
-        (5 + Math.random() * 15) + "s";
-
-    particle.style.animationDelay =
-        (-Math.random() * 20) + "s";
-
-    particle.style.opacity =
-        .1 + Math.random() * .7;
-
-    const size =
-        1 + Math.random() * 3;
-
-    particle.style.width =
-        size + "px";
-
-    particle.style.height =
-        size + "px";
-
-    particleContainer.appendChild(
-        particle
-    );
-
-}
-
-
-/* =========================================================
-   MOUSE SPOTLIGHT
-========================================================= */
-
-const spotlight =
-    document.getElementById(
-        "spotlight"
-    );
-
-document.addEventListener(
-    "mousemove",
-    e => {
-
-        spotlight.style.left =
-            e.clientX + "px";
-
-        spotlight.style.top =
-            e.clientY + "px";
-
-    }
-);
-
-
-/* =========================================================
-   HERO 3D
-========================================================= */
-
-const hero =
-    document.getElementById(
-        "heroContent"
-    );
-
-document.addEventListener(
-    "mousemove",
-    e => {
-
-        if(
-            window.innerWidth < 700
-        ){
-
-            return;
-
-        }
-
-        const x =
-            e.clientX /
-            window.innerWidth -
-            .5;
-
-        const y =
-            e.clientY /
-            window.innerHeight -
-            .5;
-
-        hero.style.transform =
-            `rotateY(${x * 5}deg)
-             rotateX(${-y * 4}deg)`;
-
-    }
-);
-
-
-/* =========================================================
-   CARD 3D
-========================================================= */
-
-document
-.querySelectorAll(".card")
-.forEach(
-    card => {
-
-        card.addEventListener(
-            "mousemove",
-            e => {
-
-                if(
-                    window.innerWidth < 700
-                ){
-
-                    return;
-
-                }
-
-                const rect =
-                    card.getBoundingClientRect();
-
-                const x =
-                    e.clientX -
-                    rect.left;
-
-                const y =
-                    e.clientY -
-                    rect.top;
-
-                const centerX =
-                    rect.width / 2;
-
-                const centerY =
-                    rect.height / 2;
-
-                const rotateX =
-                    (y - centerY) /
-                    15;
-
-                const rotateY =
-                    (centerX - x) /
-                    15;
-
-                card.style.transform =
-                    `perspective(900px)
-                     rotateX(${rotateX}deg)
-                     rotateY(${rotateY}deg)
-                     scale(1.03)`;
-
-                card.style.setProperty(
-                    "--mouse-x",
-                    x + "px"
-                );
-
-                card.style.setProperty(
-                    "--mouse-y",
-                    y + "px"
-                );
-
-            }
-        );
-
-        card.addEventListener(
-            "mouseleave",
-            () => {
-
-                card.style.transform =
-                    "";
-
-            }
-        );
-
-    }
-);
-
-
-/* =========================================================
-   REVEAL OBSERVER
-========================================================= */
-
-const revealObserver =
-    new IntersectionObserver(
-        entries => {
-
-            entries.forEach(
-                entry => {
-
-                    if(
-                        entry.isIntersecting
-                    ){
-
-                        entry.target
-                            .classList
-                            .add(
-                                "visible"
-                            );
-
-                        revealObserver
-                            .unobserve(
-                                entry.target
-                            );
-
-                    }
-
-                }
-            );
-
-        },
-        {
-            threshold:.12
-        }
-    );
-
-
-document
-.querySelectorAll(".reveal")
-.forEach(
-    element =>
-        revealObserver.observe(
-            element
-        )
-);
-
-
-/* =========================================================
-   CARD STAGGER
-========================================================= */
-
-document
-.querySelectorAll(".cards")
-.forEach(
-    container => {
-
-        container
-        .querySelectorAll(".card")
-        .forEach(
-            (card,index) => {
-
-                card.style.transitionDelay =
-                    index * 70 + "ms";
-
-            }
-        );
-
-    }
-);
-
-
-/* =========================================================
-   SCROLL PROGRESS
-========================================================= */
-
-window.addEventListener(
+  window.addEventListener(
     "scroll",
-    () => {
+    updateNav,
+    {passive:true}
+  );
 
-        const scrollTop =
-            window.scrollY;
+  updateNav();
 
-        const height =
-            document.body.scrollHeight -
-            window.innerHeight;
+  /* =======================================================
+     ACTIVE NAV
+     ======================================================= */
+
+  const navLinks =
+    [...document.querySelectorAll(".nav-links a")];
+
+  const sections =
+    [...document.querySelectorAll("main section[id]")];
+
+  const activeObserver =
+    new IntersectionObserver(entries => {
+
+      entries.forEach(entry => {
+
+        if (!entry.isIntersecting) return;
+
+        navLinks.forEach(link => {
+
+          link.classList.toggle(
+            "active",
+            link.getAttribute("href") ===
+            "#" + entry.target.id
+          );
+
+        });
+
+      });
+
+    },{
+      threshold:.3
+    });
+
+  sections.forEach(section =>
+    activeObserver.observe(section)
+  );
+
+  /* =======================================================
+     CURSOR PARALLAX
+     ======================================================= */
+
+  const parallaxElements =
+    [...document.querySelectorAll("[data-parallax]")];
+
+  let mouseX = 0;
+  let mouseY = 0;
+
+  let smoothX = 0;
+  let smoothY = 0;
+
+  if (!reducedMotion && window.innerWidth > 700) {
+
+    window.addEventListener("mousemove", e => {
+
+      mouseX =
+        (e.clientX / window.innerWidth - .5);
+
+      mouseY =
+        (e.clientY / window.innerHeight - .5);
+
+    }, {passive:true});
+
+    function parallaxLoop() {
+
+      smoothX +=
+        (mouseX - smoothX) * .05;
+
+      smoothY +=
+        (mouseY - smoothY) * .05;
+
+      parallaxElements.forEach(el => {
 
         const amount =
-            height > 0
-            ? scrollTop / height * 100
-            : 0;
+          Number(el.dataset.parallax || .02);
 
-        document
-            .getElementById("progress")
-            .style.width =
-            amount + "%";
+        el.style.transform =
+          `translate3d(${smoothX * amount * 800}px,
+                       ${smoothY * amount * 800}px,0)`;
 
+      });
+
+      requestAnimationFrame(parallaxLoop);
     }
-);
 
+    requestAnimationFrame(parallaxLoop);
+  }
 
-/* =========================================================
-   NAV
-========================================================= */
+  /* =======================================================
+     CARD TILT
+     ======================================================= */
 
-window.addEventListener(
-    "scroll",
-    () => {
+  if (!reducedMotion && window.innerWidth > 700) {
 
-        const nav =
-            document.getElementById(
-                "nav"
-            );
+    document
+      .querySelectorAll(".tilt-card")
+      .forEach(card => {
 
-        if(
-            window.scrollY > 40
-        ){
+        card.addEventListener("mousemove", e => {
 
-            nav.classList.add(
-                "scrolled"
-            );
+          const rect =
+            card.getBoundingClientRect();
 
-        }else{
+          const x =
+            e.clientX - rect.left;
 
-            nav.classList.remove(
-                "scrolled"
-            );
+          const y =
+            e.clientY - rect.top;
 
-        }
+          const rotateX =
+            ((y / rect.height) - .5) * -6;
 
+          const rotateY =
+            ((x / rect.width) - .5) * 6;
+
+          card.style.transform =
+            `perspective(800px)
+             rotateX(${rotateX}deg)
+             rotateY(${rotateY}deg)
+             translateY(-7px)`;
+
+          card.style.setProperty(
+            "--mx",
+            (x / rect.width * 100) + "%"
+          );
+
+          card.style.setProperty(
+            "--my",
+            (y / rect.height * 100) + "%"
+          );
+
+        });
+
+        card.addEventListener("mouseleave", () => {
+
+          card.style.transform = "";
+
+        });
+
+      });
+  }
+
+  /* =======================================================
+     BUTTON RIPPLES
+     ======================================================= */
+
+  document
+    .querySelectorAll(".ripple-button")
+    .forEach(button => {
+
+      button.addEventListener("click", e => {
+
+        const rect =
+          button.getBoundingClientRect();
+
+        const ripple =
+          document.createElement("span");
+
+        ripple.className = "ripple";
+
+        const size =
+          Math.max(rect.width,rect.height);
+
+        ripple.style.width = size + "px";
+        ripple.style.height = size + "px";
+
+        ripple.style.left =
+          (e.clientX - rect.left - size / 2) + "px";
+
+        ripple.style.top =
+          (e.clientY - rect.top - size / 2) + "px";
+
+        button.appendChild(ripple);
+
+        setTimeout(() => {
+          ripple.remove();
+        },700);
+
+      });
+
+    });
+
+  /* =======================================================
+     SMOOTH INTERNAL LINKS
+     ======================================================= */
+
+  document
+    .querySelectorAll('a[href^="#"]')
+    .forEach(link => {
+
+      link.addEventListener("click", e => {
+
+        const id =
+          link.getAttribute("href");
+
+        const target =
+          document.querySelector(id);
+
+        if (!target) return;
+
+        e.preventDefault();
+
+        target.scrollIntoView({
+          behavior:
+            reducedMotion ? "auto" : "smooth",
+          block:"start"
+        });
+
+      });
+
+    });
+
+  /* =======================================================
+     SCROLL-LINKED CINEMATIC EFFECTS
+     ======================================================= */
+
+  if (!reducedMotion) {
+
+    let ticking = false;
+
+    function cinematicScroll() {
+
+      const scroll =
+        window.scrollY;
+
+      const hero =
+        document.querySelector(".hero");
+
+      if (hero) {
+
+        const amount =
+          Math.min(scroll / window.innerHeight,1);
+
+        hero.style.transform =
+          `translateY(${amount * -35}px)
+           scale(${1 - amount * .035})`;
+
+        hero.style.opacity =
+          String(1 - amount * .22);
+
+      }
+
+      ticking = false;
     }
-);
 
+    window.addEventListener("scroll", () => {
 
-/* =========================================================
-   MAGNETIC BUTTONS
-========================================================= */
+      if (!ticking) {
 
-document
-.querySelectorAll(".btn")
-.forEach(
-    button => {
-
-        button.addEventListener(
-            "mousemove",
-            e => {
-
-                const rect =
-                    button.getBoundingClientRect();
-
-                const x =
-                    e.clientX -
-                    rect.left -
-                    rect.width / 2;
-
-                const y =
-                    e.clientY -
-                    rect.top -
-                    rect.height / 2;
-
-                button.style.transform =
-                    `translate(
-                        ${x * .08}px,
-                        ${y * .08}px
-                    ) scale(1.03)`;
-
-            }
+        requestAnimationFrame(
+          cinematicScroll
         );
 
-        button.addEventListener(
-            "mouseleave",
-            () => {
+        ticking = true;
+      }
 
-                button.style.transform =
-                    "";
+    }, {passive:true});
 
-            }
+  }
+
+  /* =======================================================
+     EXPERIENCE PARALLAX PANELS
+     ======================================================= */
+
+  if (!reducedMotion) {
+
+    const experience =
+      document.querySelector(".experience-wrap");
+
+    const panels =
+      [...document.querySelectorAll(".exp-panel")];
+
+    function experienceScroll() {
+
+      if (!experience) return;
+
+      const rect =
+        experience.getBoundingClientRect();
+
+      const center =
+        window.innerHeight / 2;
+
+      const distance =
+        (rect.top + rect.height / 2 - center);
+
+      const normalized =
+        Math.max(-1,Math.min(1,distance / 600));
+
+      panels.forEach((panel,index) => {
+
+        if (
+          window.innerWidth < 700 &&
+          index > 3
+        ) return;
+
+        const direction =
+          index % 2 === 0 ? 1 : -1;
+
+        const move =
+          normalized * 25 * direction;
+
+        panel.style.setProperty(
+          "--scrollMove",
+          move + "px"
         );
 
-    }
-);
-
-
-/* =========================================================
-   BUTTON SHOCKWAVE
-========================================================= */
-
-document
-.querySelectorAll(".btn")
-.forEach(
-    button => {
-
-        button.addEventListener(
-            "click",
-            e => {
-
-                const flash =
-                    document.createElement(
-                        "div"
-                    );
-
-                flash.style.position =
-                    "fixed";
-
-                flash.style.left =
-                    e.clientX + "px";
-
-                flash.style.top =
-                    e.clientY + "px";
-
-                flash.style.width =
-                    "10px";
-
-                flash.style.height =
-                    "10px";
-
-                flash.style.borderRadius =
-                    "50%";
-
-                flash.style.background =
-                    "#ffd700";
-
-                flash.style.pointerEvents =
-                    "none";
-
-                flash.style.zIndex =
-                    "99999";
-
-                flash.style.boxShadow =
-                    "0 0 30px #ffd700";
-
-                flash.animate(
-                    [
-                        {
-                            transform:
-                                "translate(-50%,-50%) scale(1)",
-                            opacity:1
-                        },
-                        {
-                            transform:
-                                "translate(-50%,-50%) scale(25)",
-                            opacity:0
-                        }
-                    ],
-                    {
-                        duration:500,
-                        easing:
-                            "cubic-bezier(.16,1,.3,1)"
-                    }
-                );
-
-                document.body.appendChild(
-                    flash
-                );
-
-                setTimeout(
-                    () =>
-                        flash.remove(),
-                    550
-                );
-
-            }
-        );
+      });
 
     }
-);
 
+    window.addEventListener(
+      "scroll",
+      experienceScroll,
+      {passive:true}
+    );
 
-/* =========================================================
-   PARALLAX
-========================================================= */
+  }
 
-window.addEventListener(
-    "scroll",
-    () => {
-
-        const y =
-            window.scrollY;
-
-        const one =
-            document.querySelector(
-                ".orb.one"
-            );
-
-        const two =
-            document.querySelector(
-                ".orb.two"
-            );
-
-        const three =
-            document.querySelector(
-                ".orb.three"
-            );
-
-        if(one){
-            one.style.transform =
-                `translateY(${y * .08}px)`;
-        }
-
-        if(two){
-            two.style.transform =
-                `translateY(${y * -.05}px)`;
-        }
-
-        if(three){
-            three.style.transform =
-                `translateY(${y * .03}px)`;
-        }
-
-    }
-);
-
-
-/* =========================================================
-   ANCHORS
-========================================================= */
-
-document
-.querySelectorAll(
-    'a[href^="#"]'
-)
-.forEach(
-    anchor => {
-
-        anchor.addEventListener(
-            "click",
-            e => {
-
-                const target =
-                    document.querySelector(
-                        anchor.getAttribute(
-                            "href"
-                        )
-                    );
-
-                if(!target){
-                    return;
-                }
-
-                e.preventDefault();
-
-                target.scrollIntoView({
-                    behavior:"smooth",
-                    block:"start"
-                });
-
-            }
-        );
-
-    }
-);
-
+})();
 </script>
 
 </body>
