@@ -1,20 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
 <meta charset="UTF-8">
-
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
 
 <title>4EV | Forever Victory — Roblox Rivals Clan</title>
 
 <meta name="description"
-content="4EV | Forever Victory — competitive Roblox Rivals clan. Join our community, compete, improve and represent 4EV.">
+content="4EV | Forever Victory is a competitive Roblox Rivals clan focused on skilled players, competition, clan wars, events, improvement and community.">
 
 <style>
 
 /* =========================================================
-   CORE
+   RESET
 ========================================================= */
 
 *{
@@ -28,10 +26,14 @@ html{
 }
 
 body{
-    background:#030303;
-    color:#fff;
+    background:#020202;
+    color:white;
     font-family:Arial,Helvetica,sans-serif;
     overflow-x:hidden;
+}
+
+body.loading{
+    overflow:hidden;
 }
 
 a{
@@ -46,117 +48,890 @@ a{
 
 
 /* =========================================================
-   SCROLL PROGRESS
+   PAGE PROTECTION
 ========================================================= */
 
-#progress{
-    position:fixed;
-    top:0;
-    left:0;
-    width:0%;
-    height:3px;
-    background:#ffd700;
-    box-shadow:0 0 20px #ffd700;
-    z-index:99999;
+#site{
+    opacity:0;
+    transform:scale(1.08);
+    filter:blur(10px);
+    transition:
+        opacity 1.8s cubic-bezier(.16,1,.3,1),
+        transform 2s cubic-bezier(.16,1,.3,1),
+        filter 1.6s ease;
+}
+
+body.entered #site{
+    opacity:1;
+    transform:scale(1);
+    filter:blur(0);
 }
 
 
 /* =========================================================
-   LOADING SCREEN
+   CINEMATIC LOADER
 ========================================================= */
 
-#loader{
+#cinematicLoader{
     position:fixed;
     inset:0;
-    background:#030303;
-    z-index:99998;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
+    z-index:999999;
+    overflow:hidden;
+    background:#000;
+    color:#fff;
     transition:
-        opacity 1s ease,
-        visibility 1s ease;
+        opacity 1.5s ease,
+        visibility 1.5s ease;
 }
 
-#loader.hide{
+#cinematicLoader.complete{
     opacity:0;
     visibility:hidden;
+    pointer-events:none;
 }
 
-.loader-inner{
-    text-align:center;
+
+/* =========================================================
+   SPACE BACKGROUND
+========================================================= */
+
+.space{
+    position:absolute;
+    inset:0;
+    background:
+        radial-gradient(
+            ellipse at center,
+            rgba(255,215,0,.06),
+            transparent 35%
+        ),
+        radial-gradient(
+            ellipse at center,
+            #071018 0%,
+            #020408 50%,
+            #000 100%
+        );
 }
 
-.loader-logo{
-    font-size:90px;
-    font-weight:1000;
-    color:#ffd700;
-    letter-spacing:-6px;
+
+/* =========================================================
+   STARS
+========================================================= */
+
+.stars,
+.stars2,
+.stars3{
+    position:absolute;
+    inset:-100%;
+    background-repeat:repeat;
+    transform:translateZ(0);
+}
+
+.stars{
+    background-image:
+        radial-gradient(circle,rgba(255,255,255,.9) 0 1px,transparent 1.5px);
+    background-size:83px 83px;
+    animation:starDrift 25s linear infinite;
+}
+
+.stars2{
+    background-image:
+        radial-gradient(circle,rgba(255,215,0,.7) 0 1px,transparent 1.5px);
+    background-size:137px 137px;
+    animation:starDrift 14s linear infinite;
+}
+
+.stars3{
+    background-image:
+        radial-gradient(circle,rgba(255,255,255,.5) 0 1px,transparent 1.2px);
+    background-size:211px 211px;
+    animation:starDrift 40s linear infinite;
+}
+
+@keyframes starDrift{
+    from{
+        transform:translate(0,0) scale(1);
+    }
+    to{
+        transform:translate(180px,260px) scale(1.08);
+    }
+}
+
+
+/* =========================================================
+   HYPERSPACE
+========================================================= */
+
+#hyperspace{
+    position:absolute;
+    inset:0;
+    perspective:700px;
+    opacity:0;
+    transition:opacity 1s ease;
+}
+
+#hyperspace.active{
+    opacity:1;
+}
+
+.spaceLine{
+    position:absolute;
+    left:50%;
+    top:50%;
+
+    width:2px;
+    height:100px;
+
+    transform-origin:center bottom;
+
+    background:
+        linear-gradient(
+            to bottom,
+            transparent,
+            rgba(255,215,0,.85)
+        );
+
+    box-shadow:
+        0 0 12px rgba(255,215,0,.5);
 
     animation:
-        loaderPulse 1.2s infinite alternate;
+        warpLine 1.2s linear infinite;
 }
 
-.loader-text{
-    color:#666;
+@keyframes warpLine{
+    from{
+        transform:
+            rotate(var(--angle))
+            translateY(0)
+            scaleY(.2);
+        opacity:0;
+    }
+
+    20%{
+        opacity:1;
+    }
+
+    to{
+        transform:
+            rotate(var(--angle))
+            translateY(-650px)
+            scaleY(2);
+        opacity:0;
+    }
+}
+
+
+/* =========================================================
+   CENTRAL LIGHT
+========================================================= */
+
+.core{
+    position:absolute;
+
+    left:50%;
+    top:50%;
+
+    width:80px;
+    height:80px;
+
+    border-radius:50%;
+
+    transform:
+        translate(-50%,-50%)
+        scale(.1);
+
+    background:
+        radial-gradient(
+            circle,
+            #fff 0%,
+            #ffd700 15%,
+            rgba(255,215,0,.35) 40%,
+            transparent 70%
+        );
+
+    box-shadow:
+        0 0 40px #ffd700,
+        0 0 100px rgba(255,215,0,.7),
+        0 0 220px rgba(255,215,0,.25);
+
+    opacity:0;
+
+    transition:
+        transform 2s cubic-bezier(.16,1,.3,1),
+        opacity 1s ease;
+}
+
+.core.active{
+    opacity:1;
+
+    transform:
+        translate(-50%,-50%)
+        scale(3);
+}
+
+
+/* =========================================================
+   ORBITAL RINGS
+========================================================= */
+
+.orbits{
+    position:absolute;
+
+    left:50%;
+    top:50%;
+
+    width:600px;
+    height:600px;
+
+    transform:
+        translate(-50%,-50%)
+        scale(.2);
+
+    opacity:0;
+
+    transition:
+        transform 2s cubic-bezier(.16,1,.3,1),
+        opacity 1.2s ease;
+}
+
+.orbits.active{
+    opacity:1;
+
+    transform:
+        translate(-50%,-50%)
+        scale(1);
+}
+
+.orbit{
+    position:absolute;
+
+    inset:0;
+
+    border:
+        1px solid rgba(255,215,0,.15);
+
+    border-radius:50%;
+
+    transform:
+        rotateX(65deg)
+        rotateZ(var(--rotation));
+
+    animation:
+        orbitSpin var(--speed) linear infinite;
+}
+
+.orbit:nth-child(2){
+    transform:
+        rotateY(65deg)
+        rotateZ(var(--rotation));
+}
+
+.orbit:nth-child(3){
+    transform:
+        rotateX(75deg)
+        rotateY(20deg)
+        rotateZ(var(--rotation));
+}
+
+@keyframes orbitSpin{
+    from{
+        transform:
+            rotateX(65deg)
+            rotateZ(0deg);
+    }
+
+    to{
+        transform:
+            rotateX(65deg)
+            rotateZ(360deg);
+    }
+}
+
+
+/* =========================================================
+   SCANNER
+========================================================= */
+
+.scanner{
+    position:absolute;
+
+    left:0;
+    right:0;
+
+    top:-10%;
+
+    height:3px;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(255,215,0,.8),
+            transparent
+        );
+
+    box-shadow:
+        0 0 25px rgba(255,215,0,.6);
+
+    opacity:.7;
+
+    animation:
+        scannerMove 3s linear infinite;
+}
+
+@keyframes scannerMove{
+    from{
+        top:-10%;
+    }
+
+    to{
+        top:110%;
+    }
+}
+
+
+/* =========================================================
+   HUD
+========================================================= */
+
+.hud{
+    position:absolute;
+    inset:0;
+    pointer-events:none;
+}
+
+.hudCorner{
+    position:absolute;
+
+    width:120px;
+    height:120px;
+
+    border-color:rgba(255,215,0,.35);
+    border-style:solid;
+}
+
+.hudTL{
+    top:35px;
+    left:35px;
+    border-width:1px 0 0 1px;
+}
+
+.hudTR{
+    top:35px;
+    right:35px;
+    border-width:1px 1px 0 0;
+}
+
+.hudBL{
+    bottom:35px;
+    left:35px;
+    border-width:0 0 1px 1px;
+}
+
+.hudBR{
+    bottom:35px;
+    right:35px;
+    border-width:0 1px 1px 0;
+}
+
+.hudText{
+    position:absolute;
+
+    color:rgba(255,215,0,.6);
+
+    font-size:9px;
+
+    letter-spacing:3px;
+
+    font-weight:bold;
+}
+
+.hudTopLeft{
+    top:48px;
+    left:48px;
+}
+
+.hudTopRight{
+    top:48px;
+    right:48px;
+    text-align:right;
+}
+
+.hudBottomLeft{
+    bottom:48px;
+    left:48px;
+}
+
+.hudBottomRight{
+    bottom:48px;
+    right:48px;
+    text-align:right;
+}
+
+
+/* =========================================================
+   RADAR
+========================================================= */
+
+.radar{
+    position:absolute;
+
+    width:150px;
+    height:150px;
+
+    right:70px;
+    bottom:80px;
+
+    border:
+        1px solid rgba(255,215,0,.2);
+
+    border-radius:50%;
+
+    opacity:.5;
+}
+
+.radar::before,
+.radar::after{
+    content:"";
+
+    position:absolute;
+
+    left:50%;
+    top:50%;
+
+    transform:translate(-50%,-50%);
+
+    border:
+        1px solid rgba(255,215,0,.1);
+
+    border-radius:50%;
+}
+
+.radar::before{
+    width:100px;
+    height:100px;
+}
+
+.radar::after{
+    width:50px;
+    height:50px;
+}
+
+.radarLine{
+    position:absolute;
+
+    width:50%;
+    height:1px;
+
+    left:50%;
+    top:50%;
+
+    transform-origin:left center;
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(255,215,0,.8),
+            transparent
+        );
+
+    animation:
+        radarSpin 3s linear infinite;
+}
+
+@keyframes radarSpin{
+    to{
+        transform:
+            rotate(360deg);
+    }
+}
+
+
+/* =========================================================
+   TELEMETRY
+========================================================= */
+
+.telemetry{
+    position:absolute;
+
+    left:50%;
+    bottom:75px;
+
+    transform:
+        translateX(-50%);
+
+    width:min(500px,80%);
+
+    font-family:
+        "Courier New",
+        monospace;
+
+    font-size:9px;
+
+    color:rgba(255,255,255,.35);
+
+    text-align:center;
+
+    letter-spacing:2px;
+
+    line-height:2;
+}
+
+
+/* =========================================================
+   MAIN LOADER CONTENT
+========================================================= */
+
+.loaderCenter{
+    position:absolute;
+
+    left:50%;
+    top:50%;
+
+    transform:
+        translate(-50%,-50%);
+
+    text-align:center;
+
+    width:90%;
+
+    z-index:10;
+}
+
+.system{
+    font-family:
+        "Courier New",
+        monospace;
+
+    font-size:10px;
+
     letter-spacing:5px;
-    font-size:11px;
-    margin-top:15px;
+
+    color:rgba(255,215,0,.65);
+
+    margin-bottom:20px;
+
+    opacity:0;
+
+    animation:
+        bootText 1s 1.2s forwards;
 }
 
-.loader-line{
-    width:180px;
-    height:2px;
-    background:#222;
-    margin:25px auto 0;
+@keyframes bootText{
+    from{
+        opacity:0;
+        letter-spacing:12px;
+    }
+
+    to{
+        opacity:1;
+        letter-spacing:5px;
+    }
+}
+
+.loaderLogo{
+    font-size:
+        clamp(90px,20vw,220px);
+
+    font-weight:1000;
+
+    letter-spacing:-14px;
+
+    line-height:.75;
+
+    color:#ffd700;
+
+    opacity:0;
+
+    transform:
+        scale(2.5)
+        translateY(40px);
+
+    filter:
+        blur(25px);
+
+    text-shadow:
+        0 0 20px rgba(255,215,0,.3),
+        0 0 100px rgba(255,215,0,.2);
+
+    transition:
+        opacity 1.2s ease,
+        transform 1.8s cubic-bezier(.16,1,.3,1),
+        filter 1.2s ease;
+}
+
+.loaderLogo.reveal{
+    opacity:1;
+
+    transform:
+        scale(1)
+        translateY(0);
+
+    filter:blur(0);
+}
+
+.loaderSubtitle{
+    margin-top:25px;
+
+    font-size:
+        clamp(14px,3vw,25px);
+
+    font-weight:1000;
+
+    letter-spacing:
+        clamp(3px,1vw,8px);
+
+    opacity:0;
+
+    transform:translateY(20px);
+
+    transition:
+        opacity .8s ease,
+        transform .8s ease;
+}
+
+.loaderSubtitle.reveal{
+    opacity:1;
+
+    transform:translateY(0);
+}
+
+
+/* =========================================================
+   LOADING BAR
+========================================================= */
+
+.loaderProgress{
+    margin:40px auto 0;
+
+    width:min(450px,75%);
+
+    opacity:0;
+
+    transition:opacity .6s ease;
+}
+
+.loaderProgress.show{
+    opacity:1;
+}
+
+.progressTop{
+    display:flex;
+
+    justify-content:space-between;
+
+    font-family:
+        "Courier New",
+        monospace;
+
+    font-size:9px;
+
+    letter-spacing:2px;
+
+    color:#777;
+
+    margin-bottom:8px;
+}
+
+#percent{
+    color:#ffd700;
+}
+
+.progressTrack{
+    height:3px;
+
+    background:
+        rgba(255,255,255,.08);
+
     overflow:hidden;
 }
 
-.loader-line::after{
-    content:"";
-    display:block;
-    width:50%;
+.progressFill{
     height:100%;
-    background:#ffd700;
 
+    width:0%;
+
+    background:
+        linear-gradient(
+            90deg,
+            #8c7600,
+            #ffd700,
+            #fff,
+            #ffd700
+        );
+
+    box-shadow:
+        0 0 20px #ffd700;
+
+    transition:
+        width .15s linear;
+}
+
+
+/* =========================================================
+   SYSTEM MESSAGE
+========================================================= */
+
+.systemMessage{
+    margin-top:20px;
+
+    height:18px;
+
+    color:#666;
+
+    font-family:
+        "Courier New",
+        monospace;
+
+    font-size:9px;
+
+    letter-spacing:2px;
+}
+
+
+/* =========================================================
+   LANDING SHOCKWAVE
+========================================================= */
+
+.shockwave{
+    position:absolute;
+
+    left:50%;
+    top:50%;
+
+    width:20px;
+    height:20px;
+
+    border:
+        2px solid #ffd700;
+
+    border-radius:50%;
+
+    transform:
+        translate(-50%,-50%)
+        scale(0);
+
+    opacity:0;
+
+    z-index:20;
+}
+
+.shockwave.fire{
     animation:
-        loaderLine 1.2s infinite;
+        shockwave 1.6s cubic-bezier(.16,1,.3,1);
 }
 
-@keyframes loaderPulse{
-    from{
-        transform:scale(.95);
-        text-shadow:0 0 10px rgba(255,215,0,.2);
+@keyframes shockwave{
+
+    0%{
+        transform:
+            translate(-50%,-50%)
+            scale(0);
+
+        opacity:1;
     }
 
-    to{
-        transform:scale(1.05);
-        text-shadow:0 0 50px rgba(255,215,0,.7);
-    }
-}
+    100%{
+        transform:
+            translate(-50%,-50%)
+            scale(70);
 
-@keyframes loaderLine{
-    from{
-        transform:translateX(-150%);
-    }
-
-    to{
-        transform:translateX(300%);
+        opacity:0;
     }
 }
 
 
 /* =========================================================
-   BACKGROUND
+   LANDING FLASH
+========================================================= */
+
+.landingFlash{
+    position:absolute;
+
+    inset:0;
+
+    background:#fff;
+
+    opacity:0;
+
+    pointer-events:none;
+
+    z-index:30;
+}
+
+.landingFlash.fire{
+    animation:
+        flash .8s ease;
+}
+
+@keyframes flash{
+    0%{
+        opacity:0;
+    }
+
+    12%{
+        opacity:.8;
+    }
+
+    100%{
+        opacity:0;
+    }
+}
+
+
+/* =========================================================
+   SCREEN SHAKE
+========================================================= */
+
+#cinematicLoader.shake{
+    animation:
+        cameraShake .8s ease;
+}
+
+@keyframes cameraShake{
+
+    0%,100%{
+        transform:translate(0);
+    }
+
+    10%{
+        transform:translate(-8px,5px);
+    }
+
+    20%{
+        transform:translate(8px,-4px);
+    }
+
+    30%{
+        transform:translate(-6px,-5px);
+    }
+
+    40%{
+        transform:translate(7px,4px);
+    }
+
+    50%{
+        transform:translate(-4px,2px);
+    }
+
+    60%{
+        transform:translate(4px,-3px);
+    }
+}
+
+
+/* =========================================================
+   SITE BACKGROUND
 ========================================================= */
 
 .background{
     position:fixed;
+
     inset:0;
+
     z-index:-20;
+
     overflow:hidden;
+
     background:
         radial-gradient(
             circle at 50% 15%,
@@ -168,6 +943,7 @@ a{
 
 .grid{
     position:absolute;
+
     inset:-100px;
 
     background-image:
@@ -203,7 +979,6 @@ a{
 }
 
 @keyframes gridMove{
-
     from{
         background-position:0 0;
     }
@@ -211,12 +986,11 @@ a{
     to{
         background-position:0 550px;
     }
-
 }
 
 
 /* =========================================================
-   GIANT BACKGROUND RINGS
+   SITE RINGS
 ========================================================= */
 
 .ring{
@@ -245,18 +1019,21 @@ a{
 .ring:nth-child(2){
     width:650px;
     height:650px;
+
     animation-duration:45s;
 }
 
 .ring:nth-child(3){
     width:950px;
     height:950px;
+
     animation-duration:65s;
 }
 
 .ring:nth-child(4){
     width:1300px;
     height:1300px;
+
     animation-duration:90s;
 }
 
@@ -264,7 +1041,7 @@ a{
     from{
         transform:
             translate(-50%,-50%)
-            rotate(0deg);
+            rotate(0);
     }
 
     to{
@@ -281,8 +1058,11 @@ a{
 
 .orb{
     position:absolute;
+
     border-radius:50%;
+
     filter:blur(90px);
+
     opacity:.14;
 
     animation:
@@ -292,7 +1072,9 @@ a{
 .orb.one{
     width:450px;
     height:450px;
+
     background:#ffd700;
+
     left:-200px;
     top:10%;
 }
@@ -300,23 +1082,28 @@ a{
 .orb.two{
     width:350px;
     height:350px;
+
     background:#fff;
+
     right:-180px;
     top:45%;
+
     animation-delay:-4s;
 }
 
 .orb.three{
     width:300px;
     height:300px;
+
     background:#ffd700;
+
     left:40%;
     top:80%;
+
     animation-delay:-7s;
 }
 
 @keyframes orbFloat{
-
     0%,100%{
         transform:translate(0,0) scale(1);
     }
@@ -335,8 +1122,11 @@ a{
 
 #particles{
     position:fixed;
+
     inset:0;
+
     z-index:-5;
+
     pointer-events:none;
 }
 
@@ -358,7 +1148,6 @@ a{
 }
 
 @keyframes particleUp{
-
     from{
         transform:
             translate3d(
@@ -394,7 +1183,7 @@ a{
 
 
 /* =========================================================
-   MOUSE SPOTLIGHT
+   SPOTLIGHT
 ========================================================= */
 
 #spotlight{
@@ -457,6 +1246,7 @@ nav.scrolled{
 
 .nav-inner{
     max-width:1250px;
+
     height:75px;
 
     margin:auto;
@@ -464,7 +1254,9 @@ nav.scrolled{
     padding:0 25px;
 
     display:flex;
+
     align-items:center;
+
     justify-content:space-between;
 }
 
@@ -519,7 +1311,8 @@ nav.scrolled{
 
     background:#ffd700;
 
-    transform:translateX(-50%);
+    transform:
+        translateX(-50%);
 
     transition:.3s;
 }
@@ -541,6 +1334,7 @@ nav.scrolled{
     min-height:100vh;
 
     display:flex;
+
     align-items:center;
     justify-content:center;
 
@@ -566,7 +1360,6 @@ nav.scrolled{
 }
 
 @keyframes heroIn{
-
     from{
         opacity:0;
 
@@ -614,22 +1407,6 @@ nav.scrolled{
     font-weight:900;
 
     letter-spacing:2px;
-
-    animation:
-        statusAppear 1s .3s both;
-}
-
-@keyframes statusAppear{
-
-    from{
-        opacity:0;
-        transform:translateY(20px) scale(.8);
-    }
-
-    to{
-        opacity:1;
-        transform:none;
-    }
 }
 
 .status-dot{
@@ -648,7 +1425,6 @@ nav.scrolled{
 }
 
 @keyframes statusBlink{
-
     0%,100%{
         transform:scale(1);
     }
@@ -677,36 +1453,10 @@ nav.scrolled{
         0 0 80px rgba(255,215,0,.12);
 
     animation:
-        titleReveal 1.5s .15s both,
         titlePulse 4s 2s infinite;
 }
 
-@keyframes titleReveal{
-
-    from{
-        opacity:0;
-
-        transform:
-            scale(1.5)
-            translateY(-30px);
-
-        filter:
-            blur(25px);
-    }
-
-    to{
-        opacity:1;
-
-        transform:
-            scale(1)
-            translateY(0);
-
-        filter:blur(0);
-    }
-}
-
 @keyframes titlePulse{
-
     0%,100%{
         text-shadow:
             0 0 20px rgba(255,215,0,.15),
@@ -730,9 +1480,6 @@ nav.scrolled{
 
     letter-spacing:
         clamp(3px,1vw,9px);
-
-    animation:
-        fadeUp 1s .5s both;
 }
 
 .hero-description{
@@ -743,9 +1490,6 @@ nav.scrolled{
     color:#777;
 
     font-size:17px;
-
-    animation:
-        fadeUp 1s .7s both;
 }
 
 .hero-description strong{
@@ -762,23 +1506,6 @@ nav.scrolled{
     flex-wrap:wrap;
 
     margin-top:35px;
-
-    animation:
-        fadeUp 1s .9s both;
-}
-
-@keyframes fadeUp{
-
-    from{
-        opacity:0;
-        transform:
-            translateY(30px);
-    }
-
-    to{
-        opacity:1;
-        transform:none;
-    }
 }
 
 
@@ -830,7 +1557,8 @@ nav.scrolled{
             transparent
         );
 
-    transform:skewX(-20deg);
+    transform:
+        skewX(-20deg);
 
     transition:.6s;
 }
@@ -877,7 +1605,7 @@ nav.scrolled{
 
 
 /* =========================================================
-   SCROLL INDICATOR
+   SCROLL
 ========================================================= */
 
 .scroll{
@@ -887,7 +1615,8 @@ nav.scrolled{
 
     left:50%;
 
-    transform:translateX(-50%);
+    transform:
+        translateX(-50%);
 
     color:#555;
 
@@ -900,7 +1629,6 @@ nav.scrolled{
 }
 
 @keyframes scrollFloat{
-
     0%,100%{
         transform:
             translate(-50%,0);
@@ -966,7 +1694,7 @@ section{
 
 
 /* =========================================================
-   SCROLL REVEAL
+   REVEAL
 ========================================================= */
 
 .reveal{
@@ -979,14 +1707,9 @@ section{
     filter:blur(10px);
 
     transition:
-        opacity 1s
-        cubic-bezier(.16,1,.3,1),
-
-        transform 1s
-        cubic-bezier(.16,1,.3,1),
-
-        filter 1s
-        cubic-bezier(.16,1,.3,1);
+        opacity 1s cubic-bezier(.16,1,.3,1),
+        transform 1s cubic-bezier(.16,1,.3,1),
+        filter 1s cubic-bezier(.16,1,.3,1);
 }
 
 .reveal.visible{
@@ -1299,9 +2022,6 @@ section{
 
     border:
         1px solid rgba(255,215,0,.25);
-
-    box-shadow:
-        0 0 20px rgba(255,215,0,.05);
 }
 
 .requirement strong{
@@ -1452,7 +2172,7 @@ section{
     from{
         transform:
             translate(-50%,-50%)
-            rotate(0deg);
+            rotate(0);
     }
 
     to{
@@ -1478,7 +2198,6 @@ section{
 }
 
 @keyframes discordBounce{
-
     0%,100%{
         transform:
             translateY(0)
@@ -1595,7 +2314,7 @@ details p{
 
 
 /* =========================================================
-   FINAL CTA
+   FINAL
 ========================================================= */
 
 .final{
@@ -1709,6 +2428,10 @@ footer{
             repeat(2,1fr);
     }
 
+    .radar{
+        display:none;
+    }
+
 }
 
 @media(max-width:650px){
@@ -1732,6 +2455,7 @@ footer{
 
     .requirement{
         align-items:flex-start;
+        flex-wrap:wrap;
     }
 
     .requirement strong{
@@ -1740,6 +2464,19 @@ footer{
 
     .hero h1{
         letter-spacing:-6px;
+    }
+
+    .hudCorner{
+        width:70px;
+        height:70px;
+    }
+
+    .hudText{
+        font-size:7px;
+    }
+
+    .loaderLogo{
+        letter-spacing:-7px;
     }
 
 }
@@ -1766,36 +2503,182 @@ footer{
 </head>
 
 
-<body>
+<body class="loading">
 
 
-<!-- LOADING -->
+<!-- ======================================================
+     CINEMATIC LOADER
+======================================================= -->
 
-<div id="loader">
+<div id="cinematicLoader">
 
-    <div class="loader-inner">
+    <div class="space"></div>
 
-        <div class="loader-logo">
+    <div class="stars"></div>
+    <div class="stars2"></div>
+    <div class="stars3"></div>
+
+    <div id="hyperspace"></div>
+
+    <div class="core"></div>
+
+    <div class="orbits">
+        <div
+            class="orbit"
+            style="--rotation:0deg;--speed:12s"
+        ></div>
+
+        <div
+            class="orbit"
+            style="--rotation:45deg;--speed:18s"
+        ></div>
+
+        <div
+            class="orbit"
+            style="--rotation:90deg;--speed:25s"
+        ></div>
+    </div>
+
+    <div class="scanner"></div>
+
+
+    <!-- HUD -->
+
+    <div class="hud">
+
+        <div class="hudCorner hudTL"></div>
+        <div class="hudCorner hudTR"></div>
+        <div class="hudCorner hudBL"></div>
+        <div class="hudCorner hudBR"></div>
+
+        <div class="hudText hudTopLeft">
+            4EV // SYSTEM
+        </div>
+
+        <div class="hudText hudTopRight">
+            SECTOR 04 // ONLINE
+        </div>
+
+        <div class="hudText hudBottomLeft">
+            FOREVER VICTORY
+        </div>
+
+        <div class="hudText hudBottomRight">
+            CONNECTION: STABLE
+        </div>
+
+    </div>
+
+
+    <!-- RADAR -->
+
+    <div class="radar">
+        <div class="radarLine"></div>
+    </div>
+
+
+    <!-- TELEMETRY -->
+
+    <div class="telemetry">
+
+        [ SYSTEM TELEMETRY ]<br>
+
+        NAVIGATION: ONLINE
+        &nbsp; //
+        POWER: 100%
+        &nbsp; //
+        NETWORK: STABLE
+        <br>
+
+        RIVALS COMPETITIVE NETWORK
+        &nbsp; //
+        4EV PROTOCOL ACTIVE
+
+    </div>
+
+
+    <!-- CENTER -->
+
+    <div class="loaderCenter">
+
+        <div class="system">
+            4EV // INITIALIZING FOREVER VICTORY
+        </div>
+
+        <div
+            id="loaderLogo"
+            class="loaderLogo"
+        >
             4EV
         </div>
 
-        <div class="loader-text">
-            INITIALIZING FOREVER VICTORY
+        <div
+            id="loaderSubtitle"
+            class="loaderSubtitle"
+        >
+            FOREVER VICTORY
         </div>
 
-        <div class="loader-line"></div>
+        <div
+            id="loaderProgress"
+            class="loaderProgress"
+        >
+
+            <div class="progressTop">
+
+                <span id="statusText">
+                    BOOTING SYSTEM
+                </span>
+
+                <span id="percent">
+                    0%
+                </span>
+
+            </div>
+
+            <div class="progressTrack">
+
+                <div
+                    id="progressFill"
+                    class="progressFill"
+                ></div>
+
+            </div>
+
+            <div
+                id="systemMessage"
+                class="systemMessage"
+            >
+                INITIALIZING...
+
+            </div>
+
+        </div>
 
     </div>
+
+
+    <!-- LANDING EFFECTS -->
+
+    <div
+        id="shockwave"
+        class="shockwave"
+    ></div>
+
+    <div
+        id="landingFlash"
+        class="landingFlash"
+    ></div>
 
 </div>
 
 
-<!-- PROGRESS -->
+<!-- ======================================================
+     WEBSITE
+======================================================= -->
 
-<div id="progress"></div>
+<div id="site">
 
-
-<!-- BACKGROUND -->
 
 <div class="background">
 
@@ -1816,6 +2699,9 @@ footer{
 <div id="particles"></div>
 
 <div id="spotlight"></div>
+
+
+<div id="progress"></div>
 
 
 <!-- NAV -->
@@ -1860,7 +2746,9 @@ footer{
 </nav>
 
 
-<!-- HERO -->
+<!-- ======================================================
+     HERO
+======================================================= -->
 
 <header class="hero">
 
@@ -1877,15 +2765,18 @@ footer{
 
         </div>
 
+
         <h1>
             4EV
         </h1>
+
 
         <div class="hero-subtitle">
 
             FOREVER VICTORY
 
         </div>
+
 
         <p class="hero-description">
 
@@ -1899,6 +2790,7 @@ footer{
             </strong>
 
         </p>
+
 
         <div class="buttons">
 
@@ -1929,7 +2821,9 @@ footer{
 </header>
 
 
-<!-- STATS -->
+<!-- ======================================================
+     STATS
+======================================================= -->
 
 <section>
 
@@ -1991,7 +2885,9 @@ footer{
 </section>
 
 
-<!-- ABOUT -->
+<!-- ======================================================
+     ABOUT
+======================================================= -->
 
 <section id="about">
 
@@ -2018,9 +2914,7 @@ footer{
 
         <div class="card reveal">
 
-            <div class="icon">
-                ⚔️
-            </div>
+            <div class="icon">⚔️</div>
 
             <h3>
                 Competitive
@@ -2036,9 +2930,7 @@ footer{
 
         <div class="card reveal">
 
-            <div class="icon">
-                🎯
-            </div>
+            <div class="icon">🎯</div>
 
             <h3>
                 Skill
@@ -2046,7 +2938,7 @@ footer{
 
             <p>
                 Build better mechanics, smarter decisions,
-                stronger communication and better teamwork.
+                stronger communication and teamwork.
             </p>
 
         </div>
@@ -2054,17 +2946,15 @@ footer{
 
         <div class="card reveal">
 
-            <div class="icon">
-                🚀
-            </div>
+            <div class="icon">🚀</div>
 
             <h3>
                 Progression
             </h3>
 
             <p>
-                Start as a Recruit and work your way through
-                the 4EV progression system.
+                Start as a Recruit and work your way
+                through the 4EV progression system.
             </p>
 
         </div>
@@ -2072,9 +2962,7 @@ footer{
 
         <div class="card reveal">
 
-            <div class="icon">
-                🏆
-            </div>
+            <div class="icon">🏆</div>
 
             <h3>
                 Competition
@@ -2090,9 +2978,7 @@ footer{
 
         <div class="card reveal">
 
-            <div class="icon">
-                👥
-            </div>
+            <div class="icon">👥</div>
 
             <h3>
                 Community
@@ -2108,9 +2994,7 @@ footer{
 
         <div class="card reveal">
 
-            <div class="icon">
-                🔥
-            </div>
+            <div class="icon">🔥</div>
 
             <h3>
                 Ambition
@@ -2128,7 +3012,9 @@ footer{
 </section>
 
 
-<!-- RECRUITMENT -->
+<!-- ======================================================
+     RECRUITMENT
+======================================================= -->
 
 <section id="recruitment">
 
@@ -2155,9 +3041,7 @@ footer{
 
         <div class="requirement">
 
-            <span class="check">
-                ✓
-            </span>
+            <span class="check">✓</span>
 
             <strong>
                 Platinum 1+
@@ -2172,9 +3056,7 @@ footer{
 
         <div class="requirement">
 
-            <span class="check">
-                ✓
-            </span>
+            <span class="check">✓</span>
 
             <strong>
                 Level 170+
@@ -2189,9 +3071,7 @@ footer{
 
         <div class="requirement">
 
-            <span class="check">
-                ✓
-            </span>
+            <span class="check">✓</span>
 
             <strong>
                 60%+ Win Rate
@@ -2206,9 +3086,7 @@ footer{
 
         <div class="requirement">
 
-            <span class="check">
-                ✓
-            </span>
+            <span class="check">✓</span>
 
             <strong>
                 Active
@@ -2223,9 +3101,7 @@ footer{
 
         <div class="requirement">
 
-            <span class="check">
-                ✓
-            </span>
+            <span class="check">✓</span>
 
             <strong>
                 Competitive Mindset
@@ -2240,9 +3116,7 @@ footer{
 
         <div class="requirement">
 
-            <span class="check">
-                ✓
-            </span>
+            <span class="check">✓</span>
 
             <strong>
                 Team Player
@@ -2260,7 +3134,9 @@ footer{
 </section>
 
 
-<!-- PROCESS -->
+<!-- ======================================================
+     PROCESS
+======================================================= -->
 
 <section>
 
@@ -2359,7 +3235,9 @@ footer{
 </section>
 
 
-<!-- RANKS -->
+<!-- ======================================================
+     RANKS
+======================================================= -->
 
 <section id="ranks">
 
@@ -2491,7 +3369,9 @@ footer{
 </section>
 
 
-<!-- COMMUNITY -->
+<!-- ======================================================
+     COMMUNITY
+======================================================= -->
 
 <section>
 
@@ -2544,8 +3424,8 @@ footer{
             </h3>
 
             <p>
-                Meet players and build your competitive
-                squad.
+                Meet players and build your
+                competitive squad.
             </p>
 
         </div>
@@ -2627,7 +3507,9 @@ footer{
 </section>
 
 
-<!-- DISCORD -->
+<!-- ======================================================
+     DISCORD
+======================================================= -->
 
 <section id="discord">
 
@@ -2668,7 +3550,9 @@ footer{
 </section>
 
 
-<!-- FAQ -->
+<!-- ======================================================
+     FAQ
+======================================================= -->
 
 <section id="faq">
 
@@ -2750,26 +3634,14 @@ footer{
         </details>
 
 
-        <details class="reveal">
-
-            <summary>
-                Where are recruitment updates?
-            </summary>
-
-            <p>
-                Recruitment information is posted through
-                the official 4EV Discord.
-            </p>
-
-        </details>
-
-
     </div>
 
 </section>
 
 
-<!-- FINAL -->
+<!-- ======================================================
+     FINAL
+======================================================= -->
 
 <section class="final">
 
@@ -2802,8 +3674,6 @@ footer{
 </section>
 
 
-<!-- FOOTER -->
-
 <footer>
 
     <div class="footer-logo">
@@ -2824,31 +3694,363 @@ footer{
 
 </footer>
 
+</div>
+
 
 <script>
 
 /* =========================================================
-   LOADER
+   CINEMATIC LOADER ENGINE
 ========================================================= */
 
-window.addEventListener(
-    "load",
-    () => {
+const loader =
+    document.getElementById(
+        "cinematicLoader"
+    );
 
-        setTimeout(
-            () => {
+const loaderLogo =
+    document.getElementById(
+        "loaderLogo"
+    );
 
-                document
-                    .getElementById("loader")
-                    .classList
-                    .add("hide");
+const loaderSubtitle =
+    document.getElementById(
+        "loaderSubtitle"
+    );
 
-            },
-            1000
+const progressBox =
+    document.getElementById(
+        "loaderProgress"
+    );
+
+const progressFill =
+    document.getElementById(
+        "progressFill"
+    );
+
+const percent =
+    document.getElementById(
+        "percent"
+    );
+
+const statusText =
+    document.getElementById(
+        "statusText"
+    );
+
+const systemMessage =
+    document.getElementById(
+        "systemMessage"
+    );
+
+const hyperspace =
+    document.getElementById(
+        "hyperspace"
+    );
+
+const core =
+    document.querySelector(
+        ".core"
+    );
+
+const orbits =
+    document.querySelector(
+        ".orbits"
+    );
+
+const shockwave =
+    document.getElementById(
+        "shockwave"
+    );
+
+const flash =
+    document.getElementById(
+        "landingFlash"
+    );
+
+
+/* =========================================================
+   CREATE HYPERSPACE LINES
+========================================================= */
+
+for(
+    let i = 0;
+    i < 70;
+    i++
+){
+
+    const line =
+        document.createElement(
+            "div"
         );
 
+    line.className =
+        "spaceLine";
+
+    const angle =
+        Math.random() * 360;
+
+    line.style.setProperty(
+        "--angle",
+        angle + "deg"
+    );
+
+    line.style.animationDelay =
+        (-Math.random() * 1.5) + "s";
+
+    line.style.animationDuration =
+        (0.7 + Math.random() * 1.5) + "s";
+
+    hyperspace.appendChild(
+        line
+    );
+
+}
+
+
+/* =========================================================
+   LOADER SEQUENCE
+========================================================= */
+
+const stages = [
+
+    {
+        at:0,
+        status:"BOOTING SYSTEM",
+        message:"POWERING 4EV CORE..."
+    },
+
+    {
+        at:12,
+        status:"SCANNING",
+        message:"SCANNING COMPETITIVE NETWORK..."
+    },
+
+    {
+        at:24,
+        status:"NAVIGATION ONLINE",
+        message:"CALCULATING LANDING VECTOR..."
+    },
+
+    {
+        at:38,
+        status:"POWER SYSTEMS",
+        message:"ENERGY CORE STABLE..."
+    },
+
+    {
+        at:52,
+        status:"HYPERSPACE",
+        message:"ENTERING HYPERSPACE..."
+    },
+
+    {
+        at:66,
+        status:"APPROACHING",
+        message:"4EV DESTINATION LOCKED..."
+    },
+
+    {
+        at:78,
+        status:"LANDING SEQUENCE",
+        message:"PREPARING CINEMATIC LANDING..."
+    },
+
+    {
+        at:90,
+        status:"SYSTEM ONLINE",
+        message:"FOREVER VICTORY INITIALIZED."
     }
+
+];
+
+
+function updateStage(value){
+
+    let current =
+        stages[0];
+
+    for(
+        const stage of stages
+    ){
+
+        if(
+            value >= stage.at
+        ){
+
+            current =
+                stage;
+
+        }
+
+    }
+
+    statusText.textContent =
+        current.status;
+
+    systemMessage.textContent =
+        current.message;
+
+}
+
+
+/* =========================================================
+   PROGRESS ANIMATION
+========================================================= */
+
+let progress =
+    0;
+
+progressBox.classList.add(
+    "show"
 );
+
+const progressTimer =
+    setInterval(
+        () => {
+
+            progress +=
+                Math.random() * 1.7;
+
+            if(
+                progress > 100
+            ){
+
+                progress =
+                    100;
+
+                clearInterval(
+                    progressTimer
+                );
+
+                landingSequence();
+
+            }
+
+            progressFill.style.width =
+                progress + "%";
+
+            percent.textContent =
+                Math.floor(progress) + "%";
+
+            updateStage(progress);
+
+            if(
+                progress > 45
+            ){
+
+                hyperspace.classList.add(
+                    "active"
+                );
+
+            }
+
+            if(
+                progress > 60
+            ){
+
+                core.classList.add(
+                    "active"
+                );
+
+            }
+
+            if(
+                progress > 70
+            ){
+
+                orbits.classList.add(
+                    "active"
+                );
+
+            }
+
+        },
+        110
+    );
+
+
+/* =========================================================
+   LANDING SEQUENCE
+========================================================= */
+
+function landingSequence(){
+
+    statusText.textContent =
+        "LANDING COMPLETE";
+
+    systemMessage.textContent =
+        "WELCOME TO FOREVER VICTORY.";
+
+    loader.classList.add(
+        "shake"
+    );
+
+    flash.classList.add(
+        "fire"
+    );
+
+    shockwave.classList.add(
+        "fire"
+    );
+
+    hyperspace.classList.remove(
+        "active"
+    );
+
+
+    setTimeout(
+        () => {
+
+            loaderLogo.classList.add(
+                "reveal"
+            );
+
+        },
+        200
+    );
+
+
+    setTimeout(
+        () => {
+
+            loaderSubtitle.classList.add(
+                "reveal"
+            );
+
+        },
+        650
+    );
+
+
+    setTimeout(
+        () => {
+
+            document.body.classList.add(
+                "entered"
+            );
+
+        },
+        1600
+    );
+
+
+    setTimeout(
+        () => {
+
+            loader.classList.add(
+                "complete"
+            );
+
+            document.body.classList.remove(
+                "loading"
+            );
+
+        },
+        3000
+    );
+
+}
 
 
 /* =========================================================
@@ -2862,7 +4064,7 @@ const particleContainer =
 
 for(
     let i = 0;
-    i < 100;
+    i < 110;
     i++
 ){
 
@@ -2926,7 +4128,7 @@ document.addEventListener(
 
 
 /* =========================================================
-   HERO 3D MOUSE EFFECT
+   HERO 3D
 ========================================================= */
 
 const hero =
@@ -2940,17 +4142,21 @@ document.addEventListener(
 
         if(
             window.innerWidth < 700
-        ) return;
+        ){
+
+            return;
+
+        }
 
         const x =
-            (e.clientX /
+            e.clientX /
             window.innerWidth -
-            .5);
+            .5;
 
         const y =
-            (e.clientY /
+            e.clientY /
             window.innerHeight -
-            .5);
+            .5;
 
         hero.style.transform =
             `rotateY(${x * 5}deg)
@@ -2961,80 +4167,86 @@ document.addEventListener(
 
 
 /* =========================================================
-   CARD 3D TILT
+   CARD 3D
 ========================================================= */
 
 document
 .querySelectorAll(".card")
-.forEach(card => {
+.forEach(
+    card => {
 
-    card.addEventListener(
-        "mousemove",
-        e => {
+        card.addEventListener(
+            "mousemove",
+            e => {
 
-            if(
-                window.innerWidth < 700
-            ) return;
+                if(
+                    window.innerWidth < 700
+                ){
 
-            const rect =
-                card.getBoundingClientRect();
+                    return;
 
-            const x =
-                e.clientX -
-                rect.left;
+                }
 
-            const y =
-                e.clientY -
-                rect.top;
+                const rect =
+                    card.getBoundingClientRect();
 
-            const centerX =
-                rect.width / 2;
+                const x =
+                    e.clientX -
+                    rect.left;
 
-            const centerY =
-                rect.height / 2;
+                const y =
+                    e.clientY -
+                    rect.top;
 
-            const rotateX =
-                (y - centerY) /
-                15;
+                const centerX =
+                    rect.width / 2;
 
-            const rotateY =
-                (centerX - x) /
-                15;
+                const centerY =
+                    rect.height / 2;
 
-            card.style.transform =
-                `perspective(900px)
-                 rotateX(${rotateX}deg)
-                 rotateY(${rotateY}deg)
-                 scale(1.03)`;
+                const rotateX =
+                    (y - centerY) /
+                    15;
 
-            card.style.setProperty(
-                "--mouse-x",
-                x + "px"
-            );
+                const rotateY =
+                    (centerX - x) /
+                    15;
 
-            card.style.setProperty(
-                "--mouse-y",
-                y + "px"
-            );
+                card.style.transform =
+                    `perspective(900px)
+                     rotateX(${rotateX}deg)
+                     rotateY(${rotateY}deg)
+                     scale(1.03)`;
 
-        }
-    );
+                card.style.setProperty(
+                    "--mouse-x",
+                    x + "px"
+                );
 
-    card.addEventListener(
-        "mouseleave",
-        () => {
+                card.style.setProperty(
+                    "--mouse-y",
+                    y + "px"
+                );
 
-            card.style.transform =
-                "";
+            }
+        );
 
-        }
-    );
+        card.addEventListener(
+            "mouseleave",
+            () => {
 
-});
+                card.style.transform =
+                    "";
+
+            }
+        );
+
+    }
+);
 
 
 /* =========================================================
-   SCROLL REVEAL
+   REVEAL OBSERVER
 ========================================================= */
 
 const revealObserver =
@@ -3074,31 +4286,35 @@ const revealObserver =
 document
 .querySelectorAll(".reveal")
 .forEach(
-    el =>
-        revealObserver.observe(el)
+    element =>
+        revealObserver.observe(
+            element
+        )
 );
 
 
 /* =========================================================
-   STAGGER
+   CARD STAGGER
 ========================================================= */
 
 document
 .querySelectorAll(".cards")
-.forEach(container => {
+.forEach(
+    container => {
 
-    container
-    .querySelectorAll(".card")
-    .forEach(
-        (card,index) => {
+        container
+        .querySelectorAll(".card")
+        .forEach(
+            (card,index) => {
 
-            card.style.transitionDelay =
-                index * 70 + "ms";
+                card.style.transitionDelay =
+                    index * 70 + "ms";
 
-        }
-    );
+            }
+        );
 
-});
+    }
+);
 
 
 /* =========================================================
@@ -3116,20 +4332,22 @@ window.addEventListener(
             document.body.scrollHeight -
             window.innerHeight;
 
-        const percent =
-            (scrollTop / height) * 100;
+        const amount =
+            height > 0
+            ? scrollTop / height * 100
+            : 0;
 
         document
             .getElementById("progress")
             .style.width =
-            percent + "%";
+            amount + "%";
 
     }
 );
 
 
 /* =========================================================
-   NAV SCROLL
+   NAV
 ========================================================= */
 
 window.addEventListener(
@@ -3167,131 +4385,136 @@ window.addEventListener(
 
 document
 .querySelectorAll(".btn")
-.forEach(button => {
+.forEach(
+    button => {
 
-    button.addEventListener(
-        "mousemove",
-        e => {
+        button.addEventListener(
+            "mousemove",
+            e => {
 
-            const rect =
-                button.getBoundingClientRect();
+                const rect =
+                    button.getBoundingClientRect();
 
-            const x =
-                e.clientX -
-                rect.left -
-                rect.width / 2;
+                const x =
+                    e.clientX -
+                    rect.left -
+                    rect.width / 2;
 
-            const y =
-                e.clientY -
-                rect.top -
-                rect.height / 2;
+                const y =
+                    e.clientY -
+                    rect.top -
+                    rect.height / 2;
 
-            button.style.transform =
-                `translate(
-                    ${x * .08}px,
-                    ${y * .08}px
-                ) scale(1.03)`;
+                button.style.transform =
+                    `translate(
+                        ${x * .08}px,
+                        ${y * .08}px
+                    ) scale(1.03)`;
 
-        }
-    );
+            }
+        );
 
-    button.addEventListener(
-        "mouseleave",
-        () => {
+        button.addEventListener(
+            "mouseleave",
+            () => {
 
-            button.style.transform =
-                "";
+                button.style.transform =
+                    "";
 
-        }
-    );
+            }
+        );
 
-});
+    }
+);
 
 
 /* =========================================================
-   CLICK FLASH
+   BUTTON SHOCKWAVE
 ========================================================= */
 
 document
 .querySelectorAll(".btn")
-.forEach(button => {
+.forEach(
+    button => {
 
-    button.addEventListener(
-        "click",
-        e => {
+        button.addEventListener(
+            "click",
+            e => {
 
-            const flash =
-                document.createElement(
-                    "div"
+                const flash =
+                    document.createElement(
+                        "div"
+                    );
+
+                flash.style.position =
+                    "fixed";
+
+                flash.style.left =
+                    e.clientX + "px";
+
+                flash.style.top =
+                    e.clientY + "px";
+
+                flash.style.width =
+                    "10px";
+
+                flash.style.height =
+                    "10px";
+
+                flash.style.borderRadius =
+                    "50%";
+
+                flash.style.background =
+                    "#ffd700";
+
+                flash.style.pointerEvents =
+                    "none";
+
+                flash.style.zIndex =
+                    "99999";
+
+                flash.style.boxShadow =
+                    "0 0 30px #ffd700";
+
+                flash.animate(
+                    [
+                        {
+                            transform:
+                                "translate(-50%,-50%) scale(1)",
+                            opacity:1
+                        },
+                        {
+                            transform:
+                                "translate(-50%,-50%) scale(25)",
+                            opacity:0
+                        }
+                    ],
+                    {
+                        duration:500,
+                        easing:
+                            "cubic-bezier(.16,1,.3,1)"
+                    }
                 );
 
-            flash.style.position =
-                "fixed";
+                document.body.appendChild(
+                    flash
+                );
 
-            flash.style.left =
-                e.clientX + "px";
+                setTimeout(
+                    () =>
+                        flash.remove(),
+                    550
+                );
 
-            flash.style.top =
-                e.clientY + "px";
+            }
+        );
 
-            flash.style.width =
-                "10px";
-
-            flash.style.height =
-                "10px";
-
-            flash.style.borderRadius =
-                "50%";
-
-            flash.style.background =
-                "#ffd700";
-
-            flash.style.pointerEvents =
-                "none";
-
-            flash.style.zIndex =
-                "99999";
-
-            flash.style.boxShadow =
-                "0 0 30px #ffd700";
-
-            flash.animate(
-                [
-                    {
-                        transform:
-                            "translate(-50%,-50%) scale(1)",
-                        opacity:1
-                    },
-                    {
-                        transform:
-                            "translate(-50%,-50%) scale(25)",
-                        opacity:0
-                    }
-                ],
-                {
-                    duration:500,
-                    easing:
-                        "cubic-bezier(.16,1,.3,1)"
-                }
-            );
-
-            document.body.appendChild(
-                flash
-            );
-
-            setTimeout(
-                () => flash.remove(),
-                550
-            );
-
-        }
-    );
-
-});
+    }
+);
 
 
 /* =========================================================
-   PARALLAX ORBS
+   PARALLAX
 ========================================================= */
 
 window.addEventListener(
@@ -3301,59 +4524,78 @@ window.addEventListener(
         const y =
             window.scrollY;
 
-        document
-        .querySelector(".orb.one")
-        .style.transform =
-            `translateY(${y * .08}px)`;
+        const one =
+            document.querySelector(
+                ".orb.one"
+            );
 
-        document
-        .querySelector(".orb.two")
-        .style.transform =
-            `translateY(${y * -.05}px)`;
+        const two =
+            document.querySelector(
+                ".orb.two"
+            );
 
-        document
-        .querySelector(".orb.three")
-        .style.transform =
-            `translateY(${y * .03}px)`;
+        const three =
+            document.querySelector(
+                ".orb.three"
+            );
+
+        if(one){
+            one.style.transform =
+                `translateY(${y * .08}px)`;
+        }
+
+        if(two){
+            two.style.transform =
+                `translateY(${y * -.05}px)`;
+        }
+
+        if(three){
+            three.style.transform =
+                `translateY(${y * .03}px)`;
+        }
 
     }
 );
 
 
 /* =========================================================
-   SMOOTH ANCHOR OFFSET
+   ANCHORS
 ========================================================= */
 
 document
 .querySelectorAll(
     'a[href^="#"]'
 )
-.forEach(anchor => {
+.forEach(
+    anchor => {
 
-    anchor.addEventListener(
-        "click",
-        e => {
+        anchor.addEventListener(
+            "click",
+            e => {
 
-            const target =
-                document.querySelector(
-                    anchor.getAttribute(
-                        "href"
-                    )
-                );
+                const target =
+                    document.querySelector(
+                        anchor.getAttribute(
+                            "href"
+                        )
+                    );
 
-            if(!target) return;
+                if(!target){
+                    return;
+                }
 
-            e.preventDefault();
+                e.preventDefault();
 
-            target.scrollIntoView({
-                behavior:"smooth",
-                block:"start"
-            });
+                target.scrollIntoView({
+                    behavior:"smooth",
+                    block:"start"
+                });
 
-        }
-    );
+            }
+        );
 
-});
+    }
+);
 
 </script>
 
