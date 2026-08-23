@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://mocha20121usc.github.io/4ev-clan/sitemap.xml
