@@ -3,43 +3,1003 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>4EV | Forever Victory — Roblox Rivals Clan</title>
-    <meta name="description" content="4EV | Forever Victory is a competitive Roblox Rivals clan recruiting skilled and active players.">
+
+    <meta name="description" content="4EV | Forever Victory is a competitive Roblox Rivals clan for skilled, active and competitive players. Join our Discord and learn about recruitment, clan wars, events and more.">
+
+    <meta name="keywords" content="Roblox Rivals clan, Rivals clan, Roblox Rivals, 4EV, Forever Victory, competitive Rivals">
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #070707;
+            color: #ffffff;
+            line-height: 1.6;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .nav {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: rgba(7, 7, 7, 0.95);
+            border-bottom: 1px solid #222;
+            backdrop-filter: blur(12px);
+        }
+
+        .nav-inner {
+            max-width: 1200px;
+            margin: auto;
+            padding: 18px 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .logo {
+            font-size: 25px;
+            font-weight: 900;
+            color: #ffd700;
+            letter-spacing: 2px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 25px;
+            flex-wrap: wrap;
+        }
+
+        .nav-links a {
+            color: #aaa;
+            font-size: 14px;
+            transition: 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: #ffd700;
+        }
+
+        .hero {
+            min-height: 720px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 100px 25px;
+            background:
+                radial-gradient(circle at center, #302700 0%, #100e05 25%, #070707 65%);
+        }
+
+        .hero-content {
+            max-width: 1000px;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 8px 16px;
+            border: 1px solid #665600;
+            border-radius: 30px;
+            color: #ffd700;
+            background: #161200;
+            font-size: 13px;
+            font-weight: bold;
+            margin-bottom: 25px;
+        }
+
+        .hero h1 {
+            font-size: clamp(55px, 10vw, 105px);
+            line-height: 0.95;
+            font-weight: 1000;
+            letter-spacing: -4px;
+            color: #ffd700;
+            text-shadow: 0 0 35px rgba(255, 215, 0, 0.18);
+        }
+
+        .hero h2 {
+            font-size: clamp(22px, 4vw, 38px);
+            margin-top: 20px;
+            color: #ffffff;
+        }
+
+        .hero p {
+            max-width: 750px;
+            margin: 25px auto;
+            color: #aaa;
+            font-size: 18px;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-top: 35px;
+        }
+
+        .btn {
+            padding: 15px 25px;
+            border-radius: 9px;
+            font-weight: bold;
+            transition: 0.2s;
+            display: inline-block;
+        }
+
+        .btn-gold {
+            background: #ffd700;
+            color: #080808;
+        }
+
+        .btn-gold:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(255, 215, 0, 0.2);
+        }
+
+        .btn-dark {
+            border: 1px solid #444;
+            background: #121212;
+            color: white;
+        }
+
+        .btn-dark:hover {
+            border-color: #ffd700;
+            color: #ffd700;
+        }
+
+        section {
+            max-width: 1200px;
+            margin: auto;
+            padding: 90px 25px;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-title h2 {
+            font-size: 42px;
+            color: #ffd700;
+            margin-bottom: 10px;
+        }
+
+        .section-title p {
+            color: #888;
+            max-width: 700px;
+            margin: auto;
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .card {
+            background: #101010;
+            border: 1px solid #252525;
+            border-radius: 15px;
+            padding: 30px;
+            transition: 0.25s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            border-color: #5c4d00;
+        }
+
+        .card-icon {
+            font-size: 35px;
+            margin-bottom: 15px;
+        }
+
+        .card h3 {
+            color: #ffd700;
+            font-size: 22px;
+            margin-bottom: 10px;
+        }
+
+        .card p {
+            color: #999;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+        }
+
+        .stat {
+            text-align: center;
+            padding: 30px 15px;
+            background: #101010;
+            border: 1px solid #252525;
+            border-radius: 14px;
+        }
+
+        .stat-number {
+            color: #ffd700;
+            font-size: 38px;
+            font-weight: 900;
+        }
+
+        .stat-label {
+            color: #888;
+            margin-top: 5px;
+        }
+
+        .requirements {
+            max-width: 800px;
+            margin: auto;
+            background: #101010;
+            border: 1px solid #302900;
+            border-radius: 18px;
+            padding: 40px;
+        }
+
+        .requirement {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 17px 0;
+            border-bottom: 1px solid #242424;
+        }
+
+        .requirement:last-child {
+            border-bottom: none;
+        }
+
+        .check {
+            color: #ffd700;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .requirement strong {
+            font-size: 17px;
+        }
+
+        .requirement span:last-child {
+            color: #999;
+        }
+
+        .rank {
+            border-left: 3px solid #ffd700;
+        }
+
+        .discord {
+            text-align: center;
+            max-width: 900px;
+            margin: auto;
+            background:
+                radial-gradient(circle at center, #211d08, #101010 60%);
+            border: 1px solid #4b4000;
+            border-radius: 20px;
+            padding: 60px 30px;
+        }
+
+        .discord h2 {
+            color: #ffd700;
+            font-size: 45px;
+            margin-bottom: 15px;
+        }
+
+        .discord p {
+            color: #aaa;
+            max-width: 650px;
+            margin: 0 auto 30px;
+        }
+
+        .faq {
+            max-width: 850px;
+            margin: auto;
+        }
+
+        details {
+            background: #101010;
+            border: 1px solid #252525;
+            border-radius: 12px;
+            margin-bottom: 12px;
+            padding: 20px;
+        }
+
+        summary {
+            cursor: pointer;
+            color: #ffd700;
+            font-weight: bold;
+        }
+
+        details p {
+            color: #999;
+            margin-top: 15px;
+        }
+
+        .cta {
+            text-align: center;
+            padding: 100px 25px;
+            background: #0c0c0c;
+            border-top: 1px solid #222;
+            border-bottom: 1px solid #222;
+        }
+
+        .cta h2 {
+            font-size: 50px;
+            color: #ffd700;
+            margin-bottom: 15px;
+        }
+
+        .cta p {
+            color: #999;
+            margin-bottom: 30px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px 25px;
+            color: #666;
+            background: #050505;
+        }
+
+        footer strong {
+            color: #ffd700;
+        }
+
+        @media (max-width: 850px) {
+            .cards {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .stats {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .nav-links {
+                display: none;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .cards {
+                grid-template-columns: 1fr;
+            }
+
+            .stats {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .hero {
+                min-height: 620px;
+            }
+
+            .hero h1 {
+                letter-spacing: -2px;
+            }
+
+            .requirements {
+                padding: 25px;
+            }
+
+            .discord h2,
+            .cta h2 {
+                font-size: 34px;
+            }
+        }
+    </style>
 </head>
 
 <body>
-    <h1>4EV | Forever Victory</h1>
 
-    <h2>Competitive Roblox Rivals Clan</h2>
+<!-- NAVIGATION -->
+
+<nav class="nav">
+    <div class="nav-inner">
+
+        <div class="logo">4EV</div>
+
+        <div class="nav-links">
+            <a href="#about">About</a>
+            <a href="#recruitment">Recruitment</a>
+            <a href="#ranks">Ranks</a>
+            <a href="#community">Community</a>
+            <a href="#faq">FAQ</a>
+        </div>
+
+    </div>
+</nav>
+
+
+<!-- HERO -->
+
+<header class="hero">
+
+    <div class="hero-content">
+
+        <div class="badge">
+            ⚔️ RECRUITMENT IS OPEN
+        </div>
+
+        <h1>4EV</h1>
+
+        <h2>Forever Victory</h2>
+
+        <p>
+            A competitive Roblox Rivals clan built for skilled,
+            active and ambitious players who want to compete,
+            improve and grow together.
+        </p>
+
+        <div class="buttons">
+
+            <a
+                class="btn btn-gold"
+                href="https://discord.gg/YOUR_DISCORD_INVITE"
+                target="_blank"
+            >
+                💬 JOIN 4EV DISCORD
+            </a>
+
+            <a
+                class="btn btn-dark"
+                href="#recruitment"
+            >
+                ⚔️ VIEW REQUIREMENTS
+            </a>
+
+        </div>
+
+    </div>
+
+</header>
+
+
+<!-- STATS -->
+
+<section>
+
+    <div class="stats">
+
+        <div class="stat">
+            <div class="stat-number">4EV</div>
+            <div class="stat-label">Forever Victory</div>
+        </div>
+
+        <div class="stat">
+            <div class="stat-number">170+</div>
+            <div class="stat-label">Minimum Level</div>
+        </div>
+
+        <div class="stat">
+            <div class="stat-number">P1+</div>
+            <div class="stat-label">Minimum Rank</div>
+        </div>
+
+        <div class="stat">
+            <div class="stat-number">60%+</div>
+            <div class="stat-label">Win Rate</div>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ABOUT -->
+
+<section id="about">
+
+    <div class="section-title">
+
+        <h2>ABOUT 4EV</h2>
+
+        <p>
+            More than just a clan. 4EV is a competitive community
+            for players who want to push themselves further.
+        </p>
+
+    </div>
+
+    <div class="cards">
+
+        <div class="card">
+            <div class="card-icon">⚔️</div>
+
+            <h3>Competitive</h3>
+
+            <p>
+                We focus on competitive Roblox Rivals gameplay,
+                improvement, teamwork and high-level competition.
+            </p>
+        </div>
+
+        <div class="card">
+            <div class="card-icon">📈</div>
+
+            <h3>Improve</h3>
+
+            <p>
+                Work alongside other competitive players,
+                learn from each other and continue improving.
+            </p>
+        </div>
+
+        <div class="card">
+            <div class="card-icon">👥</div>
+
+            <h3>Community</h3>
+
+            <p>
+                Meet other Rivals players, participate in events
+                and become part of the 4EV community.
+            </p>
+        </div>
+
+        <div class="card">
+            <div class="card-icon">🏆</div>
+
+            <h3>Competition</h3>
+
+            <p>
+                Take part in clan activities, competitions,
+                events and future opportunities.
+            </p>
+        </div>
+
+        <div class="card">
+            <div class="card-icon">🌎</div>
+
+            <h3>Multiple Regions</h3>
+
+            <p>
+                Players from different regions can connect,
+                compete and represent 4EV.
+            </p>
+        </div>
+
+        <div class="card">
+            <div class="card-icon">🔥</div>
+
+            <h3>Ambition</h3>
+
+            <p>
+                We are looking for players who want to take
+                their gameplay and competitive experience further.
+            </p>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- RECRUITMENT -->
+
+<section id="recruitment">
+
+    <div class="section-title">
+
+        <h2>RECRUITMENT</h2>
+
+        <p>
+            Think you have what it takes to represent 4EV?
+            Check the current requirements below.
+        </p>
+
+    </div>
+
+    <div class="requirements">
+
+        <div class="requirement">
+            <span class="check">✓</span>
+            <strong>Platinum 1+</strong>
+            <span>Competitive ranked experience</span>
+        </div>
+
+        <div class="requirement">
+            <span class="check">✓</span>
+            <strong>Level 170+</strong>
+            <span>Experienced Rivals player</span>
+        </div>
+
+        <div class="requirement">
+            <span class="check">✓</span>
+            <strong>60%+ Win Rate</strong>
+            <span>Strong overall performance</span>
+        </div>
+
+        <div class="requirement">
+            <span class="check">✓</span>
+            <strong>Active</strong>
+            <span>Participate in the community</span>
+        </div>
+
+        <div class="requirement">
+            <span class="check">✓</span>
+            <strong>Competitive Mindset</strong>
+            <span>Always looking to improve</span>
+        </div>
+
+        <div class="requirement">
+            <span class="check">✓</span>
+            <strong>Team Player</strong>
+            <span>Respect teammates and opponents</span>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- WHY JOIN -->
+
+<section>
+
+    <div class="section-title">
+
+        <h2>WHY JOIN 4EV?</h2>
+
+        <p>
+            Built around competition, community and progression.
+        </p>
+
+    </div>
+
+    <div class="cards">
+
+        <div class="card">
+            <div class="card-icon">🎯</div>
+            <h3>Serious Players</h3>
+            <p>
+                Connect with players who take Roblox Rivals
+                seriously and want to improve.
+            </p>
+        </div>
+
+        <div class="card">
+            <div class="card-icon">📢</div>
+            <h3>Organized Community</h3>
+            <p>
+                Stay updated through organized Discord channels,
+                announcements and recruitment information.
+            </p>
+        </div>
+
+        <div class="card">
+            <div class="card-icon">🏅</div>
+            <h3>Progression</h3>
+            <p>
+                Work toward higher clan ranks and become a
+                stronger competitive player.
+            </p>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- RANKS -->
+
+<section id="ranks">
+
+    <div class="section-title">
+
+        <h2>4EV RANK SYSTEM</h2>
+
+        <p>
+            Progress through the clan by showing activity,
+            reliability and competitive ability.
+        </p>
+
+    </div>
+
+    <div class="cards">
+
+        <div class="card rank">
+            <h3>R1 — Recruit</h3>
+            <p>
+                New members beginning their journey with 4EV.
+            </p>
+        </div>
+
+        <div class="card rank">
+            <h3>R2 — Contender</h3>
+            <p>
+                Active members who are becoming established
+                within the clan.
+            </p>
+        </div>
+
+        <div class="card rank">
+            <h3>R3 — Elite</h3>
+            <p>
+                Proven competitive members with strong
+                participation and performance.
+            </p>
+        </div>
+
+        <div class="card rank">
+            <h3>R4 — Veteran</h3>
+            <p>
+                Experienced and trusted members who contribute
+                significantly to 4EV.
+            </p>
+        </div>
+
+        <div class="card rank">
+            <h3>R5 — Apex</h3>
+            <p>
+                The highest competitive member rank within
+                the 4EV progression system.
+            </p>
+        </div>
+
+        <div class="card rank">
+            <h3>Leadership</h3>
+            <p>
+                Staff and leadership roles responsible for
+                managing and developing 4EV.
+            </p>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- CLAN ACTIVITIES -->
+
+<section>
+
+    <div class="section-title">
+
+        <h2>CLAN ACTIVITIES</h2>
+
+        <p>
+            There is more to 4EV than simply having a clan tag.
+        </p>
+
+    </div>
+
+    <div class="cards">
+
+        <div class="card">
+            <div class="card-icon">⚔️</div>
+            <h3>Clan Wars</h3>
+            <p>
+                Represent 4EV in organized clan battles
+                and competitive activities.
+            </p>
+        </div>
+
+        <div class="card">
+            <div class="card-icon">🏆</div>
+            <h3>Events</h3>
+            <p>
+                Participate in community events and
+                competitive activities.
+            </p>
+        </div>
+
+        <div class="card">
+            <div class="card-icon">🎮</div>
+            <h3>Rivals Sessions</h3>
+            <p>
+                Play with other members and build teamwork,
+                communication and chemistry.
+            </p>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- REGIONS -->
+
+<section>
+
+    <div class="section-title">
+
+        <h2>REGIONS</h2>
+
+        <p>
+            4EV welcomes competitive players from multiple regions.
+        </p>
+
+    </div>
+
+    <div class="cards">
+
+        <div class="card">
+            <h3>🇺🇸 North America</h3>
+            <p>
+                Competitive players from NA servers.
+            </p>
+        </div>
+
+        <div class="card">
+            <h3>🇪🇺 Europe</h3>
+            <p>
+                Players representing EU servers.
+            </p>
+        </div>
+
+        <div class="card">
+            <h3>🌎 LATAM</h3>
+            <p>
+                Players from Latin American regions.
+            </p>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- DISCORD -->
+
+<section id="community">
+
+    <div class="discord">
+
+        <h2>💬 JOIN THE 4EV DISCORD</h2>
+
+        <p>
+            The official 4EV Discord is where our community
+            comes together. Find recruitment information,
+            announcements, events, discussions and other
+            Roblox Rivals players.
+        </p>
+
+        <div class="buttons">
+
+            <a
+                class="btn btn-gold"
+                href="https://discord.gg/YOUR_DISCORD_INVITE"
+                target="_blank"
+            >
+                JOIN DISCORD
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- FAQ -->
+
+<section id="faq">
+
+    <div class="section-title">
+
+        <h2>FAQ</h2>
+
+        <p>
+            Frequently asked questions about 4EV.
+        </p>
+
+    </div>
+
+    <div class="faq">
+
+        <details>
+            <summary>What is 4EV?</summary>
+
+            <p>
+                4EV | Forever Victory is a competitive Roblox
+                Rivals clan focused on skilled players,
+                competition, community and improvement.
+            </p>
+        </details>
+
+        <details>
+            <summary>How do I join?</summary>
+
+            <p>
+                Join the official 4EV Discord and check the
+                current recruitment information.
+            </p>
+        </details>
+
+        <details>
+            <summary>What are the requirements?</summary>
+
+            <p>
+                Current requirements include Platinum 1+,
+                Level 170+, 60%+ win rate, activity and
+                a competitive mindset.
+            </p>
+        </details>
+
+        <details>
+            <summary>Do I have to be competitive?</summary>
+
+            <p>
+                4EV is designed around competitive Roblox
+                Rivals players, so members should be interested
+                in improving and participating.
+            </p>
+        </details>
+
+        <details>
+            <summary>What regions are accepted?</summary>
+
+            <p>
+                Players from NA, EU, LATAM and other regions
+                may be considered depending on recruitment needs.
+            </p>
+        </details>
+
+        <details>
+            <summary>Where can I get recruitment updates?</summary>
+
+            <p>
+                Recruitment updates and community announcements
+                are available through the official 4EV Discord.
+            </p>
+        </details>
+
+    </div>
+
+</section>
+
+
+<!-- FINAL CTA -->
+
+<div class="cta">
+
+    <h2>READY FOR 4EV?</h2>
 
     <p>
-        4EV | Forever Victory is a competitive Roblox Rivals clan
-        focused on skilled players, competition, clan wars, events,
-        and improving together.
+        If you're skilled, active and competitive,
+        come see what 4EV is about.
     </p>
 
-    <h2>Recruitment</h2>
+    <a
+        class="btn btn-gold"
+        href="https://discord.gg/YOUR_DISCORD_INVITE"
+        target="_blank"
+    >
+        ⚔️ JOIN 4EV DISCORD
+    </a>
 
-    <ul>
-        <li>Platinum 1+</li>
-        <li>Level 170+</li>
-        <li>60%+ Win Rate</li>
-        <li>Active and competitive players</li>
-    </ul>
+</div>
 
-    <h2>About 4EV</h2>
+
+<!-- FOOTER -->
+
+<footer>
 
     <p>
-        4EV is a Roblox Rivals clan built for competitive players
-        who want to improve, compete, and be part of a strong community.
+        <strong>4EV | Forever Victory</strong>
     </p>
 
-    <h2>Regions</h2>
+    <p>
+        Competitive Roblox Rivals Clan
+    </p>
 
-    <p>NA • EU • LATAM • Other Regions</p>
+    <p style="margin-top: 10px;">
+        © 2026 4EV. All rights reserved.
+    </p>
 
-    <h2>Join 4EV</h2>
+</footer>
 
-    <p>Recruitment is currently open.</p>
 </body>
 </html>
