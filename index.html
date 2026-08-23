@@ -1,425 +1,1386 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>4EV | Forever Victory — Roblox Rivals Clan</title>
-
-    <meta name="description" content="4EV | Forever Victory is a competitive Roblox Rivals clan for skilled, active and competitive players. Join our Discord and learn about recruitment, clan wars, events and more.">
-
-    <meta name="keywords" content="Roblox Rivals clan, Rivals clan, Roblox Rivals, 4EV, Forever Victory, competitive Rivals">
-
-    <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            font-family: Arial, Helvetica, sans-serif;
-            background: #070707;
-            color: #ffffff;
-            line-height: 1.6;
-        }
-
-        a {
-            text-decoration: none;
-            color: inherit;
-        }
-
-        .nav {
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            background: rgba(7, 7, 7, 0.95);
-            border-bottom: 1px solid #222;
-            backdrop-filter: blur(12px);
-        }
-
-        .nav-inner {
-            max-width: 1200px;
-            margin: auto;
-            padding: 18px 25px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            gap: 20px;
-        }
-
-        .logo {
-            font-size: 25px;
-            font-weight: 900;
-            color: #ffd700;
-            letter-spacing: 2px;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 25px;
-            flex-wrap: wrap;
-        }
-
-        .nav-links a {
-            color: #aaa;
-            font-size: 14px;
-            transition: 0.2s;
-        }
-
-        .nav-links a:hover {
-            color: #ffd700;
-        }
-
-        .hero {
-            min-height: 720px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            padding: 100px 25px;
-            background:
-                radial-gradient(circle at center, #302700 0%, #100e05 25%, #070707 65%);
-        }
-
-        .hero-content {
-            max-width: 1000px;
-        }
-
-        .badge {
-            display: inline-block;
-            padding: 8px 16px;
-            border: 1px solid #665600;
-            border-radius: 30px;
-            color: #ffd700;
-            background: #161200;
-            font-size: 13px;
-            font-weight: bold;
-            margin-bottom: 25px;
-        }
-
-        .hero h1 {
-            font-size: clamp(55px, 10vw, 105px);
-            line-height: 0.95;
-            font-weight: 1000;
-            letter-spacing: -4px;
-            color: #ffd700;
-            text-shadow: 0 0 35px rgba(255, 215, 0, 0.18);
-        }
-
-        .hero h2 {
-            font-size: clamp(22px, 4vw, 38px);
-            margin-top: 20px;
-            color: #ffffff;
-        }
-
-        .hero p {
-            max-width: 750px;
-            margin: 25px auto;
-            color: #aaa;
-            font-size: 18px;
-        }
-
-        .buttons {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            flex-wrap: wrap;
-            margin-top: 35px;
-        }
-
-        .btn {
-            padding: 15px 25px;
-            border-radius: 9px;
-            font-weight: bold;
-            transition: 0.2s;
-            display: inline-block;
-        }
-
-        .btn-gold {
-            background: #ffd700;
-            color: #080808;
-        }
-
-        .btn-gold:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 30px rgba(255, 215, 0, 0.2);
-        }
-
-        .btn-dark {
-            border: 1px solid #444;
-            background: #121212;
-            color: white;
-        }
-
-        .btn-dark:hover {
-            border-color: #ffd700;
-            color: #ffd700;
-        }
-
-        section {
-            max-width: 1200px;
-            margin: auto;
-            padding: 90px 25px;
-        }
-
-        .section-title {
-            text-align: center;
-            margin-bottom: 50px;
-        }
-
-        .section-title h2 {
-            font-size: 42px;
-            color: #ffd700;
-            margin-bottom: 10px;
-        }
-
-        .section-title p {
-            color: #888;
-            max-width: 700px;
-            margin: auto;
-        }
-
-        .cards {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
-        }
-
-        .card {
-            background: #101010;
-            border: 1px solid #252525;
-            border-radius: 15px;
-            padding: 30px;
-            transition: 0.25s;
-        }
-
-        .card:hover {
-            transform: translateY(-5px);
-            border-color: #5c4d00;
-        }
-
-        .card-icon {
-            font-size: 35px;
-            margin-bottom: 15px;
-        }
-
-        .card h3 {
-            color: #ffd700;
-            font-size: 22px;
-            margin-bottom: 10px;
-        }
-
-        .card p {
-            color: #999;
-        }
-
-        .stats {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 15px;
-        }
-
-        .stat {
-            text-align: center;
-            padding: 30px 15px;
-            background: #101010;
-            border: 1px solid #252525;
-            border-radius: 14px;
-        }
-
-        .stat-number {
-            color: #ffd700;
-            font-size: 38px;
-            font-weight: 900;
-        }
-
-        .stat-label {
-            color: #888;
-            margin-top: 5px;
-        }
-
-        .requirements {
-            max-width: 800px;
-            margin: auto;
-            background: #101010;
-            border: 1px solid #302900;
-            border-radius: 18px;
-            padding: 40px;
-        }
-
-        .requirement {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            padding: 17px 0;
-            border-bottom: 1px solid #242424;
-        }
-
-        .requirement:last-child {
-            border-bottom: none;
-        }
-
-        .check {
-            color: #ffd700;
-            font-size: 20px;
-            font-weight: bold;
-        }
-
-        .requirement strong {
-            font-size: 17px;
-        }
-
-        .requirement span:last-child {
-            color: #999;
-        }
-
-        .rank {
-            border-left: 3px solid #ffd700;
-        }
-
-        .discord {
-            text-align: center;
-            max-width: 900px;
-            margin: auto;
-            background:
-                radial-gradient(circle at center, #211d08, #101010 60%);
-            border: 1px solid #4b4000;
-            border-radius: 20px;
-            padding: 60px 30px;
-        }
-
-        .discord h2 {
-            color: #ffd700;
-            font-size: 45px;
-            margin-bottom: 15px;
-        }
-
-        .discord p {
-            color: #aaa;
-            max-width: 650px;
-            margin: 0 auto 30px;
-        }
-
-        .faq {
-            max-width: 850px;
-            margin: auto;
-        }
-
-        details {
-            background: #101010;
-            border: 1px solid #252525;
-            border-radius: 12px;
-            margin-bottom: 12px;
-            padding: 20px;
-        }
-
-        summary {
-            cursor: pointer;
-            color: #ffd700;
-            font-weight: bold;
-        }
-
-        details p {
-            color: #999;
-            margin-top: 15px;
-        }
-
-        .cta {
-            text-align: center;
-            padding: 100px 25px;
-            background: #0c0c0c;
-            border-top: 1px solid #222;
-            border-bottom: 1px solid #222;
-        }
-
-        .cta h2 {
-            font-size: 50px;
-            color: #ffd700;
-            margin-bottom: 15px;
-        }
-
-        .cta p {
-            color: #999;
-            margin-bottom: 30px;
-        }
-
-        footer {
-            text-align: center;
-            padding: 40px 25px;
-            color: #666;
-            background: #050505;
-        }
-
-        footer strong {
-            color: #ffd700;
-        }
-
-        @media (max-width: 850px) {
-            .cards {
-                grid-template-columns: 1fr 1fr;
-            }
-
-            .stats {
-                grid-template-columns: 1fr 1fr;
-            }
-
-            .nav-links {
-                display: none;
-            }
-        }
-
-        @media (max-width: 600px) {
-            .cards {
-                grid-template-columns: 1fr;
-            }
-
-            .stats {
-                grid-template-columns: 1fr 1fr;
-            }
-
-            .hero {
-                min-height: 620px;
-            }
-
-            .hero h1 {
-                letter-spacing: -2px;
-            }
-
-            .requirements {
-                padding: 25px;
-            }
-
-            .discord h2,
-            .cta h2 {
-                font-size: 34px;
-            }
-        }
-    </style>
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>4EV | Forever Victory — Roblox Rivals Clan</title>
+
+<meta name="description" content="4EV | Forever Victory is a competitive Roblox Rivals clan built for skilled, active and ambitious players. Join the 4EV Discord, compete, improve and represent Forever Victory.">
+
+<meta name="keywords" content="4EV, Forever Victory, Roblox Rivals clan, Roblox Rivals, Rivals clan, competitive Roblox clan">
+
+<style>
+
+/* =========================================================
+   RESET
+========================================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: Inter, Arial, Helvetica, sans-serif;
+    background: #050505;
+    color: #ffffff;
+    overflow-x: hidden;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+button {
+    font-family: inherit;
+}
+
+
+/* =========================================================
+   CURSOR GLOW
+========================================================= */
+
+.cursor-glow {
+    position: fixed;
+    width: 350px;
+    height: 350px;
+    border-radius: 50%;
+    pointer-events: none;
+    background: radial-gradient(
+        circle,
+        rgba(255, 215, 0, 0.10),
+        transparent 70%
+    );
+    transform: translate(-50%, -50%);
+    z-index: 1;
+    mix-blend-mode: screen;
+}
+
+
+/* =========================================================
+   BACKGROUND
+========================================================= */
+
+.background {
+    position: fixed;
+    inset: 0;
+    z-index: -5;
+    overflow: hidden;
+    background:
+        radial-gradient(
+            circle at 50% 10%,
+            rgba(255, 215, 0, 0.10),
+            transparent 30%
+        ),
+        #050505;
+}
+
+.grid {
+    position: absolute;
+    inset: 0;
+
+    background-image:
+        linear-gradient(
+            rgba(255,255,255,0.025) 1px,
+            transparent 1px
+        ),
+        linear-gradient(
+            90deg,
+            rgba(255,255,255,0.025) 1px,
+            transparent 1px
+        );
+
+    background-size: 50px 50px;
+
+    mask-image: linear-gradient(
+        to bottom,
+        black,
+        transparent 90%
+    );
+}
+
+.orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    opacity: .15;
+    animation: floatOrb 10s ease-in-out infinite;
+}
+
+.orb.one {
+    width: 400px;
+    height: 400px;
+    background: #ffd700;
+    top: 5%;
+    left: -150px;
+}
+
+.orb.two {
+    width: 350px;
+    height: 350px;
+    background: #ffffff;
+    top: 40%;
+    right: -150px;
+    animation-delay: -4s;
+}
+
+.orb.three {
+    width: 300px;
+    height: 300px;
+    background: #ffd700;
+    top: 75%;
+    left: 30%;
+    animation-delay: -7s;
+}
+
+@keyframes floatOrb {
+
+    0%,100% {
+        transform: translateY(0) translateX(0);
+    }
+
+    50% {
+        transform: translateY(-50px) translateX(30px);
+    }
+
+}
+
+
+/* =========================================================
+   PARTICLES
+========================================================= */
+
+.particles {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: -1;
+}
+
+.particle {
+    position: absolute;
+    width: 3px;
+    height: 3px;
+    border-radius: 50%;
+    background: #ffd700;
+    opacity: .5;
+
+    animation:
+        particleFloat linear infinite;
+}
+
+@keyframes particleFloat {
+
+    from {
+        transform: translateY(110vh);
+        opacity: 0;
+    }
+
+    20% {
+        opacity: .5;
+    }
+
+    80% {
+        opacity: .5;
+    }
+
+    to {
+        transform: translateY(-10vh);
+        opacity: 0;
+    }
+
+}
+
+
+/* =========================================================
+   NAVIGATION
+========================================================= */
+
+.nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+
+    z-index: 1000;
+
+    background: rgba(5,5,5,.72);
+
+    backdrop-filter: blur(20px);
+
+    border-bottom: 1px solid rgba(255,255,255,.06);
+}
+
+.nav-inner {
+    max-width: 1250px;
+    margin: auto;
+
+    height: 75px;
+
+    padding: 0 25px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.logo {
+    font-size: 27px;
+    font-weight: 1000;
+    letter-spacing: 4px;
+    color: #ffd700;
+
+    text-shadow:
+        0 0 20px rgba(255,215,0,.35);
+
+    animation: logoPulse 3s ease-in-out infinite;
+}
+
+@keyframes logoPulse {
+
+    0%,100% {
+        text-shadow:
+            0 0 15px rgba(255,215,0,.2);
+    }
+
+    50% {
+        text-shadow:
+            0 0 30px rgba(255,215,0,.6);
+    }
+
+}
+
+.nav-links {
+    display: flex;
+    gap: 28px;
+}
+
+.nav-links a {
+    color: #888;
+    font-size: 13px;
+    font-weight: 700;
+
+    transition: .25s;
+}
+
+.nav-links a:hover {
+    color: #ffd700;
+}
+
+
+/* =========================================================
+   HERO
+========================================================= */
+
+.hero {
+    min-height: 100vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    text-align: center;
+
+    padding:
+        140px 25px
+        100px;
+
+    position: relative;
+}
+
+.hero-content {
+    max-width: 1100px;
+
+    animation:
+        heroEnter 1.2s cubic-bezier(.16,1,.3,1);
+}
+
+@keyframes heroEnter {
+
+    from {
+        opacity: 0;
+        transform:
+            translateY(50px)
+            scale(.95);
+    }
+
+    to {
+        opacity: 1;
+        transform:
+            translateY(0)
+            scale(1);
+    }
+
+}
+
+.status {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+
+    padding: 9px 17px;
+
+    border-radius: 50px;
+
+    background: rgba(255,215,0,.06);
+
+    border: 1px solid rgba(255,215,0,.25);
+
+    color: #ffd700;
+
+    font-size: 12px;
+    font-weight: 800;
+
+    margin-bottom: 28px;
+
+    box-shadow:
+        0 0 30px rgba(255,215,0,.06);
+}
+
+.status-dot {
+    width: 8px;
+    height: 8px;
+
+    border-radius: 50%;
+
+    background: #00ff88;
+
+    box-shadow:
+        0 0 15px #00ff88;
+
+    animation: statusPulse 1.5s infinite;
+}
+
+@keyframes statusPulse {
+
+    0%,100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+
+    50% {
+        transform: scale(1.5);
+        opacity: .6;
+    }
+
+}
+
+.hero h1 {
+    font-size: clamp(
+        80px,
+        18vw,
+        190px
+    );
+
+    line-height: .78;
+
+    font-weight: 1000;
+
+    letter-spacing: -10px;
+
+    color: #ffd700;
+
+    text-shadow:
+        0 0 15px rgba(255,215,0,.15),
+        0 0 60px rgba(255,215,0,.10);
+
+    animation:
+        titleGlow 4s ease-in-out infinite;
+}
+
+@keyframes titleGlow {
+
+    0%,100% {
+        filter: brightness(1);
+    }
+
+    50% {
+        filter: brightness(1.2);
+    }
+
+}
+
+.hero-subtitle {
+    font-size: clamp(
+        24px,
+        4vw,
+        44px
+    );
+
+    font-weight: 900;
+
+    margin-top: 30px;
+
+    letter-spacing: 8px;
+
+    text-transform: uppercase;
+}
+
+.hero-description {
+    max-width: 750px;
+
+    margin: 30px auto;
+
+    color: #888;
+
+    font-size: 18px;
+}
+
+.buttons {
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    gap: 15px;
+
+    flex-wrap: wrap;
+
+    margin-top: 35px;
+}
+
+.btn {
+    position: relative;
+
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 10px;
+
+    padding: 16px 27px;
+
+    border-radius: 10px;
+
+    font-size: 14px;
+
+    font-weight: 900;
+
+    overflow: hidden;
+
+    transition:
+        transform .25s,
+        box-shadow .25s;
+}
+
+.btn::before {
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+    left: -100%;
+
+    width: 60%;
+    height: 100%;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(255,255,255,.35),
+            transparent
+        );
+
+    transform: skewX(-20deg);
+
+    transition: .6s;
+}
+
+.btn:hover::before {
+    left: 140%;
+}
+
+.btn:hover {
+    transform:
+        translateY(-5px)
+        scale(1.02);
+}
+
+.btn-gold {
+    background: #ffd700;
+    color: #080808;
+
+    box-shadow:
+        0 10px 40px rgba(255,215,0,.12);
+}
+
+.btn-gold:hover {
+    box-shadow:
+        0 15px 55px rgba(255,215,0,.28);
+}
+
+.btn-dark {
+    background: rgba(255,255,255,.04);
+
+    border: 1px solid rgba(255,255,255,.12);
+
+    color: white;
+}
+
+.btn-dark:hover {
+    border-color: #ffd700;
+    color: #ffd700;
+}
+
+
+/* =========================================================
+   SCROLL INDICATOR
+========================================================= */
+
+.scroll {
+    position: absolute;
+
+    bottom: 35px;
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    color: #555;
+
+    font-size: 11px;
+
+    letter-spacing: 3px;
+
+    text-transform: uppercase;
+
+    animation: scrollBounce 2s infinite;
+}
+
+@keyframes scrollBounce {
+
+    0%,100% {
+        transform:
+            translateX(-50%)
+            translateY(0);
+    }
+
+    50% {
+        transform:
+            translateX(-50%)
+            translateY(10px);
+    }
+
+}
+
+
+/* =========================================================
+   GENERAL SECTIONS
+========================================================= */
+
+section {
+    max-width: 1250px;
+
+    margin: auto;
+
+    padding:
+        120px 25px;
+}
+
+.section-title {
+    text-align: center;
+
+    max-width: 800px;
+
+    margin:
+        0 auto
+        65px;
+}
+
+.section-label {
+    color: #ffd700;
+
+    font-size: 12px;
+
+    font-weight: 900;
+
+    letter-spacing: 4px;
+
+    margin-bottom: 15px;
+}
+
+.section-title h2 {
+    font-size:
+        clamp(38px,6vw,65px);
+
+    line-height: 1;
+
+    margin-bottom: 20px;
+
+    font-weight: 1000;
+}
+
+.section-title p {
+    color: #777;
+
+    font-size: 16px;
+}
+
+
+/* =========================================================
+   REVEAL ANIMATION
+========================================================= */
+
+.reveal {
+    opacity: 0;
+
+    transform:
+        translateY(70px)
+        scale(.97);
+
+    transition:
+        opacity .9s cubic-bezier(.16,1,.3,1),
+        transform .9s cubic-bezier(.16,1,.3,1);
+}
+
+.reveal.visible {
+    opacity: 1;
+
+    transform:
+        translateY(0)
+        scale(1);
+}
+
+
+/* =========================================================
+   STATS
+========================================================= */
+
+.stats {
+    max-width: 1100px;
+
+    margin:
+        -40px auto
+        50px;
+
+    display:
+        grid;
+
+    grid-template-columns:
+        repeat(4,1fr);
+
+    gap: 15px;
+
+    position: relative;
+
+    z-index: 5;
+}
+
+.stat {
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,.055),
+            rgba(255,255,255,.015)
+        );
+
+    border:
+        1px solid rgba(255,255,255,.08);
+
+    border-radius: 16px;
+
+    padding: 32px 15px;
+
+    text-align: center;
+
+    transition: .3s;
+}
+
+.stat:hover {
+    transform:
+        translateY(-10px);
+
+    border-color:
+        rgba(255,215,0,.4);
+
+    box-shadow:
+        0 20px 50px rgba(0,0,0,.35);
+}
+
+.stat-number {
+    font-size: 38px;
+
+    color: #ffd700;
+
+    font-weight: 1000;
+}
+
+.stat-label {
+    color: #666;
+
+    font-size: 12px;
+
+    margin-top: 5px;
+
+    text-transform: uppercase;
+
+    letter-spacing: 1px;
+}
+
+
+/* =========================================================
+   CARDS
+========================================================= */
+
+.cards {
+    display:
+        grid;
+
+    grid-template-columns:
+        repeat(3,1fr);
+
+    gap: 18px;
+}
+
+.card {
+    position: relative;
+
+    overflow: hidden;
+
+    padding: 35px;
+
+    min-height: 220px;
+
+    border-radius: 18px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,.055),
+            rgba(255,255,255,.015)
+        );
+
+    border:
+        1px solid rgba(255,255,255,.08);
+
+    transition:
+        transform .4s cubic-bezier(.16,1,.3,1),
+        border-color .3s,
+        box-shadow .4s;
+}
+
+.card::after {
+    content: "";
+
+    position: absolute;
+
+    width: 180px;
+    height: 180px;
+
+    right: -100px;
+    bottom: -100px;
+
+    border-radius: 50%;
+
+    background:
+        rgba(255,215,0,.08);
+
+    filter: blur(35px);
+
+    transition: .4s;
+}
+
+.card:hover {
+    transform:
+        translateY(-12px)
+        rotateX(2deg);
+
+    border-color:
+        rgba(255,215,0,.35);
+
+    box-shadow:
+        0 30px 70px rgba(0,0,0,.4);
+}
+
+.card:hover::after {
+    transform: scale(1.5);
+}
+
+.icon {
+    width: 55px;
+    height: 55px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 14px;
+
+    background:
+        rgba(255,215,0,.08);
+
+    border:
+        1px solid rgba(255,215,0,.2);
+
+    font-size: 25px;
+
+    margin-bottom: 25px;
+
+    transition: .3s;
+}
+
+.card:hover .icon {
+    transform:
+        rotate(-5deg)
+        scale(1.1);
+
+    background:
+        rgba(255,215,0,.14);
+}
+
+.card h3 {
+    font-size: 21px;
+
+    margin-bottom: 10px;
+
+    font-weight: 900;
+}
+
+.card p {
+    color: #777;
+
+    font-size: 14px;
+}
+
+
+/* =========================================================
+   REQUIREMENTS
+========================================================= */
+
+.requirements {
+    max-width: 850px;
+
+    margin: auto;
+
+    padding: 10px;
+
+    border-radius: 22px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,215,0,.08),
+            rgba(255,255,255,.02)
+        );
+
+    border:
+        1px solid rgba(255,215,0,.18);
+
+    box-shadow:
+        0 30px 100px rgba(0,0,0,.25);
+}
+
+.requirement {
+    display:
+        flex;
+
+    align-items: center;
+
+    gap: 18px;
+
+    padding: 22px 25px;
+
+    margin: 4px;
+
+    border-radius: 13px;
+
+    background:
+        rgba(5,5,5,.5);
+
+    transition: .25s;
+}
+
+.requirement:hover {
+    transform:
+        translateX(8px);
+
+    background:
+        rgba(255,215,0,.05);
+}
+
+.check {
+    width: 30px;
+    height: 30px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    flex-shrink: 0;
+
+    border-radius: 50%;
+
+    color: #ffd700;
+
+    background:
+        rgba(255,215,0,.1);
+
+    border:
+        1px solid rgba(255,215,0,.2);
+}
+
+.requirement strong {
+    min-width: 180px;
+
+    font-size: 15px;
+}
+
+.requirement span:last-child {
+    color: #666;
+
+    font-size: 13px;
+}
+
+
+/* =========================================================
+   PROCESS
+========================================================= */
+
+.process {
+    display:
+        grid;
+
+    grid-template-columns:
+        repeat(4,1fr);
+
+    gap: 15px;
+
+    counter-reset: steps;
+}
+
+.step {
+    counter-increment: steps;
+
+    position: relative;
+
+    padding: 35px 25px;
+
+    text-align: center;
+
+    border:
+        1px solid rgba(255,255,255,.08);
+
+    background:
+        rgba(255,255,255,.025);
+
+    border-radius: 18px;
+
+    transition: .3s;
+}
+
+.step:hover {
+    transform:
+        translateY(-10px);
+
+    border-color:
+        rgba(255,215,0,.3);
+}
+
+.step::before {
+    content:
+        "0" counter(steps);
+
+    display: block;
+
+    color: #ffd700;
+
+    font-size: 45px;
+
+    font-weight: 1000;
+
+    margin-bottom: 15px;
+}
+
+.step h3 {
+    margin-bottom: 8px;
+}
+
+.step p {
+    color: #666;
+
+    font-size: 13px;
+}
+
+
+/* =========================================================
+   RANKS
+========================================================= */
+
+.rank-card {
+    text-align: center;
+
+    min-height: auto;
+}
+
+.rank-number {
+    font-size: 13px;
+
+    color: #ffd700;
+
+    font-weight: 900;
+
+    letter-spacing: 2px;
+
+    margin-bottom: 10px;
+}
+
+
+/* =========================================================
+   DISCORD
+========================================================= */
+
+.discord-box {
+    position: relative;
+
+    overflow: hidden;
+
+    max-width: 1000px;
+
+    margin: auto;
+
+    padding: 80px 35px;
+
+    text-align: center;
+
+    border-radius: 28px;
+
+    background:
+        radial-gradient(
+            circle at center,
+            rgba(255,215,0,.12),
+            transparent 60%
+        ),
+
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,.06),
+            rgba(255,255,255,.015)
+        );
+
+    border:
+        1px solid rgba(255,215,0,.22);
+
+    box-shadow:
+        0 40px 100px rgba(0,0,0,.35);
+}
+
+.discord-logo {
+    font-size: 60px;
+
+    margin-bottom: 20px;
+
+    animation:
+        discordFloat 3s ease-in-out infinite;
+}
+
+@keyframes discordFloat {
+
+    0%,100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+
+}
+
+.discord-box h2 {
+    font-size:
+        clamp(40px,6vw,70px);
+
+    font-weight: 1000;
+
+    margin-bottom: 15px;
+}
+
+.discord-box p {
+    color: #777;
+
+    max-width: 650px;
+
+    margin:
+        0 auto 30px;
+}
+
+
+/* =========================================================
+   FAQ
+========================================================= */
+
+.faq {
+    max-width: 850px;
+
+    margin: auto;
+}
+
+details {
+    background:
+        rgba(255,255,255,.025);
+
+    border:
+        1px solid rgba(255,255,255,.08);
+
+    border-radius: 14px;
+
+    padding: 20px 23px;
+
+    margin-bottom: 12px;
+
+    transition: .25s;
+}
+
+details:hover {
+    border-color:
+        rgba(255,215,0,.25);
+}
+
+summary {
+    cursor: pointer;
+
+    font-weight: 800;
+
+    list-style: none;
+}
+
+summary::-webkit-details-marker {
+    display: none;
+}
+
+summary::after {
+    content: "+";
+
+    float: right;
+
+    color: #ffd700;
+
+    font-size: 22px;
+}
+
+details[open] summary::after {
+    content: "−";
+}
+
+details p {
+    color: #777;
+
+    margin-top: 15px;
+
+    font-size: 14px;
+}
+
+
+/* =========================================================
+   FINAL CTA
+========================================================= */
+
+.final-cta {
+    position: relative;
+
+    overflow: hidden;
+
+    text-align: center;
+
+    padding:
+        150px 25px;
+
+    border-top:
+        1px solid rgba(255,255,255,.06);
+
+    border-bottom:
+        1px solid rgba(255,255,255,.06);
+
+    background:
+        radial-gradient(
+            circle at center,
+            rgba(255,215,0,.12),
+            transparent 50%
+        );
+}
+
+.final-cta h2 {
+    font-size:
+        clamp(50px,9vw,100px);
+
+    line-height: .9;
+
+    font-weight: 1000;
+
+    color: #ffd700;
+
+    margin-bottom: 25px;
+}
+
+.final-cta p {
+    color: #777;
+
+    margin-bottom: 30px;
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+footer {
+    padding:
+        50px 25px;
+
+    text-align: center;
+
+    color: #555;
+
+    background: #030303;
+}
+
+.footer-logo {
+    color: #ffd700;
+
+    font-size: 25px;
+
+    font-weight: 1000;
+
+    letter-spacing: 4px;
+
+    margin-bottom: 10px;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 900px) {
+
+    .cards {
+        grid-template-columns:
+            repeat(2,1fr);
+    }
+
+    .stats {
+        grid-template-columns:
+            repeat(2,1fr);
+    }
+
+    .process {
+        grid-template-columns:
+            repeat(2,1fr);
+    }
+
+}
+
+@media (max-width: 650px) {
+
+    .nav-links {
+        display: none;
+    }
+
+    .cards {
+        grid-template-columns: 1fr;
+    }
+
+    .stats {
+        grid-template-columns:
+            repeat(2,1fr);
+    }
+
+    .process {
+        grid-template-columns: 1fr;
+    }
+
+    .hero h1 {
+        letter-spacing: -5px;
+    }
+
+    .requirement {
+        align-items: flex-start;
+    }
+
+    .requirement strong {
+        min-width: auto;
+    }
+
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+        transition-duration: .01ms !important;
+    }
+
+}
+
+</style>
 </head>
+
 
 <body>
 
-<!-- NAVIGATION -->
+
+<!-- BACKGROUND -->
+
+<div class="background">
+    <div class="grid"></div>
+
+    <div class="orb one"></div>
+    <div class="orb two"></div>
+    <div class="orb three"></div>
+</div>
+
+<div class="particles" id="particles"></div>
+
+<div class="cursor-glow" id="cursorGlow"></div>
+
+
+<!-- NAV -->
 
 <nav class="nav">
+
     <div class="nav-inner">
 
-        <div class="logo">4EV</div>
+        <a href="#" class="logo">
+            4EV
+        </a>
 
         <div class="nav-links">
-            <a href="#about">About</a>
-            <a href="#recruitment">Recruitment</a>
-            <a href="#ranks">Ranks</a>
-            <a href="#community">Community</a>
+
+            <a href="#about">ABOUT</a>
+
+            <a href="#recruitment">RECRUITMENT</a>
+
+            <a href="#ranks">RANKS</a>
+
+            <a href="#discord">DISCORD</a>
+
             <a href="#faq">FAQ</a>
+
         </div>
 
     </div>
+
 </nav>
 
 
@@ -429,25 +1390,40 @@
 
     <div class="hero-content">
 
-        <div class="badge">
-            ⚔️ RECRUITMENT IS OPEN
+        <div class="status">
+
+            <span class="status-dot"></span>
+
+            RECRUITMENT OPEN
+
         </div>
 
-        <h1>4EV</h1>
+        <h1>
+            4EV
+        </h1>
 
-        <h2>Forever Victory</h2>
+        <div class="hero-subtitle">
+            FOREVER VICTORY
+        </div>
 
-        <p>
-            A competitive Roblox Rivals clan built for skilled,
-            active and ambitious players who want to compete,
-            improve and grow together.
+        <p class="hero-description">
+
+            A competitive Roblox Rivals clan built for
+            skilled, active and ambitious players.
+
+            <br>
+
+            <strong>
+                Compete. Improve. Represent 4EV.
+            </strong>
+
         </p>
 
         <div class="buttons">
 
             <a
                 class="btn btn-gold"
-                href="https://discord.gg/YOUR_DISCORD_INVITE"
+                href="https://discord.gg/dUtnTEfYYb"
                 target="_blank"
             >
                 💬 JOIN 4EV DISCORD
@@ -457,11 +1433,15 @@
                 class="btn btn-dark"
                 href="#recruitment"
             >
-                ⚔️ VIEW REQUIREMENTS
+                ⚔️ SEE REQUIREMENTS
             </a>
 
         </div>
 
+    </div>
+
+    <div class="scroll">
+        SCROLL TO ENTER 4EV
     </div>
 
 </header>
@@ -471,26 +1451,57 @@
 
 <section>
 
-    <div class="stats">
+    <div class="stats reveal">
 
         <div class="stat">
-            <div class="stat-number">4EV</div>
-            <div class="stat-label">Forever Victory</div>
+
+            <div
+                class="stat-number"
+                data-count="170"
+            >
+                170+
+            </div>
+
+            <div class="stat-label">
+                Minimum Level
+            </div>
+
         </div>
 
         <div class="stat">
-            <div class="stat-number">170+</div>
-            <div class="stat-label">Minimum Level</div>
+
+            <div class="stat-number">
+                P1+
+            </div>
+
+            <div class="stat-label">
+                Minimum Rank
+            </div>
+
         </div>
 
         <div class="stat">
-            <div class="stat-number">P1+</div>
-            <div class="stat-label">Minimum Rank</div>
+
+            <div class="stat-number">
+                60%+
+            </div>
+
+            <div class="stat-label">
+                Win Rate
+            </div>
+
         </div>
 
         <div class="stat">
-            <div class="stat-number">60%+</div>
-            <div class="stat-label">Win Rate</div>
+
+            <div class="stat-number">
+                4EV
+            </div>
+
+            <div class="stat-label">
+                Forever Victory
+            </div>
+
         </div>
 
     </div>
@@ -502,84 +1513,140 @@
 
 <section id="about">
 
-    <div class="section-title">
+    <div class="section-title reveal">
 
-        <h2>ABOUT 4EV</h2>
+        <div class="section-label">
+            WHO WE ARE
+        </div>
+
+        <h2>
+            BUILT DIFFERENT.
+        </h2>
 
         <p>
-            More than just a clan. 4EV is a competitive community
-            for players who want to push themselves further.
+            4EV is a Roblox Rivals clan focused on competition,
+            progression, teamwork and community.
         </p>
 
     </div>
 
+
     <div class="cards">
 
-        <div class="card">
-            <div class="card-icon">⚔️</div>
 
-            <h3>Competitive</h3>
+        <div class="card reveal">
 
-            <p>
-                We focus on competitive Roblox Rivals gameplay,
-                improvement, teamwork and high-level competition.
-            </p>
-        </div>
+            <div class="icon">
+                ⚔️
+            </div>
 
-        <div class="card">
-            <div class="card-icon">📈</div>
-
-            <h3>Improve</h3>
+            <h3>
+                Competitive
+            </h3>
 
             <p>
-                Work alongside other competitive players,
-                learn from each other and continue improving.
+                We bring together players who enjoy
+                competitive Roblox Rivals and want to
+                constantly push their gameplay further.
             </p>
+
         </div>
 
-        <div class="card">
-            <div class="card-icon">👥</div>
 
-            <h3>Community</h3>
+        <div class="card reveal">
+
+            <div class="icon">
+                🎯
+            </div>
+
+            <h3>
+                Skill First
+            </h3>
 
             <p>
-                Meet other Rivals players, participate in events
-                and become part of the 4EV community.
+                4EV is built around players who want
+                to improve their mechanics, decision-making,
+                communication and overall performance.
             </p>
+
         </div>
 
-        <div class="card">
-            <div class="card-icon">🏆</div>
 
-            <h3>Competition</h3>
+        <div class="card reveal">
+
+            <div class="icon">
+                📈
+            </div>
+
+            <h3>
+                Progression
+            </h3>
 
             <p>
-                Take part in clan activities, competitions,
-                events and future opportunities.
+                Members can grow within the community,
+                earn trust and work toward higher clan
+                positions.
             </p>
+
         </div>
 
-        <div class="card">
-            <div class="card-icon">🌎</div>
 
-            <h3>Multiple Regions</h3>
+        <div class="card reveal">
+
+            <div class="icon">
+                🏆
+            </div>
+
+            <h3>
+                Competition
+            </h3>
 
             <p>
-                Players from different regions can connect,
-                compete and represent 4EV.
+                From clan activities to competitive events,
+                4EV gives members opportunities to play
+                together and represent the clan.
             </p>
+
         </div>
 
-        <div class="card">
-            <div class="card-icon">🔥</div>
 
-            <h3>Ambition</h3>
+        <div class="card reveal">
+
+            <div class="icon">
+                👥
+            </div>
+
+            <h3>
+                Community
+            </h3>
 
             <p>
-                We are looking for players who want to take
-                their gameplay and competitive experience further.
+                Meet other Rivals players, find teammates,
+                talk strategy and become part of the
+                4EV community.
             </p>
+
         </div>
+
+
+        <div class="card reveal">
+
+            <div class="icon">
+                🔥
+            </div>
+
+            <h3>
+                Ambition
+            </h3>
+
+            <p>
+                We want players who don't want to stay
+                average. If you're always trying to get
+                better, you're in the right place.
+            </p>
+
+        </div>
+
 
     </div>
 
@@ -590,102 +1657,213 @@
 
 <section id="recruitment">
 
-    <div class="section-title">
+    <div class="section-title reveal">
 
-        <h2>RECRUITMENT</h2>
+        <div class="section-label">
+            YOUR SHOT
+        </div>
+
+        <h2>
+            THINK YOU'RE GOOD ENOUGH?
+        </h2>
 
         <p>
-            Think you have what it takes to represent 4EV?
-            Check the current requirements below.
+            4EV is looking for skilled, active and competitive
+            players ready to represent Forever Victory.
         </p>
 
     </div>
 
-    <div class="requirements">
+
+    <div class="requirements reveal">
+
 
         <div class="requirement">
-            <span class="check">✓</span>
-            <strong>Platinum 1+</strong>
-            <span>Competitive ranked experience</span>
+
+            <span class="check">
+                ✓
+            </span>
+
+            <strong>
+                Platinum 1+
+            </strong>
+
+            <span>
+                Competitive ranked experience
+            </span>
+
         </div>
 
-        <div class="requirement">
-            <span class="check">✓</span>
-            <strong>Level 170+</strong>
-            <span>Experienced Rivals player</span>
-        </div>
 
         <div class="requirement">
-            <span class="check">✓</span>
-            <strong>60%+ Win Rate</strong>
-            <span>Strong overall performance</span>
+
+            <span class="check">
+                ✓
+            </span>
+
+            <strong>
+                Level 170+
+            </strong>
+
+            <span>
+                Experienced Rivals player
+            </span>
+
         </div>
 
-        <div class="requirement">
-            <span class="check">✓</span>
-            <strong>Active</strong>
-            <span>Participate in the community</span>
-        </div>
 
         <div class="requirement">
-            <span class="check">✓</span>
-            <strong>Competitive Mindset</strong>
-            <span>Always looking to improve</span>
+
+            <span class="check">
+                ✓
+            </span>
+
+            <strong>
+                60%+ Win Rate
+            </strong>
+
+            <span>
+                Strong overall performance
+            </span>
+
         </div>
 
+
         <div class="requirement">
-            <span class="check">✓</span>
-            <strong>Team Player</strong>
-            <span>Respect teammates and opponents</span>
+
+            <span class="check">
+                ✓
+            </span>
+
+            <strong>
+                Active
+            </strong>
+
+            <span>
+                Participate in the community
+            </span>
+
         </div>
+
+
+        <div class="requirement">
+
+            <span class="check">
+                ✓
+            </span>
+
+            <strong>
+                Competitive Mindset
+            </strong>
+
+            <span>
+                Always looking to improve
+            </span>
+
+        </div>
+
+
+        <div class="requirement">
+
+            <span class="check">
+                ✓
+            </span>
+
+            <strong>
+                Team Player
+            </strong>
+
+            <span>
+                Respect teammates and opponents
+            </span>
+
+        </div>
+
 
     </div>
 
 </section>
 
 
-<!-- WHY JOIN -->
+<!-- TRYOUT PROCESS -->
 
 <section>
 
-    <div class="section-title">
+    <div class="section-title reveal">
 
-        <h2>WHY JOIN 4EV?</h2>
+        <div class="section-label">
+            HOW IT WORKS
+        </div>
+
+        <h2>
+            YOUR ROAD TO 4EV
+        </h2>
 
         <p>
-            Built around competition, community and progression.
+            A simple path from applicant to Forever Victory member.
         </p>
 
     </div>
 
-    <div class="cards">
 
-        <div class="card">
-            <div class="card-icon">🎯</div>
-            <h3>Serious Players</h3>
+    <div class="process">
+
+
+        <div class="step reveal">
+
+            <h3>
+                Join
+            </h3>
+
             <p>
-                Connect with players who take Roblox Rivals
-                seriously and want to improve.
+                Enter the official 4EV Discord and
+                check the current recruitment information.
             </p>
+
         </div>
 
-        <div class="card">
-            <div class="card-icon">📢</div>
-            <h3>Organized Community</h3>
+
+        <div class="step reveal">
+
+            <h3>
+                Apply
+            </h3>
+
             <p>
-                Stay updated through organized Discord channels,
-                announcements and recruitment information.
+                Submit your information and show us
+                what kind of player you are.
             </p>
+
         </div>
 
-        <div class="card">
-            <div class="card-icon">🏅</div>
-            <h3>Progression</h3>
+
+        <div class="step reveal">
+
+            <h3>
+                Tryout
+            </h3>
+
             <p>
-                Work toward higher clan ranks and become a
-                stronger competitive player.
+                Demonstrate your gameplay and competitive
+                ability when required.
             </p>
+
         </div>
+
+
+        <div class="step reveal">
+
+            <h3>
+                Represent
+            </h3>
+
+            <p>
+                Earn your place and represent
+                4EV | Forever Victory.
+            </p>
+
+        </div>
+
 
     </div>
 
@@ -696,155 +1874,269 @@
 
 <section id="ranks">
 
-    <div class="section-title">
+    <div class="section-title reveal">
 
-        <h2>4EV RANK SYSTEM</h2>
+        <div class="section-label">
+            CLAN PROGRESSION
+        </div>
+
+        <h2>
+            CLIMB THE RANKS
+        </h2>
 
         <p>
-            Progress through the clan by showing activity,
-            reliability and competitive ability.
+            Activity, trust and contribution can help
+            members progress through the 4EV system.
         </p>
 
     </div>
 
+
     <div class="cards">
 
-        <div class="card rank">
-            <h3>R1 — Recruit</h3>
+
+        <div class="card rank-card reveal">
+
+            <div class="rank-number">
+                R1
+            </div>
+
+            <h3>
+                Recruit
+            </h3>
+
             <p>
-                New members beginning their journey with 4EV.
+                The beginning of your 4EV journey.
             </p>
+
         </div>
 
-        <div class="card rank">
-            <h3>R2 — Contender</h3>
+
+        <div class="card rank-card reveal">
+
+            <div class="rank-number">
+                R2
+            </div>
+
+            <h3>
+                Contender
+            </h3>
+
             <p>
-                Active members who are becoming established
+                Active members establishing themselves
                 within the clan.
             </p>
+
         </div>
 
-        <div class="card rank">
-            <h3>R3 — Elite</h3>
+
+        <div class="card rank-card reveal">
+
+            <div class="rank-number">
+                R3
+            </div>
+
+            <h3>
+                Elite
+            </h3>
+
             <p>
-                Proven competitive members with strong
-                participation and performance.
+                Proven competitive members who contribute
+                to the clan.
             </p>
+
         </div>
 
-        <div class="card rank">
-            <h3>R4 — Veteran</h3>
+
+        <div class="card rank-card reveal">
+
+            <div class="rank-number">
+                R4
+            </div>
+
+            <h3>
+                Veteran
+            </h3>
+
             <p>
-                Experienced and trusted members who contribute
-                significantly to 4EV.
+                Experienced and trusted members.
             </p>
+
         </div>
 
-        <div class="card rank">
-            <h3>R5 — Apex</h3>
+
+        <div class="card rank-card reveal">
+
+            <div class="rank-number">
+                R5
+            </div>
+
+            <h3>
+                Apex
+            </h3>
+
             <p>
-                The highest competitive member rank within
-                the 4EV progression system.
+                The highest member rank in the
+                4EV progression system.
             </p>
+
         </div>
 
-        <div class="card rank">
-            <h3>Leadership</h3>
+
+        <div class="card rank-card reveal">
+
+            <div class="rank-number">
+                STAFF
+            </div>
+
+            <h3>
+                Leadership
+            </h3>
+
             <p>
-                Staff and leadership roles responsible for
-                managing and developing 4EV.
+                Members responsible for managing,
+                supporting and developing 4EV.
             </p>
+
         </div>
+
 
     </div>
 
 </section>
 
 
-<!-- CLAN ACTIVITIES -->
+<!-- COMMUNITY -->
 
 <section>
 
-    <div class="section-title">
+    <div class="section-title reveal">
 
-        <h2>CLAN ACTIVITIES</h2>
+        <div class="section-label">
+            MORE THAN A CLAN
+        </div>
+
+        <h2>
+            THE 4EV COMMUNITY
+        </h2>
 
         <p>
-            There is more to 4EV than simply having a clan tag.
+            Your clan experience doesn't stop when the match ends.
         </p>
 
     </div>
 
-    <div class="cards">
-
-        <div class="card">
-            <div class="card-icon">⚔️</div>
-            <h3>Clan Wars</h3>
-            <p>
-                Represent 4EV in organized clan battles
-                and competitive activities.
-            </p>
-        </div>
-
-        <div class="card">
-            <div class="card-icon">🏆</div>
-            <h3>Events</h3>
-            <p>
-                Participate in community events and
-                competitive activities.
-            </p>
-        </div>
-
-        <div class="card">
-            <div class="card-icon">🎮</div>
-            <h3>Rivals Sessions</h3>
-            <p>
-                Play with other members and build teamwork,
-                communication and chemistry.
-            </p>
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- REGIONS -->
-
-<section>
-
-    <div class="section-title">
-
-        <h2>REGIONS</h2>
-
-        <p>
-            4EV welcomes competitive players from multiple regions.
-        </p>
-
-    </div>
 
     <div class="cards">
 
-        <div class="card">
-            <h3>🇺🇸 North America</h3>
+
+        <div class="card reveal">
+
+            <div class="icon">
+                💬
+            </div>
+
+            <h3>
+                Community Chat
+            </h3>
+
             <p>
-                Competitive players from NA servers.
+                Talk with other members, share clips,
+                discuss gameplay and hang out.
             </p>
+
         </div>
 
-        <div class="card">
-            <h3>🇪🇺 Europe</h3>
+
+        <div class="card reveal">
+
+            <div class="icon">
+                📢
+            </div>
+
+            <h3>
+                Announcements
+            </h3>
+
             <p>
-                Players representing EU servers.
+                Stay informed about recruitment,
+                events and important clan updates.
             </p>
+
         </div>
 
-        <div class="card">
-            <h3>🌎 LATAM</h3>
+
+        <div class="card reveal">
+
+            <div class="icon">
+                🎮
+            </div>
+
+            <h3>
+                Find Teammates
+            </h3>
+
             <p>
-                Players from Latin American regions.
+                Meet other Roblox Rivals players
+                and find people to play with.
             </p>
+
         </div>
+
+
+        <div class="card reveal">
+
+            <div class="icon">
+                🎬
+            </div>
+
+            <h3>
+                Clips & Highlights
+            </h3>
+
+            <p>
+                Share your best plays and show the
+                community what you can do.
+            </p>
+
+        </div>
+
+
+        <div class="card reveal">
+
+            <div class="icon">
+                🏅
+            </div>
+
+            <h3>
+                Recognition
+            </h3>
+
+            <p>
+                Stand out through activity, contribution
+                and competitive performance.
+            </p>
+
+        </div>
+
+
+        <div class="card reveal">
+
+            <div class="icon">
+                🚀
+            </div>
+
+            <h3>
+                Grow With 4EV
+            </h3>
+
+            <p>
+                Help build the clan and become part
+                of its future.
+            </p>
+
+        </div>
+
 
     </div>
 
@@ -853,27 +2145,32 @@
 
 <!-- DISCORD -->
 
-<section id="community">
+<section id="discord">
 
-    <div class="discord">
+    <div class="discord-box reveal">
 
-        <h2>💬 JOIN THE 4EV DISCORD</h2>
+        <div class="discord-logo">
+            💬
+        </div>
+
+        <h2>
+            JOIN THE 4EV DISCORD
+        </h2>
 
         <p>
-            The official 4EV Discord is where our community
-            comes together. Find recruitment information,
-            announcements, events, discussions and other
-            Roblox Rivals players.
+            This is where the 4EV community lives.
+            Get recruitment information, announcements,
+            community discussions, events and more.
         </p>
 
         <div class="buttons">
 
             <a
                 class="btn btn-gold"
-                href="https://discord.gg/AywFUpNQpe"
+                href="https://discord.gg/dUtnTEfYYb"
                 target="_blank"
             >
-                JOIN DISCORD
+                JOIN THE SERVER
             </a>
 
         </div>
@@ -887,74 +2184,113 @@
 
 <section id="faq">
 
-    <div class="section-title">
+    <div class="section-title reveal">
 
-        <h2>FAQ</h2>
+        <div class="section-label">
+            QUESTIONS?
+        </div>
+
+        <h2>
+            FREQUENTLY ASKED
+        </h2>
 
         <p>
-            Frequently asked questions about 4EV.
+            Everything you need to know before joining 4EV.
         </p>
 
     </div>
 
+
     <div class="faq">
 
-        <details>
-            <summary>What is 4EV?</summary>
+
+        <details class="reveal">
+
+            <summary>
+                What is 4EV?
+            </summary>
 
             <p>
-                4EV | Forever Victory is a competitive Roblox
-                Rivals clan focused on skilled players,
-                competition, community and improvement.
+                4EV | Forever Victory is a competitive
+                Roblox Rivals clan focused on skilled players,
+                improvement, competition and community.
             </p>
+
         </details>
 
-        <details>
-            <summary>How do I join?</summary>
+
+        <details class="reveal">
+
+            <summary>
+                How do I join 4EV?
+            </summary>
 
             <p>
-                Join the official 4EV Discord and check the
-                current recruitment information.
+                Join the official 4EV Discord and check
+                the current recruitment information.
             </p>
+
         </details>
 
-        <details>
-            <summary>What are the requirements?</summary>
+
+        <details class="reveal">
+
+            <summary>
+                What are the current requirements?
+            </summary>
 
             <p>
-                Current requirements include Platinum 1+,
+                The current listed requirements are Platinum 1+,
                 Level 170+, 60%+ win rate, activity and
                 a competitive mindset.
             </p>
+
         </details>
 
-        <details>
-            <summary>Do I have to be competitive?</summary>
+
+        <details class="reveal">
+
+            <summary>
+                Do I have to be active?
+            </summary>
 
             <p>
-                4EV is designed around competitive Roblox
-                Rivals players, so members should be interested
-                in improving and participating.
+                Yes. 4EV is designed for active players who
+                want to participate in the community and
+                competitive activities.
             </p>
+
         </details>
 
-        <details>
-            <summary>What regions are accepted?</summary>
+
+        <details class="reveal">
+
+            <summary>
+                Where can I find recruitment updates?
+            </summary>
 
             <p>
-                Players from NA, EU, LATAM and other regions
-                may be considered depending on recruitment needs.
+                Recruitment information and updates are
+                available through the official 4EV Discord.
             </p>
+
         </details>
 
-        <details>
-            <summary>Where can I get recruitment updates?</summary>
+
+        <details class="reveal">
+
+            <summary>
+                Can I help build 4EV?
+            </summary>
 
             <p>
-                Recruitment updates and community announcements
-                are available through the official 4EV Discord.
+                Absolutely. Community members can contribute
+                through activity, participation, events,
+                content and helping create a positive community.
             </p>
+
         </details>
+
 
     </div>
 
@@ -963,22 +2299,39 @@
 
 <!-- FINAL CTA -->
 
-<div class="cta">
+<div class="final-cta">
 
-    <h2>READY FOR 4EV?</h2>
+    <div class="reveal">
 
-    <p>
-        If you're skilled, active and competitive,
-        come see what 4EV is about.
-    </p>
+        <h2>
+            READY FOR 4EV?
+        </h2>
 
-    <a
-        class="btn btn-gold"
-        href="https://discord.gg/YOUR_DISCORD_INVITE"
-        target="_blank"
-    >
-        ⚔️ JOIN 4EV DISCORD
-    </a>
+        <p>
+            Don't just play Roblox Rivals.
+            Represent something.
+        </p>
+
+        <div class="buttons">
+
+            <a
+                class="btn btn-gold"
+                href="https://discord.gg/dUtnTEfYYb"
+                target="_blank"
+            >
+                ⚔️ JOIN 4EV
+            </a>
+
+            <a
+                class="btn btn-dark"
+                href="#recruitment"
+            >
+                VIEW REQUIREMENTS
+            </a>
+
+        </div>
+
+    </div>
 
 </div>
 
@@ -987,19 +2340,232 @@
 
 <footer>
 
-    <p>
-        <strong>4EV | Forever Victory</strong>
-    </p>
+    <div class="footer-logo">
+        4EV
+    </div>
 
     <p>
+        Forever Victory
+    </p>
+
+    <p style="margin-top:15px;">
         Competitive Roblox Rivals Clan
     </p>
 
-    <p style="margin-top: 10px;">
-        © 2026 4EV. All rights reserved.
+    <p style="margin-top:25px; font-size:12px;">
+        © 2026 4EV | Forever Victory
     </p>
 
 </footer>
 
+
+<script>
+
+/* =========================================================
+   PARTICLES
+========================================================= */
+
+const particleContainer =
+    document.getElementById("particles");
+
+for (let i = 0; i < 55; i++) {
+
+    const particle =
+        document.createElement("div");
+
+    particle.className =
+        "particle";
+
+    particle.style.left =
+        Math.random() * 100 + "%";
+
+    particle.style.animationDuration =
+        (6 + Math.random() * 12) + "s";
+
+    particle.style.animationDelay =
+        (-Math.random() * 15) + "s";
+
+    particle.style.opacity =
+        (0.15 + Math.random() * 0.5);
+
+    particleContainer.appendChild(
+        particle
+    );
+
+}
+
+
+/* =========================================================
+   CURSOR GLOW
+========================================================= */
+
+const cursorGlow =
+    document.getElementById("cursorGlow");
+
+document.addEventListener(
+    "mousemove",
+    (event) => {
+
+        cursorGlow.style.left =
+            event.clientX + "px";
+
+        cursorGlow.style.top =
+            event.clientY + "px";
+
+    }
+);
+
+
+/* =========================================================
+   SCROLL REVEAL
+========================================================= */
+
+const observer =
+    new IntersectionObserver(
+        (entries) => {
+
+            entries.forEach(
+                (entry) => {
+
+                    if (
+                        entry.isIntersecting
+                    ) {
+
+                        entry.target
+                            .classList
+                            .add("visible");
+
+                        observer.unobserve(
+                            entry.target
+                        );
+
+                    }
+
+                }
+            );
+
+        },
+        {
+            threshold: 0.12
+        }
+    );
+
+
+document
+    .querySelectorAll(".reveal")
+    .forEach(
+        (element) => {
+
+            observer.observe(
+                element
+            );
+
+        }
+    );
+
+
+/* =========================================================
+   STAGGER CARD ANIMATIONS
+========================================================= */
+
+document
+    .querySelectorAll(".cards")
+    .forEach(
+        (container) => {
+
+            const cards =
+                container.querySelectorAll(
+                    ".card"
+                );
+
+            cards.forEach(
+                (card, index) => {
+
+                    card.style.transitionDelay =
+                        (index * 80) + "ms";
+
+                }
+            );
+
+        }
+    );
+
+
+/* =========================================================
+   MAGNETIC BUTTON EFFECT
+========================================================= */
+
+document
+    .querySelectorAll(".btn")
+    .forEach(
+        (button) => {
+
+            button.addEventListener(
+                "mousemove",
+                (event) => {
+
+                    const rect =
+                        button.getBoundingClientRect();
+
+                    const x =
+                        event.clientX -
+                        rect.left -
+                        rect.width / 2;
+
+                    const y =
+                        event.clientY -
+                        rect.top -
+                        rect.height / 2;
+
+                    button.style.transform =
+                        `translate(${x * .08}px,
+                        ${y * .08}px)`;
+
+                }
+            );
+
+            button.addEventListener(
+                "mouseleave",
+                () => {
+
+                    button.style.transform =
+                        "";
+
+                }
+            );
+
+        }
+    );
+
+
+/* =========================================================
+   NAVBAR SCROLL EFFECT
+========================================================= */
+
+window.addEventListener(
+    "scroll",
+    () => {
+
+        const nav =
+            document.querySelector(".nav");
+
+        if (window.scrollY > 30) {
+
+            nav.style.background =
+                "rgba(3,3,3,.92)";
+
+        } else {
+
+            nav.style.background =
+                "rgba(5,5,5,.72)";
+
+        }
+
+    }
+);
+
+</script>
+
 </body>
 </html>
+```
